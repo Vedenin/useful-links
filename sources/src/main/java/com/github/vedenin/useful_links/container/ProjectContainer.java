@@ -9,15 +9,15 @@ import com.github.vedenin.useful_links.annotation.PropertiesContainer;
  */
 @PropertiesContainer // class without getter and setter (see Properties in C#)
 public class ProjectContainer {
-    private String category;
-    private String name;
-    private String url;
-    private String description;
-    private String star;
-    private String stackOverflow;
-    private String license;
-    private String licenseUrl;
-    private String site;
+    public String category;
+    public String name;
+    public String url;
+    public String description;
+    public String star;
+    public String stackOverflow;
+    public String license;
+    public String licenseUrl;
+    public String site;
 
     @Override
     public String toString() {
@@ -32,5 +32,9 @@ public class ProjectContainer {
                 ", licenseUrl='" + licenseUrl + '\'' +
                 ", site='" + site + '\'' +
                 '}';
+    }
+
+    public static ProjectContainer create() {
+        return new ProjectContainer();
     }
 }
