@@ -21,11 +21,12 @@ public class ProjectContainer {
     public String userGuide;
     public Integer newStar;
     public Integer newStackOverflow;
+    public String github;
 
     @Override
     public String toString() {
         return "{" +
-                toString(category, "category") +
+                "category = '" + category + "'" +
                 toString(name, "name") +
                 toString(url, "url") +
                 toString(star, "star") +
@@ -37,6 +38,7 @@ public class ProjectContainer {
                 toString(description, "description") +
                 toString(newStar, "newStar") +
                 toString(newStackOverflow, "newStackOverflow") +
+                toString(github, "github") +
                 '}';
     }
 

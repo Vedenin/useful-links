@@ -1,12 +1,14 @@
 package com.github.vedenin.useful_links;
 
 import com.github.vedenin.useful_links.container.ProjectContainer;
+import com.github.vedenin.useful_links.utils.HTTPSDownloadUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +23,19 @@ public class DownloadJavaUsefulProjects {
     private static final String GITHUB_STAR = "github's star";
 
     private static void testHtmlParser(String url) throws Exception {
-        Document doc = Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
+        System.out.println("Start downloading");
+        HTTPSDownloadUtils.initHTTPSDownload();
+        Document doc = getPage(url);
         Elements div = doc.select("#readme");
         List<ProjectContainer> list = parserProjects(div, "", null, "");
+        System.out.println("End downloading");
+        System.out.println();
+
         list.stream().forEach(System.out::println);
+    }
+
+    private static Document getPage(String url) throws IOException {
+        return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
     }
 
     private static List<ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
@@ -34,6 +45,9 @@ public class DownloadJavaUsefulProjects {
             if (isHeader(tag)) {
                 currentCategory = element.text();
                 container = null;
+                if("1. Communities".equals(currentCategory)) {
+                    return result;
+                }
             } else if (isEnum(tag)) {
                 description = getDescription(element);
             } else if (isLink(tag)) {
@@ -85,9 +99,32 @@ public class DownloadJavaUsefulProjects {
         container = ProjectContainer.create();
         container.category = currentCategory;
         container.name = element.text();
-        container.url = link;
+        saveUrlAndGithub(link, container);
         saveStarAndText(container, text);
         return container;
+    }
+
+    private static void saveUrlAndGithub(String link, ProjectContainer container) {
+        if(link.contains("github.com")) {
+            container.github = link;
+            container.url = link;
+        } else {
+            try {
+                Document doc = getPage(link);
+                Elements elements = doc.select("a[href*=github.com]");
+                if(!elements.isEmpty()) {
+                    Element element = elements.get(0);
+                    String github = element.attr("href");
+                    container.url = elements.size() == 1? github : link;
+                    container.github = github;
+                    container.site = link;
+                } else {
+                    container.url = link;
+                }
+            } catch (Exception exp) {
+                System.out.println(link + " : " + exp.getMessage());
+            }
+        }
     }
 
     private static void saveStarAndText(ProjectContainer container, String text) {
