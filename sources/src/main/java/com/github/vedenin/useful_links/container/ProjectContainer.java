@@ -13,8 +13,8 @@ public class ProjectContainer {
     public String name;
     public String url;
     public String description;
-    public String star;
-    public String stackOverflow;
+    public Integer star;
+    public Integer stackOverflow;
     public String license;
     public String licenseUrl;
     public String site;

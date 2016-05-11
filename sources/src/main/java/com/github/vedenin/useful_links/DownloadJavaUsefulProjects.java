@@ -81,9 +81,9 @@ public class DownloadJavaUsefulProjects {
     private static void saveStarAndText(ProjectContainer container, String text) {
         int i1 = text.indexOf(GITHUB_STAR);
         if(i1 > -1) {
-            int i2 = text.indexOf(".", i1);
+            int i2 = min(text.indexOf(".", i1), text.indexOf(",", i1));
             String starText = text.substring(i1, i2);
-            container.star = text.substring(i1 + GITHUB_STAR.length(), i2).replace("-", "").replace(" ", "").replace(",", "");
+            container.star = Integer.parseInt(text.substring(i1 + GITHUB_STAR.length(), i2).replaceAll("[^\\d.]", ""));
             container.description = text.replace(starText , "").replaceAll("  ", " ").replace(". ,",".").replace(", .",".").replace(".,",".").replace(",.",".").replace(". .",".");
         } else {
             container.description = text;
@@ -97,6 +97,10 @@ public class DownloadJavaUsefulProjects {
         }
     }
 
+    private static int min(int i1, int i2) {
+        return i1 < 0? i2: (i2< 0? i1 : Math.min(i1, i2));
+    }
+
     private static void saveSite(ProjectContainer container, String link) {
         if (container != null) {
             container.site = link;
@@ -105,7 +109,7 @@ public class DownloadJavaUsefulProjects {
 
     private static void saveStackOverflow(ProjectContainer container, Element element) {
         if (container != null) {
-            container.stackOverflow = element.text().replace("questions", "").replace(".", "").replace(" ", "").trim();
+            container.stackOverflow = Integer.parseInt(element.text().replaceAll("[^\\d.]", ""));
         }
     }
 
