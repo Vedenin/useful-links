@@ -9,7 +9,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
 
@@ -23,8 +25,8 @@ public class DownloadJavaUsefulProjects {
 
     public static void main(String[] s) throws IOException {
         DownloadJavaUsefulProjects thisCls = new DownloadJavaUsefulProjects();
-        List<ProjectContainer> list = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
-        list.stream().forEach(System.out::println);
+        Map<String, ProjectContainer> list = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
+        list.values().stream().forEach(System.out::println);
     }
 
     /**
@@ -36,12 +38,12 @@ public class DownloadJavaUsefulProjects {
      * @return java projects
      * @throws IOException
      */
-    public List<ProjectContainer> getProjects(String url) throws IOException {
+    public Map<String, ProjectContainer> getProjects(String url) throws IOException {
         System.out.println("Start downloading");
         HTTPSDownloadUtils.initHTTPSDownload();
         Document doc = getPage(url);
         Elements div = doc.select("#readme");
-        List<ProjectContainer> result = parserProjects(div, "", null, "");
+        Map<String, ProjectContainer> result = parserProjects(div, "", null, "");
         System.out.println("End downloading");
         System.out.println();
         return result;
@@ -49,8 +51,8 @@ public class DownloadJavaUsefulProjects {
 
 
 
-    private static List<ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
-        List<ProjectContainer> result = new ArrayList<>(elements.size());
+    private static Map<String, ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
+        Map<String, ProjectContainer> result = new HashMap<>(elements.size());
         for (Element element : elements) {
             Tag tag = element.tag();
             if (isHeader(tag)) {
@@ -74,11 +76,11 @@ public class DownloadJavaUsefulProjects {
                         saveUserGuide(container, link);
                     } else {
                         container = getProjectContainer(currentCategory, description, element, link);
-                        result.add(container);
+                        result.put(container.url, container);
                     }
                 }
             }
-            result.addAll(parserProjects(element.children(), currentCategory, container, description));
+            result.putAll(parserProjects(element.children(), currentCategory, container, description));
         }
         return result;
     }

@@ -6,7 +6,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.github.vedenin.useful_links.utils.DownloadUtils.getInteger;
 import static com.github.vedenin.useful_links.utils.DownloadUtils.getPage;
@@ -22,10 +24,10 @@ public class GithubInfoDownloading {
         System.out.println(result);
     }
 
-    public List<GithubInfo>  getGithubInfoList(List<String> urlList) throws IOException {
-        List<GithubInfo> result = new ArrayList<>(urlList.size());
+    public Map<String, GithubInfo> getGithubInfoList(List<String> urlList) throws IOException {
+        Map<String, GithubInfo> result = new HashMap<>(urlList.size());
         for(String url: urlList) {
-            result.add(getGithubInfo(url));
+            result.put(url, getGithubInfo(url));
         }
         return result;
     }
