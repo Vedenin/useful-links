@@ -17,17 +17,17 @@ import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
  * <p>
  * Created by vedenin on 07.04.16.
  */
-public class DownloadJavaUsefullProject {
+public class DownloadJavaUsefulProjects {
     private static final String GITHUB_STAR = "github's star";
 
     private static void testHtmlParser(String url) throws Exception {
         Document doc = Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
         Elements div = doc.select("#readme");
-        List<ProjectContainer> list = work(div, "", null, "");
+        List<ProjectContainer> list = parserProjects(div, "", null, "");
         list.stream().forEach(System.out::println);
     }
 
-    private static List<ProjectContainer> work(Elements elements, String currentCategory, ProjectContainer container, String description) {
+    private static List<ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
         List<ProjectContainer> result = new ArrayList<>(elements.size());
         for (Element element : elements) {
             Tag tag = element.tag();
@@ -45,15 +45,21 @@ public class DownloadJavaUsefullProject {
                         saveSite(container, link);
                     } else if (isStackOverflow(link)) {
                         saveStackOverflow(container, element);
+                    } else if(isUserGuide(element)) {
+                        saveUserGuide(container, link);
                     } else {
                         container = getProjectContainer(currentCategory, description, element, link);
                         result.add(container);
                     }
                 }
             }
-            result.addAll(work(element.children(), currentCategory, container, description));
+            result.addAll(parserProjects(element.children(), currentCategory, container, description));
         }
         return result;
+    }
+
+    private static void saveUserGuide(ProjectContainer container, String link) {
+        container.userGuide = link;
     }
 
     private static String getDescription(Element element) {
@@ -122,8 +128,11 @@ public class DownloadJavaUsefullProject {
         return !link.startsWith("#") &&
                 !link.contains("/Vedenin/") &&
                 !link.contains("useful-java-links") &&
-                !link.contains("/akullpp/") &&
-                !"User guide".equals(element.text());
+                !link.contains("/akullpp/");
+    }
+
+    private static boolean isUserGuide(Element element) {
+        return "User guide".equals(element.text());
     }
 
     public static void main(String[] s) throws Exception {

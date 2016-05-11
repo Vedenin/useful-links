@@ -18,19 +18,21 @@ public class ProjectContainer {
     public String license;
     public String licenseUrl;
     public String site;
+    public String userGuide;
 
     @Override
     public String toString() {
         return "{" +
                 "category='" + category + '\'' +
                 ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", star='" + star + '\'' +
-                ", stackOverflow='" + stackOverflow + '\'' +
-                ", license='" + license + '\'' +
-                ", licenseUrl='" + licenseUrl + '\'' +
-                ", site='" + site + '\'' +
+                (url != null?", url='" + url + '\'' : "") +
+                (star != null?", star='" + star + '\'' : "") +
+                (stackOverflow != null?", stackOverflow='" + stackOverflow + '\'' : "") +
+                (license != null?", license='" + license + '\'' : "") +
+                (site != null?", site='" + site + '\'' : "") +
+                (licenseUrl != null?", licenseUrl='" + licenseUrl + '\'' : "") +
+                (userGuide != null?", userGuide='" + userGuide + '\'' : "") +
+                (description != null?", description='" + description + '\'' : "") +
                 '}';
     }
 
