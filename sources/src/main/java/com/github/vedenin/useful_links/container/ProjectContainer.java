@@ -19,21 +19,29 @@ public class ProjectContainer {
     public String licenseUrl;
     public String site;
     public String userGuide;
+    public Integer newStar;
+    public Integer newStackOverflow;
 
     @Override
     public String toString() {
         return "{" +
-                "category='" + category + '\'' +
-                ", name='" + name + '\'' +
-                (url != null?", url='" + url + '\'' : "") +
-                (star != null?", star='" + star + '\'' : "") +
-                (stackOverflow != null?", stackOverflow='" + stackOverflow + '\'' : "") +
-                (license != null?", license='" + license + '\'' : "") +
-                (site != null?", site='" + site + '\'' : "") +
-                (licenseUrl != null?", licenseUrl='" + licenseUrl + '\'' : "") +
-                (userGuide != null?", userGuide='" + userGuide + '\'' : "") +
-                (description != null?", description='" + description + '\'' : "") +
+                toString(category, "category") +
+                toString(name, "name") +
+                toString(url, "url") +
+                toString(star, "star") +
+                toString(stackOverflow, "stackOverflow") +
+                toString(license, "license") +
+                toString(site, "site") +
+                toString(licenseUrl, "licenseUrl") +
+                toString(userGuide, "userGuide") +
+                toString(description, "description") +
+                toString(newStar, "newStar") +
+                toString(newStackOverflow, "newStackOverflow") +
                 '}';
+    }
+
+    private static String toString(Object value, String name) {
+        return value != null?", " + name + "='" + value + '\'' : "";
     }
 
     public static ProjectContainer create() {
