@@ -1,6 +1,10 @@
 package com.github.vedenin.useful_links.utils;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.parser.Tag;
+
+import java.io.IOException;
 
 /**
  * Created by vvedenin on 5/10/2016.
@@ -30,4 +34,12 @@ public final class DownloadUtils {
     }
 
     private DownloadUtils() {}
+
+    public static Document getPage(String url) throws IOException {
+        return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
+    }
+
+    public static Integer getInteger(String s) {
+        return Integer.parseInt(s.replaceAll("[^\\d.]", ""));
+    }
 }

@@ -2,7 +2,6 @@ package com.github.vedenin.useful_links;
 
 import com.github.vedenin.useful_links.container.ProjectContainer;
 import com.github.vedenin.useful_links.utils.HTTPSDownloadUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -22,21 +21,33 @@ import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
 public class DownloadJavaUsefulProjects {
     private static final String GITHUB_STAR = "github's star";
 
-    private static void testHtmlParser(String url) throws Exception {
+    public static void main(String[] s) throws IOException {
+        DownloadJavaUsefulProjects thisCls = new DownloadJavaUsefulProjects();
+        List<ProjectContainer> list = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
+        list.stream().forEach(System.out::println);
+    }
+
+    /**
+     * Return list of java projects from:
+     * - https://github.com/Vedenin/useful-java-links/blob/master/readme.md
+     * - https://github.com/Vedenin/useful-java-links/blob/master/link-rus/readme.md
+     *
+     * @param url - url's from useful-java-links
+     * @return java projects
+     * @throws IOException
+     */
+    public List<ProjectContainer> getProjects(String url) throws IOException {
         System.out.println("Start downloading");
         HTTPSDownloadUtils.initHTTPSDownload();
         Document doc = getPage(url);
         Elements div = doc.select("#readme");
-        List<ProjectContainer> list = parserProjects(div, "", null, "");
+        List<ProjectContainer> result = parserProjects(div, "", null, "");
         System.out.println("End downloading");
         System.out.println();
-
-        list.stream().forEach(System.out::println);
+        return result;
     }
 
-    private static Document getPage(String url) throws IOException {
-        return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
-    }
+
 
     private static List<ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
         List<ProjectContainer> result = new ArrayList<>(elements.size());
@@ -132,7 +143,7 @@ public class DownloadJavaUsefulProjects {
         if(i1 > -1) {
             int i2 = min(text.indexOf(".", i1), text.indexOf(",", i1));
             String starText = text.substring(i1, i2);
-            container.star = Integer.parseInt(text.substring(i1 + GITHUB_STAR.length(), i2).replaceAll("[^\\d.]", ""));
+            container.star = getInteger(text.substring(i1 + GITHUB_STAR.length(), i2));
             container.description = getDescription(text, starText);
         } else {
             container.description = getDescription(text, "");
@@ -158,7 +169,7 @@ public class DownloadJavaUsefulProjects {
 
     private static void saveStackOverflow(ProjectContainer container, Element element) {
         if (container != null) {
-            container.stackOverflow = Integer.parseInt(element.text().replaceAll("[^\\d.]", ""));
+            container.stackOverflow = getInteger(element.text());
         }
     }
 
@@ -188,8 +199,5 @@ public class DownloadJavaUsefulProjects {
         return "User guide".equals(element.text());
     }
 
-    public static void main(String[] s) throws Exception {
-        testHtmlParser("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
-    }
 
 }
