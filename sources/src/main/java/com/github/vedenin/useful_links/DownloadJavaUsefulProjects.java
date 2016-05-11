@@ -63,9 +63,21 @@ public class DownloadJavaUsefulProjects {
     }
 
     private static String getDescription(Element element) {
-        String description;
-        description = element.ownText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
-        return description;
+        return element.ownText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
+    }
+
+    private static String getDescription(String text, String replacedText) {
+        String result = text.replace(replacedText , "").
+                replace(". and","").
+                replaceAll("  ", " ").
+                replace(" .",".").
+                replace(" ,",",").
+                replace(".,",".").
+                replace(",.",".").
+                replace("..",".").
+                trim();
+
+        return result.startsWith("-") ? result.substring(1).trim() : result;
     }
 
     private static ProjectContainer getProjectContainer(String currentCategory, String text, Element element, String link) {
@@ -84,9 +96,9 @@ public class DownloadJavaUsefulProjects {
             int i2 = min(text.indexOf(".", i1), text.indexOf(",", i1));
             String starText = text.substring(i1, i2);
             container.star = Integer.parseInt(text.substring(i1 + GITHUB_STAR.length(), i2).replaceAll("[^\\d.]", ""));
-            container.description = text.replace(starText , "").replaceAll("  ", " ").replace(". ,",".").replace(", .",".").replace(".,",".").replace(",.",".").replace(". .",".");
+            container.description = getDescription(text, starText);
         } else {
-            container.description = text;
+            container.description = getDescription(text, "");
         }
     }
 
