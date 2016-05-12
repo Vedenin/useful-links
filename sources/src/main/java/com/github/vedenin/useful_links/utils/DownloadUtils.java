@@ -6,11 +6,12 @@ import org.jsoup.parser.Tag;
 
 import java.io.IOException;
 
+import static com.github.vedenin.useful_links.Constants.USER_AGENT;
+
 /**
  * Created by vvedenin on 5/10/2016.
  */
 public final class DownloadUtils {
-    public static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36";
     private static final Tag H1 = Tag.valueOf("h1");
     private static final Tag H2 = Tag.valueOf("h2");
     private static final Tag H3 = Tag.valueOf("h3");
@@ -41,5 +42,9 @@ public final class DownloadUtils {
 
     public static Integer getInteger(String s) {
         return Integer.parseInt(s.replaceAll("[^\\d.]", ""));
+    }
+
+    public static int min(int i1, int i2) {
+        return i1 < 0? i2: (i2< 0? i1 : Math.min(i1, i2));
     }
 }

@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.annotation;
+package com.github.vedenin.useful_links.annotations;
 
 /**
  * Annotation for PropertiesContainer class (that has field without getter and setter)

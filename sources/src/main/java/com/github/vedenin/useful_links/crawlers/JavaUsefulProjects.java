@@ -1,16 +1,16 @@
-package com.github.vedenin.useful_links;
+package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.container.ProjectContainer;
-import com.github.vedenin.useful_links.utils.HTTPSDownloadUtils;
+import com.github.vedenin.useful_links.containers.ProjectContainer;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL;
 import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
 
 /**
@@ -18,11 +18,11 @@ import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
  * <p>
  * Created by vedenin on 07.04.16.
  */
-public class JavaUsefulProjectsDownloading {
+public class JavaUsefulProjects {
     private static final String GITHUB_STAR = "github's star";
 
     public static void main(String[] s) throws IOException {
-        JavaUsefulProjectsDownloading thisCls = new JavaUsefulProjectsDownloading();
+        JavaUsefulProjects thisCls = new JavaUsefulProjects();
         Map<String, ProjectContainer> projects = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
         projects.values().stream().forEach(System.out::println);
     }
@@ -38,7 +38,6 @@ public class JavaUsefulProjectsDownloading {
      */
     public Map<String, ProjectContainer> getProjects(String url) throws IOException {
         System.out.println("Start downloading");
-        HTTPSDownloadUtils.initHTTPSDownload();
         Document doc = getPage(url);
         Elements div = doc.select("#readme");
         Map<String, ProjectContainer> result = parserProjects(div, "", null, "");
@@ -50,7 +49,7 @@ public class JavaUsefulProjectsDownloading {
 
 
     private static Map<String, ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
-        Map<String, ProjectContainer> result = new HashMap<>(elements.size());
+        Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
         for (Element element : elements) {
             Tag tag = element.tag();
             if (isHeader(tag)) {
@@ -99,7 +98,7 @@ public class JavaUsefulProjectsDownloading {
                 replace(" ,",",").
                 replace(".,",".").
                 replace(",.",".").
-                replace("..",".").
+                replace("src/main",".").
                 trim();
 
         return result.startsWith("-") ? result.substring(1).trim() : result;
@@ -116,26 +115,11 @@ public class JavaUsefulProjectsDownloading {
     }
 
     private static void saveUrlAndGithub(String link, ProjectContainer container) {
-        if(link.contains("github.com")) {
+        if(link.contains(GIT_HUB_URL)) {
             container.github = link;
             container.url = link;
         } else {
-            try {
-                System.out.println("Find github's project:" + link);
-                Document doc = getPage(link);
-                Elements elements = doc.select("a[href*=github.com]");
-                if(!elements.isEmpty()) {
-                    Element element = elements.get(0);
-                    String github = element.attr("href");
-                    container.url = elements.size() == 1? github : link;
-                    container.github = github;
-                    container.site = link;
-                } else {
-                    container.url = link;
-                }
-            } catch (Exception exp) {
-                System.out.println(link + " : " + exp.getMessage());
-            }
+            container.url = link;
         }
     }
 
@@ -158,9 +142,7 @@ public class JavaUsefulProjectsDownloading {
         }
     }
 
-    private static int min(int i1, int i2) {
-        return i1 < 0? i2: (i2< 0? i1 : Math.min(i1, i2));
-    }
+
 
     private static void saveSite(ProjectContainer container, String link) {
         if (container != null) {

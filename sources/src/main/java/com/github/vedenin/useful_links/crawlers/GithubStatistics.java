@@ -1,11 +1,12 @@
-package com.github.vedenin.useful_links;
+package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.container.GithubInfo;
+import com.github.vedenin.useful_links.containers.GithubInfo;
+import com.github.vedenin.useful_links.utils.HTTPSDownloadUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,16 +17,17 @@ import static java.lang.Thread.sleep;
 /**
  * Returns information about github's projects
  */
-public class GithubInfoDownloading {
+public class GithubStatistics {
 
     public static void main(String[] args) throws IOException {
-        GithubInfoDownloading thisCls = new GithubInfoDownloading();
+        HTTPSDownloadUtils.initHTTPSDownload();
+        GithubStatistics thisCls = new GithubStatistics();
         GithubInfo result = thisCls.getGithubInfo("https://github.com/Vedenin/useful-java-links");
         System.out.println(result);
     }
 
     public Map<String, GithubInfo> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
-        Map<String, GithubInfo> result = new HashMap<>(urls.size());
+        Map<String, GithubInfo> result = new LinkedHashMap<>(urls.size());
         for(String url: urls) {
             if(url.contains("github.com")) {
                 try {

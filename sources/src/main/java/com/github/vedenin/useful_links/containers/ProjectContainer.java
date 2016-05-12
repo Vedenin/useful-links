@@ -1,6 +1,6 @@
-package com.github.vedenin.useful_links.container;
+package com.github.vedenin.useful_links.containers;
 
-import com.github.vedenin.useful_links.annotation.PropertiesContainer;
+import com.github.vedenin.useful_links.annotations.PropertiesContainer;
 
 /**
  * Container that store information about github's project
