@@ -8,9 +8,7 @@ import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
@@ -20,13 +18,13 @@ import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
  * <p>
  * Created by vedenin on 07.04.16.
  */
-public class DownloadJavaUsefulProjects {
+public class JavaUsefulProjectsDownloading {
     private static final String GITHUB_STAR = "github's star";
 
     public static void main(String[] s) throws IOException {
-        DownloadJavaUsefulProjects thisCls = new DownloadJavaUsefulProjects();
-        Map<String, ProjectContainer> list = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
-        list.values().stream().forEach(System.out::println);
+        JavaUsefulProjectsDownloading thisCls = new JavaUsefulProjectsDownloading();
+        Map<String, ProjectContainer> projects = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
+        projects.values().stream().forEach(System.out::println);
     }
 
     /**
@@ -123,6 +121,7 @@ public class DownloadJavaUsefulProjects {
             container.url = link;
         } else {
             try {
+                System.out.println("Find github's project:" + link);
                 Document doc = getPage(link);
                 Elements elements = doc.select("a[href*=github.com]");
                 if(!elements.isEmpty()) {

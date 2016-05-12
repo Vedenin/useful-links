@@ -5,13 +5,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.github.vedenin.useful_links.utils.DownloadUtils.getInteger;
 import static com.github.vedenin.useful_links.utils.DownloadUtils.getPage;
+import static java.lang.Thread.sleep;
 
 /**
  * Returns information about github's projects
@@ -24,15 +24,19 @@ public class GithubInfoDownloading {
         System.out.println(result);
     }
 
-    public Map<String, GithubInfo> getGithubInfoList(List<String> urlList) throws IOException {
-        Map<String, GithubInfo> result = new HashMap<>(urlList.size());
-        for(String url: urlList) {
-            result.put(url, getGithubInfo(url));
+    public Map<String, GithubInfo> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
+        Map<String, GithubInfo> result = new HashMap<>(urls.size());
+        for(String url: urls) {
+            if(url.contains("github.com")) {
+                result.put(url, getGithubInfo(url));
+                sleep(100);
+            }
         }
         return result;
     }
 
     public GithubInfo getGithubInfo(String url) throws IOException {
+        System.out.println("getGithubInfo " + url);
         GithubInfo result = GithubInfo.create();
         result.url = url;
 
@@ -46,6 +50,7 @@ public class GithubInfoDownloading {
 
         elements = doc.select("a[href*=/network]");
         result.forks = getInteger(elements.get(0).text());
+        System.out.println(result);
         return result;
     }
 }
