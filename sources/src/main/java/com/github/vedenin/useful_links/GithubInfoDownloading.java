@@ -28,8 +28,12 @@ public class GithubInfoDownloading {
         Map<String, GithubInfo> result = new HashMap<>(urls.size());
         for(String url: urls) {
             if(url.contains("github.com")) {
-                result.put(url, getGithubInfo(url));
-                sleep(100);
+                try {
+                    result.put(url, getGithubInfo(url));
+                    sleep(100);
+                } catch (Exception exp) {
+                    System.out.println(exp.getMessage());
+                }
             }
         }
         return result;

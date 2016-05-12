@@ -186,7 +186,8 @@ public class JavaUsefulProjectsDownloading {
         return link.contains("wikipedia.org") ||
                 link.contains("/licenses/") ||
                 link.contains("unlicense.org") ||
-                link.contains("eclipse.org/org/documents/");
+                link.contains("eclipse.org/org/documents/") ||
+                link.contains("gnu.org/copyleft/");
     }
 
     private static boolean isProjectLink(Element element, String link) {
