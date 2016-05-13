@@ -1,7 +1,6 @@
 package com.github.vedenin.useful_links.crawlers;
 
 import com.github.vedenin.useful_links.containers.GithubInfo;
-import com.github.vedenin.useful_links.utils.HTTPSDownloadUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -20,7 +19,6 @@ import static java.lang.Thread.sleep;
 public class GithubStatistics {
 
     public static void main(String[] args) throws IOException {
-        HTTPSDownloadUtils.initHTTPSDownload();
         GithubStatistics thisCls = new GithubStatistics();
         GithubInfo result = thisCls.getGithubInfo("https://github.com/Vedenin/useful-java-links");
         System.out.println(result);

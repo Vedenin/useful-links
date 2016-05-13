@@ -37,6 +37,7 @@ public final class DownloadUtils {
     private DownloadUtils() {}
 
     public static Document getPage(String url) throws IOException {
+        HTTPSDownloadUtils.initHTTPSDownload();
         return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
     }
 

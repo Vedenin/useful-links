@@ -3,7 +3,6 @@ package com.github.vedenin.useful_links;
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.GithubStatistics;
 import com.github.vedenin.useful_links.crawlers.JavaUsefulProjects;
-import com.github.vedenin.useful_links.utils.HTTPSDownloadUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -15,7 +14,6 @@ import java.util.Map;
  */
 public class MangerDownloading {
     public static void main(String[] args) throws IOException, InterruptedException {
-        HTTPSDownloadUtils.initHTTPSDownload();
         System.out.println("1. Get JavaUsefulProjects");
         JavaUsefulProjects projectsDownloading = new JavaUsefulProjects();
         Map<String, ProjectContainer> project = projectsDownloading.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");

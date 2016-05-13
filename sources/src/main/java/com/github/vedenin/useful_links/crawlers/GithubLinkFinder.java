@@ -5,27 +5,36 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL;
 import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL_FULL;
 import static com.github.vedenin.useful_links.utils.DownloadUtils.getPage;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
+import static com.github.vedenin.useful_links.utils.DownloadUtils.min;
 
 /**
+ * Find github link if project info without this link
+ *
  * Created by vvedenin on 5/12/2016.
  */
 public class GithubLinkFinder {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        JavaUsefulProjects thisCls = new JavaUsefulProjects();
+        Map<String, ProjectContainer> projects = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
+        Map<String, ProjectContainer> newProjects = getGithubLinks(projects);
+        newProjects.values().stream().forEach(System.out::println);
     }
 
-    private static void saveUrlAndGithub(String link, ProjectContainer container) {
-        if(link.contains(GIT_HUB_URL)) {
-            container.github = link;
-            container.url = link;
-        } else {
+    public static Map<String, ProjectContainer> getGithubLinks(Map<String, ProjectContainer> projectContainerMap) {
+        projectContainerMap.forEach(GithubLinkFinder::saveGithubLink);
+        return projectContainerMap;
+    }
+
+    public static void saveGithubLink(String link, ProjectContainer container) {
+        if(!link.contains(GIT_HUB_URL)) {
             try {
                 Document doc = getPage(link);
                 Elements elements = doc.select("a[href*=github.com]");
@@ -36,8 +45,6 @@ public class GithubLinkFinder {
                     container.github = githubLink;
                     container.site = link;
                     System.out.println("github's:" + link + " | " + githubLink);
-                } else {
-                    container.url = link;
                 }
             } catch (Exception exp) {
                 System.out.println(link + " : " + exp.getMessage());
