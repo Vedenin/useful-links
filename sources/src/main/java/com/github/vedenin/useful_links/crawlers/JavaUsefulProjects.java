@@ -133,6 +133,7 @@ public class JavaUsefulProjects {
         } else {
             container.description = getDescription(text, "");
         }
+        container.allText = container.description;
     }
 
     private static void saveLicense(ProjectContainer container, Element element, String link) {

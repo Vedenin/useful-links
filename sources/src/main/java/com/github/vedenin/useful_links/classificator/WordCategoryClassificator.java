@@ -31,7 +31,7 @@ public class WordCategoryClassificator {
     private Map<String, Map<String, Integer>> getWordCategoryMap(Map<String, ProjectContainer> projects) {
         Map<String, Map<String, Integer>> tmpResult = new HashMap<>();
         for(ProjectContainer project: projects.values()){
-            String text = project.description;
+            String text = project.allText;
             String textWithoutNonChar = text.replaceAll("[^a-zA-Z0-9]"," ");
             String[] words = textWithoutNonChar.split(" ");
             String category = project.category;

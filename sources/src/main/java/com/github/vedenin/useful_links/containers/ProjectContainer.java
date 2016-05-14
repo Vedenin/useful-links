@@ -40,6 +40,7 @@ public class ProjectContainer {
                 toString(newStar, "newStar") +
                 toString(newStackOverflow, "newStackOverflow") +
                 toString(github, "github") +
+                toString(allText, "allText") +
                 '}';
     }
 
