@@ -1,5 +1,6 @@
 package com.github.vedenin.useful_links;
 
+import com.github.vedenin.useful_links.containers.GithubInfoContainer;
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.GithubStatistics;
 import com.github.vedenin.useful_links.crawlers.JavaUsefulProjects;
@@ -19,7 +20,7 @@ public class MangerDownloading {
         Map<String, ProjectContainer> project = projectsDownloading.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
         System.out.println("2. Get Github statistics");
         GithubStatistics githubStatistics = new GithubStatistics();
-        Map<String, com.github.vedenin.useful_links.containers.GithubInfo> statistics = githubStatistics.getGithubInfoList(project.keySet());
+        Map<String, GithubInfoContainer> statistics = githubStatistics.getGithubInfoList(project.keySet());
         statistics.values().stream().forEach(System.out::println);
     }
 }

@@ -22,6 +22,7 @@ public class ProjectContainer {
     public Integer newStar;
     public Integer newStackOverflow;
     public String github;
+    public String allText;
 
     @Override
     public String toString() {

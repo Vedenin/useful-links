@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.containers.GithubInfo;
+import com.github.vedenin.useful_links.containers.GithubInfoContainer;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -20,12 +20,12 @@ public class GithubStatistics {
 
     public static void main(String[] args) throws IOException {
         GithubStatistics thisCls = new GithubStatistics();
-        GithubInfo result = thisCls.getGithubInfo("https://github.com/Vedenin/useful-java-links");
+        GithubInfoContainer result = thisCls.getGithubInfo("https://github.com/Vedenin/useful-java-links");
         System.out.println(result);
     }
 
-    public Map<String, GithubInfo> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
-        Map<String, GithubInfo> result = new LinkedHashMap<>(urls.size());
+    public Map<String, GithubInfoContainer> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
+        Map<String, GithubInfoContainer> result = new LinkedHashMap<>(urls.size());
         for(String url: urls) {
             if(url.contains("github.com")) {
                 try {
@@ -39,9 +39,9 @@ public class GithubStatistics {
         return result;
     }
 
-    public GithubInfo getGithubInfo(String url) throws IOException {
+    public GithubInfoContainer getGithubInfo(String url) throws IOException {
         System.out.println("getGithubInfo " + url);
-        GithubInfo result = GithubInfo.create();
+        GithubInfoContainer result = GithubInfoContainer.create();
         result.url = url;
 
         Document doc = getPage(url);

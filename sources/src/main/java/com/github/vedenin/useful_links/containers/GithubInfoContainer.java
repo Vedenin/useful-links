@@ -8,14 +8,14 @@ import com.github.vedenin.useful_links.annotations.PropertiesContainer;
  * Created by vvedenin on 5/11/2016.
  */
 @PropertiesContainer // class without getter and setter (see Properties in C#)
-public class GithubInfo {
+public class GithubInfoContainer {
     public String url;
     public Integer stars;
     public Integer watchs;
     public Integer forks;
 
-    public static GithubInfo create() {
-        return new GithubInfo();
+    public static GithubInfoContainer create() {
+        return new GithubInfoContainer();
     }
 
     @Override
