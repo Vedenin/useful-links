@@ -35,5 +35,25 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
+        <!-- http://mvnrepository.com/artifact/nz.ac.waikato.cms.weka/weka-stable -->
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>3.6.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+            <version>1.10.19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <version>4.12</version>
+        </dependency>
     </dependencies>
 </project>
