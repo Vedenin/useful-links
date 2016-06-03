@@ -1,0 +1,10 @@
+no_license (?)
+
+https://github.com/markets/awesome-ruby
+https://github.com/razum2um/awesome-clojure
+https://github.com/h4cc/awesome-elixir
+https://github.com/drobakowski/awesome-erlang
+
+separate_files
+https://github.com/svaksha/Julia.jl
+
