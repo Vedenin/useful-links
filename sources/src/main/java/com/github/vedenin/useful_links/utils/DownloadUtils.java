@@ -1,9 +1,11 @@
 package com.github.vedenin.useful_links.utils;
 
+import com.google.common.base.Charsets;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Tag;
 
+import java.io.File;
 import java.io.IOException;
 
 import static com.github.vedenin.useful_links.Constants.USER_AGENT;
@@ -38,7 +40,12 @@ public final class DownloadUtils {
 
     public static Document getPage(String url) throws IOException {
         HTTPSDownloadUtils.initHTTPSDownload();
-        return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
+        if(url.startsWith("file:")) {
+            File file = new File(url.replace("file:", ""));
+            return Jsoup.parse(file, Charsets.UTF_8.name());
+        } else {
+            return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
+        }
     }
 
     public static Integer getInteger(String s) {
