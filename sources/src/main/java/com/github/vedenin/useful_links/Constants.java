@@ -1,9 +1,13 @@
 package com.github.vedenin.useful_links;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
+ * Global constants
+ *
  * Created by vvedenin on 5/12/2016.
  */
 public final class Constants {
@@ -13,8 +17,35 @@ public final class Constants {
 
     private Constants() {}
 
+    public static final Set<String> NOT_PROJECT_HEADER = new HashSet<>(); // header that not_project
     public static final Map<String, String> LANGUAGES = new HashMap<>(); // key, name - All programming languages from github
     public static final Map<String, String> POPULAR_LANGUAGES = new HashMap<>(); // key, name - popular languages from github
+
+    static {
+        NOT_PROJECT_HEADER.add("community");
+        NOT_PROJECT_HEADER.add("contribute");
+        NOT_PROJECT_HEADER.add("learning");
+        NOT_PROJECT_HEADER.add("websites");
+        NOT_PROJECT_HEADER.add("communities");
+        NOT_PROJECT_HEADER.add("books");
+        NOT_PROJECT_HEADER.add("reading");
+        NOT_PROJECT_HEADER.add("видео доклады и лекции");
+        NOT_PROJECT_HEADER.add("podcasts");
+        NOT_PROJECT_HEADER.add("twitter");
+        NOT_PROJECT_HEADER.add("contributing");
+        NOT_PROJECT_HEADER.add("resources");
+        NOT_PROJECT_HEADER.add("videos");
+        NOT_PROJECT_HEADER.add("courses");
+        NOT_PROJECT_HEADER.add("badges");
+        NOT_PROJECT_HEADER.add("social");
+        NOT_PROJECT_HEADER.add("license");
+        NOT_PROJECT_HEADER.add("guides");
+        NOT_PROJECT_HEADER.add("tutorials");
+        NOT_PROJECT_HEADER.add("documents");
+        NOT_PROJECT_HEADER.add("syntax highlighter");
+        NOT_PROJECT_HEADER.add("links");
+        NOT_PROJECT_HEADER.add("reading");
+    }
 
     static {
         POPULAR_LANGUAGES.put("ActionScript", "ActionScript");
@@ -56,7 +87,6 @@ public final class Constants {
         POPULAR_LANGUAGES.put("OCaml", "OCaml");
         POPULAR_LANGUAGES.put("ColdFusion", "ColdFusion");
         POPULAR_LANGUAGES.put("FORTRAN", "FORTRAN");
-        POPULAR_LANGUAGES.put("Assembly", "Assembly");
         POPULAR_LANGUAGES.put("AutoHotkey", "AutoHotkey");
         POPULAR_LANGUAGES.put("AutoIt", "AutoIt");
         POPULAR_LANGUAGES.put("Crystal", "Crystal");
