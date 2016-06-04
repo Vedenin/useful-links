@@ -11,53 +11,17 @@ import java.util.Set;
  * Created by vvedenin on 5/12/2016.
  */
 public final class Constants {
+
+
     public static final String GIT_HUB_URL = "github.com/";
     public static final String GIT_HUB_URL_FULL = "https://" + GIT_HUB_URL;
     public static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36";
 
     private Constants() {}
 
-    public static final Set<String> NOT_PROJECT_HEADER = new HashSet<>(); // header that not_project
     public static final Map<String, String> LANGUAGES = new HashMap<>(); // key, name - All programming languages from github
     public static final Map<String, String> POPULAR_LANGUAGES = new HashMap<>(); // key, name - popular languages from github
 
-    static {
-        NOT_PROJECT_HEADER.add("community");
-        NOT_PROJECT_HEADER.add("contribute");
-        NOT_PROJECT_HEADER.add("learning");
-        NOT_PROJECT_HEADER.add("websites");
-        NOT_PROJECT_HEADER.add("communities");
-        NOT_PROJECT_HEADER.add("books");
-        NOT_PROJECT_HEADER.add("reading");
-        NOT_PROJECT_HEADER.add("видео доклады и лекции");
-        NOT_PROJECT_HEADER.add("podcasts");
-        NOT_PROJECT_HEADER.add("twitter");
-        NOT_PROJECT_HEADER.add("contributing");
-        NOT_PROJECT_HEADER.add("resources");
-        NOT_PROJECT_HEADER.add("videos");
-        NOT_PROJECT_HEADER.add("courses");
-        NOT_PROJECT_HEADER.add("badges");
-        NOT_PROJECT_HEADER.add("social");
-        NOT_PROJECT_HEADER.add("license");
-        NOT_PROJECT_HEADER.add("guides");
-        NOT_PROJECT_HEADER.add("tutorials");
-        NOT_PROJECT_HEADER.add("documents");
-        NOT_PROJECT_HEADER.add("syntax highlighter");
-        NOT_PROJECT_HEADER.add("links");
-        NOT_PROJECT_HEADER.add("reading");
-        NOT_PROJECT_HEADER.add("credits");
-        NOT_PROJECT_HEADER.add("blogs");
-        NOT_PROJECT_HEADER.add("up to date");
-        NOT_PROJECT_HEADER.add("in browser");
-        NOT_PROJECT_HEADER.add("another module list");
-        NOT_PROJECT_HEADER.add("awesome lists");
-        NOT_PROJECT_HEADER.add("everything else");
-        NOT_PROJECT_HEADER.add("user groups");
-        NOT_PROJECT_HEADER.add("articles");
-        NOT_PROJECT_HEADER.add("documentation");
-        NOT_PROJECT_HEADER.add("references");
-        NOT_PROJECT_HEADER.add("lists");
-    }
 
     static {
         POPULAR_LANGUAGES.put("ActionScript", "ActionScript");

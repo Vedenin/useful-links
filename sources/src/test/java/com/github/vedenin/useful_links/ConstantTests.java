@@ -17,7 +17,7 @@ public class ConstantTests {
 
     @Test
     public void testPopularLanguages() {
-        assertEquals(44, POPULAR_LANGUAGES.size());
+        assertEquals(43, POPULAR_LANGUAGES.size());
     }
 
 }
