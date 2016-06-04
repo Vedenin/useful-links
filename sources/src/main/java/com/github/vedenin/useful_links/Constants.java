@@ -45,6 +45,18 @@ public final class Constants {
         NOT_PROJECT_HEADER.add("syntax highlighter");
         NOT_PROJECT_HEADER.add("links");
         NOT_PROJECT_HEADER.add("reading");
+        NOT_PROJECT_HEADER.add("credits");
+        NOT_PROJECT_HEADER.add("blogs");
+        NOT_PROJECT_HEADER.add("up to date");
+        NOT_PROJECT_HEADER.add("in browser");
+        NOT_PROJECT_HEADER.add("another module list");
+        NOT_PROJECT_HEADER.add("awesome lists");
+        NOT_PROJECT_HEADER.add("everything else");
+        NOT_PROJECT_HEADER.add("user groups");
+        NOT_PROJECT_HEADER.add("articles");
+        NOT_PROJECT_HEADER.add("documentation");
+        NOT_PROJECT_HEADER.add("references");
+        NOT_PROJECT_HEADER.add("lists");
     }
 
     static {
