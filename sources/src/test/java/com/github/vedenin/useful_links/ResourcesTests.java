@@ -17,8 +17,8 @@ public class ResourcesTests {
     public void testGetNonProjectHeaders() {
         Resources resources = new Resources();
         List<String> list = resources.getNonProjectHeaders();
-        assertEquals(35, list.size());
-        assertEquals("contributing", list.get(10));
+        assertEquals(37, list.size());
+        assertEquals("resources", list.get(10));
     }
 
     @Test
