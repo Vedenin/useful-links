@@ -28,4 +28,12 @@ public class ResourcesTests {
         assertEquals(43, map.size());
         assertEquals("Java", map.get("Java"));
     }
+
+    @Test
+    public void testGetProgrammingLanguages() {
+        Resources resources = new Resources();
+        Map<String, String> map = resources.getProgrammingLanguages();
+        assertEquals(408, map.size());
+        assertEquals("Java", map.get("Java"));
+    }
 }

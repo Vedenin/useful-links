@@ -3,7 +3,6 @@ package com.github.vedenin.useful_links;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -27,9 +26,22 @@ public class Resources {
         return getListFromConfig("/non_project_headers.config");
     }
 
+    /**
+     * Return map all popular programming languages (key - github's key, name - languages name)
+     * @return map<Github's_key, name_of_languages>
+     */
     public Map<String, String> getPopularLanguages() {
-        return getMapFromConfig("/popular_languages.config");
+        return getMapFromConfig("/popular_programming_languages.config");
     }
+
+    /**
+     * Return map all programming languages from github (key - github's key, name - languages name)
+     * @return map<Github's_key, name_of_languages>
+     */
+    public Map<String, String> getProgrammingLanguages() {
+        return getMapFromConfig("/programming_languages.config");
+    }
+
     /**
      * Return list from config file
      * @param name - name of config file
