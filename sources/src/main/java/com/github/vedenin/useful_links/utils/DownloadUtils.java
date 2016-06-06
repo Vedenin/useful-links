@@ -1,14 +1,8 @@
 package com.github.vedenin.useful_links.utils;
 
-import com.google.common.base.Charsets;
-import org.jsoup.Jsoup;
+import com.github.vedenin.useful_links.downloader.Downloader;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Tag;
-
-import java.io.File;
-import java.io.IOException;
-
-import static com.github.vedenin.useful_links.Constants.USER_AGENT;
 
 /**
  * Created by vvedenin on 5/10/2016.
@@ -36,16 +30,11 @@ public final class DownloadUtils {
         return A.equals(tag);
     }
 
-    private DownloadUtils() {}
+    private DownloadUtils() {
+    }
 
-    public static Document getPage(String url) throws IOException {
-        HTTPSDownloadUtils.initHTTPSDownload();
-        if(url.startsWith("file:")) {
-            File file = new File(url.replace("file:", ""));
-            return Jsoup.parse(file, Charsets.UTF_8.name());
-        } else {
-            return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
-        }
+    public static Document getPage(String url) {
+        return Downloader.instance().getPage(url);
     }
 
     public static Integer getInteger(String s) {
@@ -53,6 +42,6 @@ public final class DownloadUtils {
     }
 
     public static int min(int i1, int i2) {
-        return i1 < 0? i2: (i2< 0? i1 : Math.min(i1, i2));
+        return i1 < 0 ? i2 : (i2 < 0 ? i1 : Math.min(i1, i2));
     }
 }

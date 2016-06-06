@@ -1,6 +1,7 @@
 package com.github.vedenin.useful_links;
 
 
+import com.github.vedenin.useful_links.exceptions.ResourceException;
 import org.apache.commons.io.IOUtils;
 
 import java.io.InputStream;
@@ -51,7 +52,7 @@ public class Resources {
         try {
             InputStream inputStream = this.getClass().getResourceAsStream(name);
             String str = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-            return Arrays.asList(str.split("\n"));
+            return Arrays.asList(str.replaceAll("\r","").split("\n"));
         } catch (Exception e) {
             throw new ResourceException("Problem during open resource: " + name, e);
         }
@@ -66,9 +67,8 @@ public class Resources {
         try {
             InputStream inputStream = this.getClass().getResourceAsStream(name);
             String str = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-            return Arrays.stream(str.split("\n")).collect(toMap((s) ->
-                    s.split(" := ")[0], (s) ->  s.split(" := ")[1]
-            ));
+            return Arrays.stream(str.replaceAll("\r", "").split("\n")).map((s) ->
+                    s.split(" := ")).collect(toMap((s) ->s[0], (s) ->  s[1]));
         } catch (Exception e) {
             throw new ResourceException("Problem during open resource: " + name, e);
         }

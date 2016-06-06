@@ -18,7 +18,7 @@ public class ResourcesTests {
         Resources resources = new Resources();
         List<String> list = resources.getNonProjectHeaders();
         assertEquals(37, list.size());
-        assertEquals("resources", list.get(10));
+        assertEquals("resources", list.get(10).trim());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ResourcesTests {
         Resources resources = new Resources();
         Map<String, String> map = resources.getPopularLanguages();
         assertEquals(43, map.size());
-        assertEquals("Java", map.get("Java"));
+        assertEquals("Java", map.get("Java").trim());
     }
 
     @Test
@@ -34,6 +34,6 @@ public class ResourcesTests {
         Resources resources = new Resources();
         Map<String, String> map = resources.getProgrammingLanguages();
         assertEquals(408, map.size());
-        assertEquals("Java", map.get("Java"));
+        assertEquals("Java", map.get("Java").trim());
     }
 }
