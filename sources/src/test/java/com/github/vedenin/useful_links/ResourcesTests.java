@@ -25,8 +25,8 @@ public class ResourcesTests {
     public void testGetNonProjectMainHeaders() {
         Resources resources = new Resources();
         List<String> list = resources.getNonProjectMainHeaders();
-        assertEquals(8, list.size());
-        assertEquals("resources", list.get(0).trim());
+        assertEquals(1, list.size());
+        assertEquals("user groups", list.get(0).trim());
     }
 
 

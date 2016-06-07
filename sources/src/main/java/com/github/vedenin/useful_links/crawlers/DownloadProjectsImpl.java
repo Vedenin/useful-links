@@ -56,15 +56,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         for (Element element : elements) {
             Tag tag = element.tag();
             if (isHeader(tag)) {
-                context.currentCategory = element.text();
-                if(context.skipHeader == null) {
-                    if(isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectMainHeaders)) {
-                        context.skipHeader = getHeaderIndex(tag);
-                    }
-                } else if(getHeaderIndex(tag) < context.skipHeader) {
-                    context.skipHeader = null;
-                }
-                if(isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders) || context.skipHeader != null) {
+                if(getSkipHeaderFlag(context, element.text(), getHeaderIndex(tag))) {
                     result.add(context.currentCategory);
                 }
             }
@@ -78,15 +70,25 @@ public class DownloadProjectsImpl implements DownloadProjects {
         for (Element element : elements) {
             Tag tag = element.tag();
             if (isHeader(tag)) {
-                context.currentCategory = element.text();
-                context.container = null;
-                if(isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders)) {
-                    System.out.println(context.currentCategory);
-                }
+                context.skipHeaderFlag = getSkipHeaderFlag(context, element.text(), getHeaderIndex(tag));
+            } else {
+
             }
             result.putAll(parserProjects(element.children(), context));
         }
         return result;
+    }
+
+    private boolean getSkipHeaderFlag(Context context, String currentCategory, Integer headerIndex) {
+        context.currentCategory = currentCategory;
+        if(context.skipHeader == null) {
+            if(isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectMainHeaders)) {
+                context.skipHeader = headerIndex;
+            }
+        } else if(headerIndex < context.skipHeader) {
+            context.skipHeader = null;
+        }
+        return isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
     }
 
     private static boolean isNonProjectHeader(String category, List<String> nonProjectHeaders) {
@@ -98,6 +100,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         String currentCategory = "";
         ProjectContainer container = null;
         Integer skipHeader = null;
+        boolean skipHeaderFlag = false;
         String description = "";
 
         public static Context create() {
