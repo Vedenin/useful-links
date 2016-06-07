@@ -12,9 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.vedenin.useful_links.utils.DownloadUtils.getHeaderIndex;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.getPage;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.isHeader;
+import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -47,8 +45,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
     @Override
     public Map<String, ProjectContainer> getProjects(String url) {
         Document doc = getPage(url);
+        Elements title = doc.select("title");
+        String baseUrl = title.first().ownText().split(":")[0];
         Elements div = doc.select(README_TEG);
-        return parserProjects(div, Context.create());
+        return parserProjects(div, Context.create(baseUrl));
     }
 
     private List<String> parserSkippedSections(Elements elements, Context context) {
@@ -71,12 +71,47 @@ public class DownloadProjectsImpl implements DownloadProjects {
             Tag tag = element.tag();
             if (isHeader(tag)) {
                 context.skipHeaderFlag = getSkipHeaderFlag(context, element.text(), getHeaderIndex(tag));
-            } else {
-
+            } else if(!context.skipHeaderFlag) {
+                proceedBody(element, context, result);
             }
             result.putAll(parserProjects(element.children(), context));
         }
         return result;
+    }
+
+    private static void proceedBody(Element element, Context context,  Map<String, ProjectContainer> result) {
+        Tag tag = element.tag();
+        if(isEnum(tag)){
+            context.isNewProject = true;
+            context.description = getDescription(element);
+        } else {
+            if (isLink(tag)) {
+                String link = element.attr("href");
+                if (isProjectLink(link, context.baseUrl)) {
+                    /*if (isLicenseLink(link)) {
+                        saveLicense(container, element, link);
+                    } else if (isSite(element, link)) {
+                        saveSite(container, link);
+                    } else if (isStackOverflow(link)) {
+                        saveStackOverflow(container, element);
+                    } else if (isUserGuide(element)) {
+                        saveUserGuide(container, link);
+                    } else {
+                        container = getProjectContainer(currentCategory, description, element, link);
+                        result.put(container.url, container);
+                    }*/
+                }
+            }
+        }
+    }
+
+    private static boolean isProjectLink(String link, String baseUrl) {
+        return !link.startsWith("#") &&
+                !link.toLowerCase().contains(baseUrl.toLowerCase());
+    }
+
+    private static String getDescription(Element element) {
+        return element.ownText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
     }
 
     private boolean getSkipHeaderFlag(Context context, String currentCategory, Integer headerIndex) {
@@ -101,12 +136,19 @@ public class DownloadProjectsImpl implements DownloadProjects {
         ProjectContainer container = null;
         Integer skipHeader = null;
         boolean skipHeaderFlag = false;
+        boolean isNewProject = false;
         String description = "";
+        String baseUrl = null;
 
         public static Context create() {
             return new Context();
         }
 
+        public static Context create(String baseUrl) {
+            Context context = new Context();
+            context.baseUrl = baseUrl;
+            return context;
+        }
     }
 
     private List<String> getLowerCaseList(List<String> list) {

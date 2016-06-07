@@ -44,6 +44,10 @@ public class ProjectContainer {
                 '}';
     }
 
+    public boolean isEmpty() {
+        return url.isEmpty();
+    }
+
     private static String toString(Object value, String name) {
         return value != null?", " + name + "='" + value + '\'' : "";
     }
