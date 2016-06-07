@@ -8,27 +8,33 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
+ * Test DownloadProjects Crawlers
+ *
  * Created by vedenin on 04.06.16.
  */
 public class DownloadProjectsTests {
     @Test
-    public void testDownload() throws IOException {
+    public void getSkippedSectionsTest() throws IOException {
         Resources resources = new Resources();
-        DownloadProjects thisCls = new DownloadProjectsImpl(resources.getNonProjectHeaders());
-
+        DownloadProjects thisCls = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
         List<String> awesomeLists = resources.getListFromConfig("/awesome-lists/lists.txt");
-        workingProjects(thisCls, "/useful-java-links.html");
+        System.out.println("useful-java-links");
+        List<String> skippedSections = workingProjects(thisCls, "/useful-java-links.html");
+        skippedSections.stream().forEach(System.out::println);
         for(String awesomeList: awesomeLists) {
-            workingProjects(thisCls, "/awesome-lists/" + awesomeList.trim());
+            System.out.println(awesomeList +"\n");
+            List<String> result = workingProjects(thisCls, "/awesome-lists/" + awesomeList.trim());
+            skippedSections.addAll(result);
+            result.stream().forEach(System.out::println);
         }
+        assertEquals(195, skippedSections.size());
     }
 
-    private void workingProjects(DownloadProjects thisCls, String fileName) throws IOException {
+    private List<String> workingProjects(DownloadProjects thisCls, String fileName) throws IOException {
         URL url = this.getClass().getResource(fileName);
-        System.out.println();
-        System.out.println(fileName + " : ");
-        List<String> skippedSections = thisCls.getSkippedSections(url.toString());
-        skippedSections.stream().forEach(System.out::println);
+        return thisCls.getSkippedSections(url.toString());
     }
 }

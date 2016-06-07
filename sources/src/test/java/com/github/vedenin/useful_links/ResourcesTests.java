@@ -17,9 +17,18 @@ public class ResourcesTests {
     public void testGetNonProjectHeaders() {
         Resources resources = new Resources();
         List<String> list = resources.getNonProjectHeaders();
-        assertEquals(37, list.size());
+        assertEquals(41, list.size());
         assertEquals("resources", list.get(10).trim());
     }
+
+    @Test
+    public void testGetNonProjectMainHeaders() {
+        Resources resources = new Resources();
+        List<String> list = resources.getNonProjectMainHeaders();
+        assertEquals(8, list.size());
+        assertEquals("resources", list.get(0).trim());
+    }
+
 
     @Test
     public void testGetPopularLanguages() {

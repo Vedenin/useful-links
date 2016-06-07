@@ -36,6 +36,14 @@ public class Resources {
     }
 
     /**
+     * Return all header that store non-project links (website and so on) and other headers
+     * @return non-project header list
+     */
+    public List<String> getNonProjectMainHeaders() {
+        return getListFromConfig("/non_project_main_headers.config");
+    }
+
+    /**
      * Return map all programming languages from github (key - github's key, name - languages name)
      * @return map<Github's_key, name_of_languages>
      */

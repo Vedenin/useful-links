@@ -4,6 +4,9 @@ import com.github.vedenin.useful_links.downloader.Downloader;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Tag;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by vvedenin on 5/10/2016.
  */
@@ -15,11 +18,24 @@ public final class DownloadUtils {
     private static final Tag H5 = Tag.valueOf("h5");
     private static final Tag H6 = Tag.valueOf("h6");
     private static final Tag LI = Tag.valueOf("li");
+    private static final Map<Tag, Integer> headersIndexMap = new HashMap<>(6);
     private static final Tag A = Tag.valueOf("a");
 
+    static {
+        headersIndexMap.put(H1, 1);
+        headersIndexMap.put(H2, 2);
+        headersIndexMap.put(H3, 3);
+        headersIndexMap.put(H4, 4);
+        headersIndexMap.put(H5, 5);
+        headersIndexMap.put(H6, 6);
+    }
 
     public static boolean isHeader(Tag tag) {
         return H1.equals(tag) || H2.equals(tag) || H3.equals(tag) || H4.equals(tag) || H5.equals(tag) || H6.equals(tag);
+    }
+
+    public static Integer getHeaderIndex(Tag tag) {
+        return headersIndexMap.get(tag);
     }
 
     public static boolean isEnum(Tag tag) {
