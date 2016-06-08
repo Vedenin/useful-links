@@ -88,6 +88,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
             if (isLink(tag)) {
                 String link = element.attr("href");
                 if (isProjectLink(link, context.baseUrl)) {
+                    System.out.println(context.baseUrl + " " + link);
                     /*if (isLicenseLink(link)) {
                         saveLicense(container, element, link);
                     } else if (isSite(element, link)) {
@@ -106,8 +107,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
     }
 
     private static boolean isProjectLink(String link, String baseUrl) {
+        String linkToLowerCase = link.toLowerCase();
         return !link.startsWith("#") &&
-                !link.toLowerCase().contains(baseUrl.toLowerCase());
+                !linkToLowerCase.contains(baseUrl.toLowerCase()) &&
+                !linkToLowerCase.contains("awesome");
     }
 
     private static String getDescription(Element element) {
