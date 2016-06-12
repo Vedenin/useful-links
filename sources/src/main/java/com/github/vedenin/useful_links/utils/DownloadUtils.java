@@ -5,7 +5,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.parser.Tag;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by vvedenin on 5/10/2016.
@@ -60,4 +63,33 @@ public final class DownloadUtils {
     public static int min(int i1, int i2) {
         return i1 < 0 ? i2 : (i2 < 0 ? i1 : Math.min(i1, i2));
     }
+
+
+    public static List<String> getLowerCaseList(List<String> list) {
+        return list.stream().peek(String::toLowerCase).peek(String::trim).collect(toList());
+    }
+
+    public static boolean isLicenseLink(String link) {
+        String lowerCase = link.toLowerCase();
+        return  lowerCase.contains("wikipedia.org") ||
+                lowerCase.contains("wikibooks.org") ||
+                lowerCase.contains("licens") ||
+                lowerCase.contains("licenc") ||
+                lowerCase.contains("wtfpl.net") ||
+                lowerCase.contains("unlicense.org") ||
+                lowerCase.contains("eclipse.org/org/documents/") ||
+                lowerCase.contains("gnu.org/copyleft/");
+    }
+
+    public static boolean isProjectLink(String link, String baseUrl) {
+        String lowerCase = link.toLowerCase();
+        return !lowerCase.startsWith("#") &&
+                !lowerCase.contains(baseUrl.toLowerCase()) &&
+                !lowerCase.contains("awesome");
+    }
+
+    public static boolean isNonProjectHeader(String category, List<String> nonProjectHeaders) {
+        return nonProjectHeaders.stream().anyMatch(category::contains);
+    }
+
 }

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @inheritDoc
@@ -22,6 +21,9 @@ import static java.util.stream.Collectors.toList;
  */
 public class DownloadProjectsImpl implements DownloadProjects {
     private static final String README_TEG = "#readme";
+    private static final String TITLE_TEG = "title";
+    private static final String HREF_ATTR = "href";
+
     private final List<String> nonProjectHeaders;
     private final List<String> nonProjectMainHeaders;
 
@@ -45,7 +47,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
     @Override
     public Map<String, ProjectContainer> getProjects(String url) {
         Document doc = getPage(url);
-        Elements title = doc.select("title");
+        Elements title = doc.select(TITLE_TEG);
         String baseUrl = title.first().ownText().split(":")[0];
         Elements div = doc.select(README_TEG);
         return parserProjects(div, DownloadContext.create(baseUrl));
@@ -86,9 +88,14 @@ public class DownloadProjectsImpl implements DownloadProjects {
             context.description = getDescription(element);
         } else {
             if (isLink(tag)) {
-                String link = element.attr("href");
+                String link = element.attr(HREF_ATTR);
                 if (isProjectLink(link, context.baseUrl)) {
-                    System.out.println(context.baseUrl + " " + link);
+                    if (isLicenseLink(link)) {
+                        saveLicense(context.container, element, link);
+                        System.out.println(context.baseUrl + " [license] " + link);
+                    } else {
+                        System.out.println(context.baseUrl + " " + link);
+                    }
                     /*if (isLicenseLink(link)) {
                         saveLicense(container, element, link);
                     } else if (isSite(element, link)) {
@@ -104,13 +111,6 @@ public class DownloadProjectsImpl implements DownloadProjects {
                 }
             }
         }
-    }
-
-    private static boolean isProjectLink(String link, String baseUrl) {
-        String linkToLowerCase = link.toLowerCase();
-        return !link.startsWith("#") &&
-                !linkToLowerCase.contains(baseUrl.toLowerCase()) &&
-                !linkToLowerCase.contains("awesome");
     }
 
     private static String getDescription(Element element) {
@@ -129,12 +129,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
     }
 
-    private static boolean isNonProjectHeader(String category, List<String> nonProjectHeaders) {
-        return nonProjectHeaders.stream().anyMatch(category::contains);
-    }
-
-
-    private List<String> getLowerCaseList(List<String> list) {
-        return list.stream().peek(String::toLowerCase).peek(String::trim).collect(toList());
+    private static void saveLicense(ProjectContainer container, Element element, String link) {
+        if (container != null) {
+            container.licenseUrl = link;
+            container.license = element.text();
+        }
     }
 }
