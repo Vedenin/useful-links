@@ -1,6 +1,7 @@
 package com.github.vedenin.useful_links.crawlers;
 
 import com.github.vedenin.useful_links.containers.ProjectContainer;
+import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 import com.sun.deploy.util.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

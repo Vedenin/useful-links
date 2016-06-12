@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.crawlers;
+package com.github.vedenin.useful_links.crawlers.old;
 
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import org.jsoup.nodes.Document;

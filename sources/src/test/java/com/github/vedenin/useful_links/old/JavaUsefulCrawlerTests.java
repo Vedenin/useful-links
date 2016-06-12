@@ -1,7 +1,7 @@
-package com.github.vedenin.useful_links;
+package com.github.vedenin.useful_links.old;
 
 import com.github.vedenin.useful_links.containers.ProjectContainer;
-import com.github.vedenin.useful_links.crawlers.JavaUsefulProjects;
+import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 import org.junit.Test;
 
 import java.io.IOException;

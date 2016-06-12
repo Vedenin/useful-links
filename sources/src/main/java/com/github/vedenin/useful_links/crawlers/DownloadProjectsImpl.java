@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.annotations.PropertiesContainer;
+import com.github.vedenin.useful_links.containers.DownloadContext;
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,7 +36,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
     @Override
     public List<String> getSkippedSections(String url) {
         Document doc = getPage(url);
-        return parserSkippedSections(doc.select(README_TEG), Context.create());
+        return parserSkippedSections(doc.select(README_TEG), DownloadContext.create());
     }
 
     /**
@@ -48,10 +48,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
         Elements title = doc.select("title");
         String baseUrl = title.first().ownText().split(":")[0];
         Elements div = doc.select(README_TEG);
-        return parserProjects(div, Context.create(baseUrl));
+        return parserProjects(div, DownloadContext.create(baseUrl));
     }
 
-    private List<String> parserSkippedSections(Elements elements, Context context) {
+    private List<String> parserSkippedSections(Elements elements, DownloadContext context) {
         List<String> result = new ArrayList<>(elements.size());
         for (Element element : elements) {
             Tag tag = element.tag();
@@ -65,7 +65,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return result;
     }
 
-    private Map<String, ProjectContainer> parserProjects(Elements elements, Context context) {
+    private Map<String, ProjectContainer> parserProjects(Elements elements, DownloadContext context) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
         for (Element element : elements) {
             Tag tag = element.tag();
@@ -79,7 +79,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return result;
     }
 
-    private static void proceedBody(Element element, Context context,  Map<String, ProjectContainer> result) {
+    private static void proceedBody(Element element, DownloadContext context,  Map<String, ProjectContainer> result) {
         Tag tag = element.tag();
         if(isEnum(tag)){
             context.isNewProject = true;
@@ -117,7 +117,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return element.ownText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
     }
 
-    private boolean getSkipHeaderFlag(Context context, String currentCategory, Integer headerIndex) {
+    private boolean getSkipHeaderFlag(DownloadContext context, String currentCategory, Integer headerIndex) {
         context.currentCategory = currentCategory;
         if(context.skipHeader == null) {
             if(isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectMainHeaders)) {
@@ -133,26 +133,6 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return nonProjectHeaders.stream().anyMatch(category::contains);
     }
 
-    @PropertiesContainer
-    private static class Context {
-        String currentCategory = "";
-        ProjectContainer container = null;
-        Integer skipHeader = null;
-        boolean skipHeaderFlag = false;
-        boolean isNewProject = false;
-        String description = "";
-        String baseUrl = null;
-
-        public static Context create() {
-            return new Context();
-        }
-
-        public static Context create(String baseUrl) {
-            Context context = new Context();
-            context.baseUrl = baseUrl;
-            return context;
-        }
-    }
 
     private List<String> getLowerCaseList(List<String> list) {
         return list.stream().peek(String::toLowerCase).peek(String::trim).collect(toList());

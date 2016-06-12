@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.crawlers;
+package com.github.vedenin.useful_links.crawlers.old;
 
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import org.jsoup.nodes.Document;
@@ -14,16 +14,16 @@ import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL;
 import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
 
 /**
- * Download all projects from useful-java-links
+ * Download all projects from AwesomeJava
  * <p>
  * Created by vedenin on 07.04.16.
  */
-public class JavaUsefulProjects {
+public class AwesomeJavaProjects {
     private static final String GITHUB_STAR = "github's star";
 
     public static void main(String[] s) throws IOException {
-        JavaUsefulProjects thisCls = new JavaUsefulProjects();
-        Map<String, ProjectContainer> projects = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
+        AwesomeJavaProjects thisCls = new AwesomeJavaProjects();
+        Map<String, ProjectContainer> projects = thisCls.getProjects("https://github.com/akullpp/awesome-java/blob/master/README.md");
         projects.values().stream().forEach(System.out::println);
     }
 
@@ -55,7 +55,7 @@ public class JavaUsefulProjects {
             if (isHeader(tag)) {
                 currentCategory = element.text();
                 container = null;
-                if("1. Communities".equals(currentCategory)) {
+                if("Communities".equals(currentCategory)) {
                     return result;
                 }
             } else if (isEnum(tag)) {
@@ -63,14 +63,8 @@ public class JavaUsefulProjects {
             } else if (isLink(tag)) {
                 String link = element.attr("href");
                 if (isProjectLink(element, link)) {
-                    if (isLicenseLink(link)) {
-                        saveLicense(container, element, link);
-                    } else if (isSite(element, link)) {
+                    if (isSite(element, link)) {
                         saveSite(container, link);
-                    } else if (isStackOverflow(link)) {
-                        saveStackOverflow(container, element);
-                    } else if(isUserGuide(element)) {
-                        saveUserGuide(container, link);
                     } else {
                         container = getProjectContainer(currentCategory, description, element, link);
                         result.put(container.url, container);
@@ -80,10 +74,6 @@ public class JavaUsefulProjects {
             result.putAll(parserProjects(element.children(), currentCategory, container, description));
         }
         return result;
-    }
-
-    private static void saveUserGuide(ProjectContainer container, String link) {
-        container.userGuide = link;
     }
 
     private static String getDescription(Element element) {
@@ -136,24 +126,9 @@ public class JavaUsefulProjects {
         container.allText = container.description;
     }
 
-    private static void saveLicense(ProjectContainer container, Element element, String link) {
-        if (container != null) {
-            container.licenseUrl = link;
-            container.license = element.text();
-        }
-    }
-
-
-
     private static void saveSite(ProjectContainer container, String link) {
         if (container != null) {
             container.site = link;
-        }
-    }
-
-    private static void saveStackOverflow(ProjectContainer container, Element element) {
-        if (container != null) {
-            container.stackOverflow = getInteger(element.text());
         }
     }
 
@@ -161,22 +136,9 @@ public class JavaUsefulProjects {
         return link.equals(element.text().trim());
     }
 
-    private static boolean isStackOverflow(String link) {
-        return link.contains("stackoverflow.com");
-    }
-
-    private static boolean isLicenseLink(String link) {
-        return link.contains("wikipedia.org") ||
-                link.contains("/licenses/") ||
-                link.contains("unlicense.org") ||
-                link.contains("eclipse.org/org/documents/") ||
-                link.contains("gnu.org/copyleft/");
-    }
-
     private static boolean isProjectLink(Element element, String link) {
         return !link.startsWith("#") &&
-                !link.contains("/Vedenin/") &&
-                !link.contains("useful-java-links") &&
+                !link.contains("/awesome") &&
                 !link.contains("/akullpp/");
     }
 

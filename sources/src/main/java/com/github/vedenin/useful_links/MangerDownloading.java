@@ -3,7 +3,7 @@ package com.github.vedenin.useful_links;
 import com.github.vedenin.useful_links.containers.GithubInfoContainer;
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.GithubStatistics;
-import com.github.vedenin.useful_links.crawlers.JavaUsefulProjects;
+import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 
 import java.io.IOException;
 import java.util.Map;
