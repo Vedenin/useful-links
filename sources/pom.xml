@@ -56,6 +56,14 @@
             <version>2.5</version>
         </dependency>
 
+        <!-- CSV parser -->
+
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.3</version>
+        </dependency>
+
         <!-- Machine Learning -->
 
         <!-- https://github.com/haifengl/smile -->
