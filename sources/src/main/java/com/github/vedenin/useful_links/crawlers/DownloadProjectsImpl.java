@@ -12,6 +12,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.vedenin.useful_links.Constants.GITHUB_STAR;
+import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL;
 import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
 
 /**
@@ -93,21 +95,16 @@ public class DownloadProjectsImpl implements DownloadProjects {
                     if (isLicenseLink(link)) {
                         saveLicense(context.container, element, link);
                         System.out.println(context.baseUrl + " [license] " + link);
-                    } else {
-                        System.out.println(context.baseUrl + " " + link);
-                    }
-                    /*if (isLicenseLink(link)) {
-                        saveLicense(container, element, link);
                     } else if (isSite(element, link)) {
-                        saveSite(container, link);
+                        saveSite(context.container, link);
                     } else if (isStackOverflow(link)) {
-                        saveStackOverflow(container, element);
+                        saveStackOverflow(context.container, element);
                     } else if (isUserGuide(element)) {
-                        saveUserGuide(container, link);
+                        saveUserGuide(context.container, link);
                     } else {
-                        container = getProjectContainer(currentCategory, description, element, link);
-                        result.put(container.url, container);
-                    }*/
+                        context.container = getProjectContainer(context.currentCategory, context.description, element, link);
+                        result.put(context.container.url, context.container);
+                    }
                 }
             }
         }
@@ -134,5 +131,66 @@ public class DownloadProjectsImpl implements DownloadProjects {
             container.licenseUrl = link;
             container.license = element.text();
         }
+    }
+
+    private static void saveSite(ProjectContainer container, String link) {
+        if (container != null) {
+            container.site = link;
+        }
+    }
+
+    private static void saveStackOverflow(ProjectContainer container, Element element) {
+        if (container != null) {
+            container.stackOverflow = getInteger(element.text());
+        }
+    }
+
+    private static ProjectContainer getProjectContainer(String currentCategory, String text, Element element, String link) {
+        ProjectContainer container;
+        container = ProjectContainer.create();
+        container.category = currentCategory;
+        container.name = element.text();
+        saveUrlAndGithub(link, container);
+        saveStarAndText(container, text);
+        return container;
+    }
+
+    private static void saveUrlAndGithub(String link, ProjectContainer container) {
+        if(link.contains(GIT_HUB_URL)) {
+            container.github = link;
+            container.url = link;
+        } else {
+            container.url = link;
+        }
+    }
+
+    private static void saveStarAndText(ProjectContainer container, String text) {
+        int i1 = text.indexOf(GITHUB_STAR);
+        if(i1 > -1) {
+            int i2 = min(text.indexOf(".", i1), text.indexOf(",", i1));
+            String starText = text.substring(i1, i2);
+            container.star = getInteger(text.substring(i1 + GITHUB_STAR.length(), i2));
+            container.description = getDescription(text, starText);
+        } else {
+            container.description = getDescription(text, "");
+        }
+        container.allText = container.description;
+    }
+
+    private static String getDescription(String text, String replacedText) {
+        String result = text.replace(replacedText , "").
+                replace(". and","").
+                replaceAll("  ", " ").
+                replace(" .",".").
+                replace(" ,",",").
+                replace(".,",".").
+                replace(",.",".").
+                replace("src/main",".").
+                trim();
+        return result.startsWith("-") ? result.substring(1).trim() : result;
+    }
+
+    private static void saveUserGuide(ProjectContainer container, String link) {
+        container.userGuide = link;
     }
 }

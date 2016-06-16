@@ -2,6 +2,7 @@ package com.github.vedenin.useful_links.utils;
 
 import com.github.vedenin.useful_links.downloader.Downloader;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 
 import java.util.HashMap;
@@ -91,5 +92,18 @@ public final class DownloadUtils {
     public static boolean isNonProjectHeader(String category, List<String> nonProjectHeaders) {
         return nonProjectHeaders.stream().anyMatch(category::contains);
     }
+
+    public static boolean isSite(Element element, String link) {
+        return link.equals(element.text().trim());
+    }
+
+    public static boolean isStackOverflow(String link) {
+        return link.contains("stackoverflow.com");
+    }
+
+    public static boolean isUserGuide(Element element) {
+        return "User guide".equals(element.text());
+    }
+
 
 }
