@@ -98,7 +98,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
                     } else if (isSite(element, link)) {
                         saveSite(context.container, link);
                     } else if (isStackOverflow(link)) {
-                        saveStackOverflow(context.container, element);
+                        saveStackOverflow(context.container, element, link);
                     } else if (isUserGuide(element)) {
                         saveUserGuide(context.container, link);
                     } else {
@@ -139,9 +139,15 @@ public class DownloadProjectsImpl implements DownloadProjects {
         }
     }
 
-    private static void saveStackOverflow(ProjectContainer container, Element element) {
+    private static void saveStackOverflow(ProjectContainer container, Element element, String link) {
         if (container != null) {
-            container.stackOverflow = getInteger(element.text());
+            try {
+                container.stackOverflow = getInteger(element.text());
+            } catch (Exception exp) {
+                container.stackOverflow = null;
+                System.out.println("saveStackOverflow " + link + ", " + element.text());
+            }
+            container.stackOverflowUrl = link;
         }
     }
 

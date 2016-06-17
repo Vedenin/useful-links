@@ -15,6 +15,7 @@ public class ProjectContainer {
     public String description;
     public Integer star;
     public Integer stackOverflow;
+    public String stackOverflowUrl;
     public String license;
     public String licenseUrl;
     public String site;
@@ -41,6 +42,7 @@ public class ProjectContainer {
                 toString(newStackOverflow, "newStackOverflow") +
                 toString(github, "github") +
                 toString(allText, "allText") +
+                toString(stackOverflowUrl, "stackOverflowUrl") +
                 '}';
     }
 

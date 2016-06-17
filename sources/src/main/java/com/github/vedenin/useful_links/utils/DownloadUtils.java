@@ -58,7 +58,7 @@ public final class DownloadUtils {
     }
 
     public static Integer getInteger(String s) {
-        return Integer.parseInt(s.replaceAll("[^\\d.]", ""));
+            return Integer.parseInt(s.replaceAll("[^\\d.]", ""));
     }
 
     public static int min(int i1, int i2) {
