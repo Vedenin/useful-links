@@ -5,7 +5,6 @@ import com.github.vedenin.useful_links.crawlers.DownloadProjects;
 import com.github.vedenin.useful_links.crawlers.DownloadProjectsImpl;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -46,15 +45,15 @@ public class DownloadProjectsTests {
         DownloadProjects thisCls = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
         List<String> awesomeLists = resources.getListFromConfig("/awesome-lists/lists.txt");
         System.out.println("useful-java-links");
-        Map<String, ProjectContainer> skippedSections = getProjects(thisCls, "/useful-java-links.html");
-        skippedSections.values().stream().forEach(System.out::println);
+        Map<String, ProjectContainer> projects = getProjects(thisCls, "/useful-java-links.html");
+        projects.values().stream().forEach(System.out::println);
         for(String awesomeList: awesomeLists) {
             System.out.println(awesomeList +"\n");
             Map<String, ProjectContainer> result = getProjects(thisCls, "/awesome-lists/" + awesomeList.trim());
-            skippedSections.putAll(result);
+            projects.putAll(result);
             result.values().stream().forEach(System.out::println);
         }
-        //assertEquals(195, skippedSections.size());
+        assertEquals(195, projects.size());
     }
 
     private Map<String, ProjectContainer> getProjects(DownloadProjects thisCls, String fileName) {
