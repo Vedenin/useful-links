@@ -36,7 +36,7 @@ public class JavaUsefulProjects {
      * @return java projects
      * @throws IOException
      */
-    public Map<String, ProjectContainer> getProjects(String url) throws IOException {
+    public Map<String, ProjectContainer> getProjects(String url) {
         System.out.println("Start downloading");
         Document doc = getPage(url);
         Elements div = doc.select("#readme");

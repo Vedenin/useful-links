@@ -1,13 +1,11 @@
 package com.github.vedenin.useful_links.crawlers;
 
 import com.github.vedenin.useful_links.containers.ProjectContainer;
-import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 import com.sun.deploy.util.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -24,13 +22,6 @@ import static com.github.vedenin.useful_links.utils.DownloadUtils.min;
  * Created by vvedenin on 5/12/2016.
  */
 public class GithubLinkFinder {
-    public static void main(String[] args) throws IOException {
-        JavaUsefulProjects thisCls = new JavaUsefulProjects();
-        Map<String, ProjectContainer> projects = thisCls.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
-        Map<String, ProjectContainer> newProjects = getGithubLinks(projects);
-        newProjects.values().stream().forEach(System.out::println);
-    }
-
     public static Map<String, ProjectContainer> getGithubLinks(Map<String, ProjectContainer> projectContainerMap) {
         projectContainerMap.forEach(GithubLinkFinder::saveGithubLink);
         return projectContainerMap;

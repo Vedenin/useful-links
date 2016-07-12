@@ -2,9 +2,7 @@ package com.github.vedenin.useful_links.classificator;
 
 import com.github.vedenin.useful_links.containers.ProjectContainer;
 import com.github.vedenin.useful_links.containers.WordCategoryContainer;
-import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,14 +12,6 @@ import java.util.Map;
  * Created by vedenin on 14.05.16.
  */
 public class WordCategoryClassificator {
-    public static void main(String[] args) throws IOException {
-        JavaUsefulProjects crawler = new JavaUsefulProjects();
-        WordCategoryClassificator collector = new WordCategoryClassificator();
-        Map<String, ProjectContainer> projects = crawler.getProjects("https://github.com/Vedenin/useful-java-links/blob/master/readme.md");
-        Map<String, WordCategoryContainer> markers = collector.getMarkers(projects);
-        markers.values().stream().forEach(System.out::println);
-    }
-
     public Map<String, WordCategoryContainer> getMarkers(Map<String, ProjectContainer> projects) {
         Map<String, Map<String, Integer>> tmpResult = getWordCategoryMap(projects);
         return getWordCategoryContainer(tmpResult);

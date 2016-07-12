@@ -18,12 +18,6 @@ import static java.lang.Thread.sleep;
  */
 public class GithubStatistics {
 
-    public static void main(String[] args) throws IOException {
-        GithubStatistics thisCls = new GithubStatistics();
-        GithubInfoContainer result = thisCls.getGithubInfo("https://github.com/Vedenin/useful-java-links");
-        System.out.println(result);
-    }
-
     public Map<String, GithubInfoContainer> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
         Map<String, GithubInfoContainer> result = new LinkedHashMap<>(urls.size());
         for(String url: urls) {
@@ -39,7 +33,7 @@ public class GithubStatistics {
         return result;
     }
 
-    public GithubInfoContainer getGithubInfo(String url) throws IOException {
+    public GithubInfoContainer getGithubInfo(String url) {
         System.out.println("getGithubInfo " + url);
         GithubInfoContainer result = GithubInfoContainer.create();
         result.url = url;
