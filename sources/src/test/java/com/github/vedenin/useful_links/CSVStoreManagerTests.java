@@ -2,8 +2,8 @@ package com.github.vedenin.useful_links;
 
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
-import com.github.vedenin.useful_links.store.CSVStoreManager;
-import com.github.vedenin.useful_links.store.StoreManager;
+import com.github.vedenin.useful_links.store_result.CSVStoreManager;
+import com.github.vedenin.useful_links.store_result.StoreManager;
 import org.junit.Test;
 
 import java.io.IOException;

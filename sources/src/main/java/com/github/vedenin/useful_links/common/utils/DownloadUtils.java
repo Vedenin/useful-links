@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.common.utils;
 
-import com.github.vedenin.useful_links.downloader.Downloader;
+import com.github.vedenin.useful_links.crawlers.downloader.Downloader;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;

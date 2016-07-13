@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.downloader;
+package com.github.vedenin.useful_links.crawlers.downloader;
 
 import com.github.vedenin.useful_links.common.utils.exceptions.DownloadException;
 import com.google.common.base.Charsets;

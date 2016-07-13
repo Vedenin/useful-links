@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.store;
+package com.github.vedenin.useful_links.store_result;
 
 import au.com.bytecode.opencsv.CSVWriter;
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;

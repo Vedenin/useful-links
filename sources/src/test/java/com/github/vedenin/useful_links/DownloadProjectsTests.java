@@ -3,7 +3,7 @@ package com.github.vedenin.useful_links;
 import com.github.vedenin.useful_links.common.Resources;
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.DownloadProjects;
-import com.github.vedenin.useful_links.crawlers.DownloadProjectsImpl;
+import com.github.vedenin.useful_links.crawlers.impl.DownloadProjectsImpl;
 import org.junit.Test;
 
 import java.net.URL;

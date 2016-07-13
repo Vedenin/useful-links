@@ -1,7 +1,8 @@
-package com.github.vedenin.useful_links.crawlers;
+package com.github.vedenin.useful_links.crawlers.impl;
 
 import com.github.vedenin.useful_links.common.containers.DownloadContext;
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
+import com.github.vedenin.useful_links.crawlers.DownloadProjects;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;

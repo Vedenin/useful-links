@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toMap;
 public class Resources {
 
     /**
-     * Return all header that store non-project links (website and so on)
+     * Return all header that store_result non-project links (website and so on)
      * @return non-project header list
      */
     public List<String> getNonProjectHeaders() {
@@ -36,7 +36,7 @@ public class Resources {
     }
 
     /**
-     * Return all header that store non-project links (website and so on) and other headers
+     * Return all header that store_result non-project links (website and so on) and other headers
      * @return non-project header list
      */
     public List<String> getNonProjectMainHeaders() {

@@ -16,7 +16,7 @@ import static java.lang.Thread.sleep;
 /**
  * Returns information about github's projects
  */
-public class GithubStatistics {
+public class GithubStatisticsImpl {
 
     public Map<String, GithubInfoContainer> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
         Map<String, GithubInfoContainer> result = new LinkedHashMap<>(urls.size());
