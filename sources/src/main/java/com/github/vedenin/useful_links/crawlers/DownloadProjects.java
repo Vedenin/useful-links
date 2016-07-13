@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 
 import java.util.List;
 import java.util.Map;

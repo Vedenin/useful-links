@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.downloader;
 
-import com.github.vedenin.useful_links.exceptions.DownloadException;
+import com.github.vedenin.useful_links.common.utils.exceptions.DownloadException;
 import com.google.common.base.Charsets;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,7 +11,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.File;
 
-import static com.github.vedenin.useful_links.Constants.USER_AGENT;
+import static com.github.vedenin.useful_links.common.Constants.USER_AGENT;
 
 /**
  * Class to simple download resources

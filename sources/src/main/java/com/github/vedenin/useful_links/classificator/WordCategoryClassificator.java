@@ -1,7 +1,7 @@
 package com.github.vedenin.useful_links.classificator;
 
-import com.github.vedenin.useful_links.containers.ProjectContainer;
-import com.github.vedenin.useful_links.containers.WordCategoryContainer;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.containers.WordCategoryContainer;
 
 import java.util.HashMap;
 import java.util.Map;

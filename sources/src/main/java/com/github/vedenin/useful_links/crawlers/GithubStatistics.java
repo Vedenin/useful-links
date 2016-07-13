@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.containers.GithubInfoContainer;
+import com.github.vedenin.useful_links.common.containers.GithubInfoContainer;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -9,8 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static com.github.vedenin.useful_links.utils.DownloadUtils.getInteger;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.getPage;
+import static com.github.vedenin.useful_links.common.utils.DownloadUtils.getInteger;
+import static com.github.vedenin.useful_links.common.utils.DownloadUtils.getPage;
 import static java.lang.Thread.sleep;
 
 /**

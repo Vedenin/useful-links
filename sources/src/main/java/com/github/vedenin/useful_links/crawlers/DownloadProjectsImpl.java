@@ -1,7 +1,7 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.containers.DownloadContext;
-import com.github.vedenin.useful_links.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.containers.DownloadContext;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -12,9 +12,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.vedenin.useful_links.Constants.GITHUB_STAR;
-import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.*;
+import static com.github.vedenin.useful_links.common.Constants.GITHUB_STAR;
+import static com.github.vedenin.useful_links.common.Constants.GIT_HUB_URL;
+import static com.github.vedenin.useful_links.common.utils.DownloadUtils.*;
 
 /**
  * @inheritDoc

@@ -1,8 +1,8 @@
 package com.github.vedenin.useful_links.store;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import com.github.vedenin.useful_links.containers.ProjectContainer;
-import com.github.vedenin.useful_links.exceptions.StoreException;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.utils.exceptions.StoreException;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.io.FileWriter;

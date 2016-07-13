@@ -1,7 +1,7 @@
 package com.github.vedenin.useful_links;
 
-import com.github.vedenin.useful_links.containers.GithubInfoContainer;
-import com.github.vedenin.useful_links.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.containers.GithubInfoContainer;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.GithubStatistics;
 import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 

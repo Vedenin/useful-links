@@ -1,6 +1,7 @@
 package com.github.vedenin.useful_links;
 
-import com.github.vedenin.useful_links.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.Resources;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.DownloadProjects;
 import com.github.vedenin.useful_links.crawlers.DownloadProjectsImpl;
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class DownloadProjectsTests {
             projects.putAll(result);
             result.values().stream().forEach(System.out::println);
         }
-        assertEquals(195, projects.size());
+        assertEquals(7300, projects.size());
     }
 
     private Map<String, ProjectContainer> getProjects(DownloadProjects thisCls, String fileName) {

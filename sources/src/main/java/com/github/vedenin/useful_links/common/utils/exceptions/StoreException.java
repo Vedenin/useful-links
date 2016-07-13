@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.exceptions;
+package com.github.vedenin.useful_links.common.utils.exceptions;
 
 /**
  * RuntimeException if resources can't be open

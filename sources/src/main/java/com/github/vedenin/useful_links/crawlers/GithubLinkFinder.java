@@ -1,6 +1,6 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.sun.deploy.util.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,10 +11,10 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL;
-import static com.github.vedenin.useful_links.Constants.GIT_HUB_URL_FULL;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.getPage;
-import static com.github.vedenin.useful_links.utils.DownloadUtils.min;
+import static com.github.vedenin.useful_links.common.Constants.GIT_HUB_URL;
+import static com.github.vedenin.useful_links.common.Constants.GIT_HUB_URL_FULL;
+import static com.github.vedenin.useful_links.common.utils.DownloadUtils.getPage;
+import static com.github.vedenin.useful_links.common.utils.DownloadUtils.min;
 
 /**
  * Find github link if project info without this link

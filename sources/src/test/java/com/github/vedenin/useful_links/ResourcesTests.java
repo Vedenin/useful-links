@@ -1,5 +1,6 @@
 package com.github.vedenin.useful_links;
 
+import com.github.vedenin.useful_links.common.Resources;
 import org.junit.Test;
 import java.util.List;
 import java.util.Map;

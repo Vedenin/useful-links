@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.utils;
+package com.github.vedenin.useful_links.common.utils;
 
 import com.github.vedenin.useful_links.downloader.Downloader;
 import org.jsoup.nodes.Document;

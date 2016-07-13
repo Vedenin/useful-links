@@ -1,8 +1,8 @@
 package com.github.vedenin.useful_links;
 
 import com.github.vedenin.useful_links.classificator.WordCategoryClassificator;
-import com.github.vedenin.useful_links.containers.ProjectContainer;
-import com.github.vedenin.useful_links.containers.WordCategoryContainer;
+import com.github.vedenin.useful_links.common.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.containers.WordCategoryContainer;
 import com.github.vedenin.useful_links.crawlers.old.JavaUsefulProjects;
 import org.junit.Test;
 

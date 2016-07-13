@@ -1,7 +1,7 @@
-package com.github.vedenin.useful_links;
+package com.github.vedenin.useful_links.common;
 
 
-import com.github.vedenin.useful_links.exceptions.ResourceException;
+import com.github.vedenin.useful_links.common.utils.exceptions.ResourceException;
 import org.apache.commons.io.IOUtils;
 
 import java.io.InputStream;
