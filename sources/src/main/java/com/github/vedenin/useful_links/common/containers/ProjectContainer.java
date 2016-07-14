@@ -20,7 +20,10 @@ public class ProjectContainer {
     public String licenseUrl;
     public String site;
     public String userGuide;
-    public Integer newStar;
+    public Integer newStars;
+    public Integer newWatchs;
+    public Integer newForks;
+    public String pageText;
     public Integer newStackOverflow;
     public String github;
     public String allText;
@@ -38,7 +41,7 @@ public class ProjectContainer {
                 toString(licenseUrl, "licenseUrl") +
                 toString(userGuide, "userGuide") +
                 toString(description, "description") +
-                toString(newStar, "newStar") +
+                toString(newStars, "newStars") +
                 toString(newStackOverflow, "newStackOverflow") +
                 toString(github, "github") +
                 toString(allText, "allText") +

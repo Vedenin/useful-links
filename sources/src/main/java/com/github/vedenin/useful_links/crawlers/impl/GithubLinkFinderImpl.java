@@ -23,11 +23,19 @@ import static com.github.vedenin.useful_links.common.utils.DownloadUtils.min;
  * Created by vvedenin on 5/12/2016.
  */
 public class GithubLinkFinderImpl implements GithubLinkFinder {
+    /**
+     * @inheritDoc
+     */
+    @Override
     public Map<String, ProjectContainer> getGithubLinks(Map<String, ProjectContainer> projectContainerMap) {
         projectContainerMap.forEach(this::saveGithubLink);
         return projectContainerMap;
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
     public void saveGithubLink(String link, ProjectContainer container) {
         if(!link.contains(GIT_HUB_URL)) {
             try {

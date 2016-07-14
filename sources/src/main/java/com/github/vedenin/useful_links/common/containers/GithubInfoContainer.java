@@ -13,6 +13,7 @@ public class GithubInfoContainer {
     public Integer stars;
     public Integer watchs;
     public Integer forks;
+    public String text;
 
     public static GithubInfoContainer create() {
         return new GithubInfoContainer();
