@@ -1,4 +1,4 @@
-package com.github.vedenin.useful_links.crawlers;
+package com.github.vedenin.useful_links.crawlers.impl;
 
 import com.github.vedenin.useful_links.common.containers.GithubInfoContainer;
 import org.jsoup.nodes.Document;
@@ -18,7 +18,7 @@ import static java.lang.Thread.sleep;
  */
 public class GithubStatisticsImpl {
 
-    public Map<String, GithubInfoContainer> getGithubInfoList(Set<String> urls) throws IOException, InterruptedException {
+    public Map<String, GithubInfoContainer> getGithubInfoList(Set<String> urls) {
         Map<String, GithubInfoContainer> result = new LinkedHashMap<>(urls.size());
         for(String url: urls) {
             if(url.contains("github.com")) {
