@@ -33,15 +33,19 @@ public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
             } catch (Exception exp) {
                 p.isExist = false;
             }
-            if (!p.isExist) {
+            if (p.isExist) {
                 if (p.github == null || p.github.isEmpty()) {
                     if (p.url.contains(GIT_HUB_URL)) {
                         p.github = p.url;
                     } else {
                         p.github = githubLinkFinder.getGithubLink(doc, url);
                         if (p.github != null) {
-                            doc = getPage(p.github);
-                            url = p.github;
+                            try {
+                                doc = getPage(p.github);
+                                url = p.github;
+                            } catch (Exception exp) {
+                                System.out.println("Can't open github url's = " + p.github);
+                            }
                         }
                     }
                 }
