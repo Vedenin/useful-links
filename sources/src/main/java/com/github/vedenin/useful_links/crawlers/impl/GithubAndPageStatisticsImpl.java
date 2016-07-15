@@ -3,68 +3,66 @@ package com.github.vedenin.useful_links.crawlers.impl;
 import com.github.vedenin.useful_links.common.containers.GithubInfoContainer;
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.GithubAndPageStatistics;
+import com.github.vedenin.useful_links.crawlers.GithubLinkFinder;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
+import static com.github.vedenin.useful_links.common.Constants.GIT_HUB_URL;
 import static com.github.vedenin.useful_links.common.utils.DownloadUtils.getInteger;
 import static com.github.vedenin.useful_links.common.utils.DownloadUtils.getPage;
-import static java.lang.Thread.sleep;
 
 /**
  * Returns information about github's projects
  */
 public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
+    private final static GithubLinkFinder githubLinkFinder = new GithubLinkFinderImpl();
+
     /**
      * @inheritDoc
      */
     @Override
     public Map<String, ProjectContainer> getProjectWithGithubInfo(Map<String, ProjectContainer> map) {
-        for(ProjectContainer p: map.values()) {
-            String url = p.github != null && !p.github.isEmpty()? p.github: p.url;
-            GithubInfoContainer info = getGithubInfo(url);
-            p.newStars = info.stars;
-            p.newForks = info.forks;
-            p.newWatchs = info.watchs;
-            p.pageText = info.text;
+        for (ProjectContainer p : map.values()) {
+            String url = p.github != null && !p.github.isEmpty() ? p.github : p.url;
+            Document doc = null;
+            try {
+                doc = getPage(url);
+                p.isExist = true;
+            } catch (Exception exp) {
+                p.isExist = false;
+            }
+            if (!p.isExist) {
+                if (p.github == null || p.github.isEmpty()) {
+                    if (p.url.contains(GIT_HUB_URL)) {
+                        p.github = p.url;
+                    } else {
+                        p.github = githubLinkFinder.getGithubLink(doc, url);
+                        if (p.github != null) {
+                            doc = getPage(p.github);
+                            url = p.github;
+                        }
+                    }
+                }
+                GithubInfoContainer info = getGithubInfo(doc, url);
+                p.newStars = info.stars;
+                p.newForks = info.forks;
+                p.newWatchs = info.watchs;
+                p.pageText = info.text == null ? "" : info.text.replaceAll("\n", " ").replaceAll("\r", "").trim();
+            }
         }
-
         return map;
     }
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public Map<String, GithubInfoContainer> getGithubInfoList(Set<String> urls) {
-        Map<String, GithubInfoContainer> result = new LinkedHashMap<>(urls.size());
-        for(String url: urls) {
-            if(url.contains("github.com")) {
-                try {
-                    result.put(url, getGithubInfo(url));
-                    sleep(100);
-                } catch (Exception exp) {
-                    System.out.println(exp.getMessage());
-                }
-            }
-        }
-        return result;
-    }
 
     /**
      * @inheritDoc
      */
     @Override
-    public GithubInfoContainer getGithubInfo(String url) {
-        System.out.println("getGithubInfo " + url);
+    public GithubInfoContainer getGithubInfo(Document doc, String url) {
         GithubInfoContainer result = GithubInfoContainer.create();
-        result.url = url;
-
         try {
-            Document doc = getPage(url);
             result.text = doc.text();
 
             Elements elements = doc.select("a[href*=/watchers]");

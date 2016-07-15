@@ -1,28 +1,20 @@
 package com.github.vedenin.useful_links.crawlers;
 
-import com.github.vedenin.useful_links.common.containers.ProjectContainer;
-
-import java.util.Map;
+import org.jsoup.nodes.Document;
 
 /**
  * Find github link if project info without this link
- *
+ * <p>
  * Created by vvedenin on 7/13/2016.
  */
 public interface GithubLinkFinder {
     /**
-     * Returns ProjectContainer with filled github links (if it's find)
-     *
-     * @param projectContainerMap - Map url + ProjectContainer
-     * @return map url+ ProjectContainer with filled github links
-     */
-    Map<String, ProjectContainer> getGithubLinks(Map<String, ProjectContainer> projectContainerMap);
-
-    /**
-     * Save github info to Project container
+     * Returns github info to this url and document
+     * @param doc - html document
      * @param link - url
-     * @param container - Project container
+     * @return github link's or null
      */
-    void saveGithubLink(String link, ProjectContainer container);
+    String getGithubLink(Document doc, String link);
+
 
 }

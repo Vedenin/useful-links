@@ -1,6 +1,5 @@
 package com.github.vedenin.useful_links.crawlers.impl;
 
-import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.crawlers.GithubLinkFinder;
 import com.sun.deploy.util.StringUtils;
 import org.jsoup.nodes.Document;
@@ -9,12 +8,10 @@ import org.jsoup.select.Elements;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static com.github.vedenin.useful_links.common.Constants.GIT_HUB_URL;
 import static com.github.vedenin.useful_links.common.Constants.GIT_HUB_URL_FULL;
-import static com.github.vedenin.useful_links.common.utils.DownloadUtils.getPage;
 import static com.github.vedenin.useful_links.common.utils.DownloadUtils.min;
 
 /**
@@ -27,34 +24,23 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
      * @inheritDoc
      */
     @Override
-    public Map<String, ProjectContainer> getGithubLinks(Map<String, ProjectContainer> projectContainerMap) {
-        projectContainerMap.forEach(this::saveGithubLink);
-        return projectContainerMap;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public void saveGithubLink(String link, ProjectContainer container) {
+    public String getGithubLink(Document doc, String link) {
         if(!link.contains(GIT_HUB_URL)) {
             try {
-                Document doc = getPage(link);
                 Elements elements = doc.select("a[href*=github.com]");
-                container.url = link;
                 String githubLink = getGithubLink(elements, link);
                 if(githubLink != null) {
-                    container.url = githubLink;
-                    container.github = githubLink;
-                    container.site = link;
                     System.out.println("github's:" + link + " | " + githubLink);
+                    return githubLink;
+                } else {
+                    return null;
                 }
             } catch (Exception exp) {
                 System.out.println(link + " : " + exp.getMessage());
             }
         }
+        return null;
     }
-
 
     private static String getGithubLink(Elements elements, String site) {
         if(elements.isEmpty()) {

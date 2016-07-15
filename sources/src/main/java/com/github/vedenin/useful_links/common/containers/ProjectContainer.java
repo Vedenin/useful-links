@@ -27,6 +27,7 @@ public class ProjectContainer {
     public Integer newStackOverflow;
     public String github;
     public String allText;
+    public boolean isExist = true;
 
     @Override
     public String toString() {
