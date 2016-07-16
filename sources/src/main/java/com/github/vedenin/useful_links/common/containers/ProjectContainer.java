@@ -3,7 +3,7 @@ package com.github.vedenin.useful_links.common.containers;
 import com.github.vedenin.useful_links.common.annotations.PropertiesContainer;
 
 /**
- * Container that store_result information about github's project
+ * Container that storeresult information about github's project
  *
  * Created by vvedenin on 5/10/2016.
  */

@@ -1,11 +1,11 @@
-package com.github.vedenin.useful_links.store_result;
+package com.github.vedenin.useful_links.common.storeresult;
 
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 
 import java.util.Collection;
 
 /**
- * Interface to store_result parsing results to database or files
+ * Interface to storeresult parsing results to database or files
  *
  * Created by vvedenin on 6/14/2016.
  */

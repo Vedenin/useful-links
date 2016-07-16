@@ -7,8 +7,8 @@ import com.github.vedenin.useful_links.crawlers.DownloadProjects;
 import com.github.vedenin.useful_links.crawlers.GithubAndPageStatistics;
 import com.github.vedenin.useful_links.crawlers.impl.DownloadProjectsImpl;
 import com.github.vedenin.useful_links.crawlers.impl.GithubAndPageStatisticsImpl;
-import com.github.vedenin.useful_links.store_result.CSVStoreManager;
-import com.github.vedenin.useful_links.store_result.StoreManager;
+import com.github.vedenin.useful_links.common.storeresult.CSVStoreManager;
+import com.github.vedenin.useful_links.common.storeresult.StoreManager;
 import org.junit.Test;
 
 import java.net.URL;
