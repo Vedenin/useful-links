@@ -42,10 +42,10 @@ public class GithubTest {
         result.values().stream().forEach(System.out::println);
 
         StoreManager storeManager = new CSVStoreManager();
-        storeManager.writeProjects("useful-java-links.csv", result.values());
+        storeManager.writeProjects("exports/useful-java-links.csv", result.values());
     }
 
-    @Test
+    //@Test
     public void testAwesomeLists() {
         Resources resources = new Resources();
         DownloadProjects downloadProjects = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
@@ -55,17 +55,26 @@ public class GithubTest {
         result.values().stream().forEach(System.out::println);
 
         StoreManager storeManager = new CSVStoreManager();
-        storeManager.writeProjects("awesome-java.csv", result.values());
+        storeManager.writeProjects("exports/awesome-java.csv", result.values());
     }
 
-    //@Test
+    @Test
     public void getProjectsTest() {
         Resources resources = new Resources();
-        DownloadProjects thisCls = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
+        DownloadProjects downloadProjects = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
         List<String> awesomeLists = resources.getListFromConfig("/awesome-lists/lists.txt");
+        GithubAndPageStatistics githubStatistics = new GithubAndPageStatisticsImpl();
+        StoreManager storeManager = new CSVStoreManager();
 
         for(String awesomeList: awesomeLists) {
-
+            Map<String, ProjectContainer> projects = getProjects(downloadProjects, "/awesome-lists/" + awesomeList.trim());
+            Map<String, ProjectContainer> result = githubStatistics.getProjectWithGithubInfo(projects);
+            storeManager.writeProjects(awesomeList + ".csv", result.values());
         }
+    }
+
+    private Map<String, ProjectContainer> getProjects(DownloadProjects thisCls, String fileName) {
+        URL url = this.getClass().getResource(fileName);
+        return thisCls.getProjects(url.toString());
     }
 }

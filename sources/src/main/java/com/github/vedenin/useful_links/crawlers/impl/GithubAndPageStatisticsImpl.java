@@ -66,8 +66,8 @@ public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
     @Override
     public GithubInfoContainer getGithubInfo(Document doc, String url) {
         GithubInfoContainer result = GithubInfoContainer.create();
+        result.text = doc.text();
         try {
-            result.text = doc.text();
 
             Elements elements = doc.select("a[href*=/watchers]");
             result.watchs = getInteger(elements.get(0).text());

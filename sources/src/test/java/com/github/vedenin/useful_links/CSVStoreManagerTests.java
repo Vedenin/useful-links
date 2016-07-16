@@ -23,6 +23,6 @@ public class CSVStoreManagerTests {
         Map<String, ProjectContainer> projects = thisCls.getProjects(url.toString());
         assertEquals(732, projects.size());
         StoreManager storeManager = new CSVStoreManager();
-        storeManager.writeProjects("useful-java-links.csv", projects.values());
+        storeManager.writeProjects("exports/useful-java-links.csv", projects.values());
     }
 }
