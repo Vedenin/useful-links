@@ -41,7 +41,7 @@ public class CSVStoreManager implements StoreManager {
                 if(map.isEmpty()) {
                     int i = 0;
                     for(String header: line) {
-                        map.put(i, fields.get(header));
+                        map.put(i, fields.get(header.toLowerCase()));
                         i++;
                     }
                 } else {
@@ -49,7 +49,16 @@ public class CSVStoreManager implements StoreManager {
                     T project = constructor.newInstance();
                     int i = 0;
                     for(String value: line) {
-                        map.get(i).set(project, value);
+                        Field field = map.get(i);
+                        if(value != null && !value.equals("null") && !value.isEmpty() && field != null) {
+                            if(field.getType().equals(Integer.class)) {
+                                field.set(project, Integer.parseInt(value));
+                            } else if(field.getType().equals(Boolean.class)) {
+                                field.set(project, "true".equals(value.toLowerCase()));
+                            } else {
+                                field.set(project, value);
+                            }
+                        }
                         i++;
                     }
                     result.add(project);
