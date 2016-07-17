@@ -3,6 +3,7 @@ package com.github.vedenin.useful_links.common.storeresult;
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Interface to storeresult parsing results to database or files
@@ -11,5 +12,5 @@ import java.util.Collection;
  */
 public interface StoreManager {
     void writeProjects(String name, Collection<ProjectContainer> lists);
-    Collection<ProjectContainer> readProjects(String name);
+    List<ProjectContainer> readProjects(String name);
 }

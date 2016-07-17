@@ -201,4 +201,12 @@ public class Resources {
         return tmp.substring(tmp.lastIndexOf("/")+1);
     }
 
+    public String getResourcePath(String name) {
+        try {
+            URL url = this.getClass().getResource(name);
+            return url.getPath();
+        } catch (Exception e) {
+            throw new ResourceException("Problem during open resource: " + name, e);
+        }
+    }
 }

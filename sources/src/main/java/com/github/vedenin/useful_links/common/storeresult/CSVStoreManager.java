@@ -6,7 +6,6 @@ import com.github.vedenin.useful_links.common.containers.ProjectContainer;
 import com.github.vedenin.useful_links.common.utils.exceptions.StoreException;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,11 +25,11 @@ public class CSVStoreManager implements StoreManager {
     }
 
     @Override
-    public Collection<ProjectContainer> readProjects(String fileName) {
+    public List<ProjectContainer> readProjects(String fileName) {
         return readLists(fileName, ProjectContainer.class);
     }
 
-    private <T> Collection<T>  readLists(String fileName, Class<T> cls) {
+    private <T> List<T>  readLists(String fileName, Class<T> cls) {
         List<T> result = new ArrayList<>();
         try(CSVReader reader = new CSVReader(new FileReader(fileName), '\t') ) {
             Map<String, Field> fields = getAllFieldsMap(cls);
@@ -103,7 +102,7 @@ public class CSVStoreManager implements StoreManager {
 
     private static String toString(Field field, Object object) throws IllegalAccessException {
         Object value = field.get(object);
-        return value == null? "null": value.toString();
+        return value == null? "null": value.toString().replaceAll("\"", " ").replaceAll("'", " ").replaceAll("  ", " ").trim();
     }
 
     private static void writeHeaders(CSVWriter writer, List<Field> fieldsList) {

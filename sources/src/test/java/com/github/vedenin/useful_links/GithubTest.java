@@ -3,12 +3,12 @@ package com.github.vedenin.useful_links;
 import com.github.vedenin.useful_links.common.Resources;
 import com.github.vedenin.useful_links.common.containers.GithubInfoContainer;
 import com.github.vedenin.useful_links.common.containers.ProjectContainer;
+import com.github.vedenin.useful_links.common.storeresult.CSVStoreManager;
+import com.github.vedenin.useful_links.common.storeresult.StoreManager;
 import com.github.vedenin.useful_links.crawlers.DownloadProjects;
 import com.github.vedenin.useful_links.crawlers.GithubAndPageStatistics;
 import com.github.vedenin.useful_links.crawlers.impl.DownloadProjectsImpl;
 import com.github.vedenin.useful_links.crawlers.impl.GithubAndPageStatisticsImpl;
-import com.github.vedenin.useful_links.common.storeresult.CSVStoreManager;
-import com.github.vedenin.useful_links.common.storeresult.StoreManager;
 import org.junit.Test;
 
 import java.net.URL;
@@ -31,8 +31,8 @@ public class GithubTest {
         System.out.println(result);
     }
 
-    //@Test
-    public void testGithubStaticticsNew() {
+    @Test
+    public void testUsefulJavaLinks() {
         Resources resources = new Resources();
         DownloadProjects downloadProjects = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
         GithubAndPageStatistics githubStatistics = new GithubAndPageStatisticsImpl();
@@ -42,7 +42,7 @@ public class GithubTest {
         result.values().stream().forEach(System.out::println);
 
         StoreManager storeManager = new CSVStoreManager();
-        storeManager.writeProjects("exports/useful-java-links.csv", result.values());
+        storeManager.writeProjects("useful-java-links.csv", result.values());
     }
 
     //@Test
@@ -55,10 +55,10 @@ public class GithubTest {
         result.values().stream().forEach(System.out::println);
 
         StoreManager storeManager = new CSVStoreManager();
-        storeManager.writeProjects("exports/awesome-java.csv", result.values());
+        storeManager.writeProjects("awesome-java.csv", result.values());
     }
 
-    @Test
+    //@Test
     public void getProjectsTest() {
         Resources resources = new Resources();
         DownloadProjects downloadProjects = new DownloadProjectsImpl(resources.getNonProjectHeaders(), resources.getNonProjectMainHeaders());
