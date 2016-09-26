@@ -1,6 +1,5 @@
 package com.github.vedenin.core.common.containers;
 
-
 import com.github.vedenin.core.common.annotations.PropertiesContainer;
 
 /**

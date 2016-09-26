@@ -1,9 +1,9 @@
 package com.github.vedenin.core.downloader.utils;
 
-import com.github.vedenin.core.downloader.Downloader;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
+import com.github.vedenin.core.downloader.Downloader;
 
 import java.util.HashMap;
 import java.util.List;

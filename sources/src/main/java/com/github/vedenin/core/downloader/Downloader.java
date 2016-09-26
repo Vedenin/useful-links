@@ -1,9 +1,10 @@
 package com.github.vedenin.core.downloader;
 
-import com.github.vedenin.core.common.exceptions.DownloadException;
+import com.github.vedenin.core.downloader.utils.DownloadConstants;
 import com.google.common.base.Charsets;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import com.github.vedenin.core.common.exceptions.DownloadException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -11,7 +12,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.File;
 
-import static com.github.vedenin.project_parser.Constants.USER_AGENT;
 
 /**
  * Class to simple download resources
@@ -54,12 +54,13 @@ public class Downloader {
 
     public Document getPage(String url) {
         try {
+            Thread.sleep(200);
             initHTTPSDownload();
             if (url.startsWith("file:")) {
                 File file = new File(url.replace("file:", ""));
                 return Jsoup.parse(file, Charsets.UTF_8.name());
             } else {
-                return Jsoup.connect(url).userAgent(USER_AGENT).timeout(30000).get();
+                return Jsoup.connect(url).userAgent(DownloadConstants.USER_AGENT).timeout(30000).get();
             }
         } catch (Exception e) {
             throw new DownloadException("Can't download url = " + url, e);

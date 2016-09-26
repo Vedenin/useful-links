@@ -13,20 +13,24 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 
 /**
  * Class returns data from resource files
- *
+ * <p>
  * Created by vedenin on 04.06.16.
  */
 public class Resources {
+
+    public Set<String> getTwoLangBooks(String dirPath) {
+        return getFiles(dirPath).stream()
+                .map((s) -> s.replaceAll("_eng.txt", ""))
+                .map((s) -> s.replaceAll("_rus.txt", ""))
+                .collect(Collectors.toSet());
+    }
 
     /**
      * Return all header that storeresult non-project links (website and so on)
