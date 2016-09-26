@@ -1,7 +1,7 @@
-package com.github.vedenin.core.classificator;
+package com.github.vedenin.project_parser.classificators;
 
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.core.common.containers.WordCategoryContainer;
+import com.github.vedenin.project_parser.containers.WordCategoryContainer;
 
 import java.util.HashMap;
 import java.util.Map;

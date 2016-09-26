@@ -1,8 +1,8 @@
 package com.github.vedenin.core;
 
-import com.github.vedenin.core.classificator.WordCategoryClassificator;
+import com.github.vedenin.project_parser.classificators.WordCategoryClassificator;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.core.common.containers.WordCategoryContainer;
+import com.github.vedenin.project_parser.containers.WordCategoryContainer;
 import com.github.vedenin.project_parser.crawlers.old.JavaUsefulProjects;
 import org.junit.Test;
 

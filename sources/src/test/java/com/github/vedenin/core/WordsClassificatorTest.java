@@ -1,6 +1,6 @@
 package com.github.vedenin.core;
 
-import com.github.vedenin.core.classificator.WordsClassificator;
+import com.github.vedenin.core.classificators.WordsClassificator;
 import com.github.vedenin.core.resources.Resources;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.storeresult.CSVStoreManager;

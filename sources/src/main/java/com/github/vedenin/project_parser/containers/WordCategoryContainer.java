@@ -1,4 +1,4 @@
-package com.github.vedenin.core.common.containers;
+package com.github.vedenin.project_parser.containers;
 
 import com.github.vedenin.core.common.annotations.PropertiesContainer;
 

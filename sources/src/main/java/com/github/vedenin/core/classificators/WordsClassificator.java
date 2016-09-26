@@ -1,4 +1,4 @@
-package com.github.vedenin.core.classificator;
+package com.github.vedenin.core.classificators;
 
 import com.github.vedenin.core.common.containers.CompareCategoryIndex;
 import com.google.common.collect.Multimap;
