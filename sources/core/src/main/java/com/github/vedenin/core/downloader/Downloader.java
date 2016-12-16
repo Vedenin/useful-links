@@ -1,9 +1,8 @@
 package com.github.vedenin.core.downloader;
 
 import com.github.vedenin.core.downloader.utils.DownloadConstants;
+import com.github.vedenin.thirdpartylib.DocumentProxy;
 import com.github.vedenin.thirdpartylib.HTMLParserProxy;
-import com.google.common.base.Charsets;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import com.github.vedenin.core.common.exceptions.DownloadException;
 
@@ -53,7 +52,7 @@ public class Downloader {
         }
     }
 
-    public Document getPage(String url) {
+    public DocumentProxy getPage(String url) {
         try {
             Thread.sleep(200);
             initHTTPSDownload();

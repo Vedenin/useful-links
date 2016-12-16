@@ -1,5 +1,6 @@
 package com.github.vedenin.project_parser.crawlers;
 
+import com.github.vedenin.thirdpartylib.DocumentProxy;
 import org.jsoup.nodes.Document;
 
 /**
@@ -14,7 +15,7 @@ public interface GithubLinkFinder {
      * @param link - url
      * @return github link's or null
      */
-    String getGithubLink(Document doc, String link);
+    String getGithubLink(DocumentProxy doc, String link);
 
 
 }

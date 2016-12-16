@@ -1,6 +1,8 @@
 package com.github.vedenin.project_parser.crawlers.old;
 
 import com.github.vedenin.project_parser.containers.ProjectContainer;
+import com.github.vedenin.thirdpartylib.DocumentProxy;
+import com.github.vedenin.thirdpartylib.ElementProxy;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -8,6 +10,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
@@ -38,8 +41,8 @@ public class JavaUsefulProjects {
      */
     public Map<String, ProjectContainer> getProjects(String url) {
         System.out.println("Start downloading");
-        Document doc = getPage(url);
-        Elements div = doc.select("#readme");
+        DocumentProxy doc = getPage(url);
+        List<ElementProxy> div = doc.select("#readme");
         Map<String, ProjectContainer> result = parserProjects(div, "", null, "");
         System.out.println("End downloading");
         System.out.println();
@@ -48,12 +51,12 @@ public class JavaUsefulProjects {
 
 
 
-    private static Map<String, ProjectContainer> parserProjects(Elements elements, String currentCategory, ProjectContainer container, String description) {
+    private static Map<String, ProjectContainer> parserProjects(List<ElementProxy> elements, String currentCategory, ProjectContainer container, String description) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
-        for (Element element : elements) {
-            Tag tag = element.tag();
+        for (ElementProxy element : elements) {
+            Tag tag = element.getTag();
             if (isHeader(tag)) {
-                currentCategory = element.text();
+                currentCategory = element.getText();
                 container = null;
                 if("1. Communities".equals(currentCategory)) {
                     return result;
@@ -61,7 +64,7 @@ public class JavaUsefulProjects {
             } else if (isEnum(tag)) {
                 description = getDescription(element);
             } else if (isLink(tag)) {
-                String link = element.attr("href");
+                String link = element.getAttr("href");
                 if (isProjectLink(element, link)) {
                     if (isLicenseLink(link)) {
                         saveLicense(container, element, link);
@@ -77,7 +80,7 @@ public class JavaUsefulProjects {
                     }
                 }
             }
-            result.putAll(parserProjects(element.children(), currentCategory, container, description));
+            result.putAll(parserProjects(element.getChild(), currentCategory, container, description));
         }
         return result;
     }
@@ -86,8 +89,8 @@ public class JavaUsefulProjects {
         container.userGuide = link;
     }
 
-    private static String getDescription(Element element) {
-        return element.ownText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
+    private static String getDescription(ElementProxy element) {
+        return element.getOwnText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
     }
 
     private static String getDescription(String text, String replacedText) {
@@ -104,11 +107,11 @@ public class JavaUsefulProjects {
         return result.startsWith("-") ? result.substring(1).trim() : result;
     }
 
-    private static ProjectContainer getProjectContainer(String currentCategory, String text, Element element, String link) {
+    private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementProxy element, String link) {
         ProjectContainer container;
         container = ProjectContainer.create();
         container.category = currentCategory;
-        container.name = element.text();
+        container.name = element.getText();
         saveUrlAndGithub(link, container);
         saveStarAndText(container, text);
         return container;
@@ -136,10 +139,10 @@ public class JavaUsefulProjects {
         container.allText = container.description;
     }
 
-    private static void saveLicense(ProjectContainer container, Element element, String link) {
+    private static void saveLicense(ProjectContainer container, ElementProxy element, String link) {
         if (container != null) {
             container.licenseUrl = link;
-            container.license = element.text();
+            container.license = element.getText();
         }
     }
 
@@ -151,14 +154,14 @@ public class JavaUsefulProjects {
         }
     }
 
-    private static void saveStackOverflow(ProjectContainer container, Element element) {
+    private static void saveStackOverflow(ProjectContainer container, ElementProxy element) {
         if (container != null) {
-            container.stackOverflow = getInteger(element.text());
+            container.stackOverflow = getInteger(element.getText());
         }
     }
 
-    private static boolean isSite(Element element, String link) {
-        return link.equals(element.text().trim());
+    private static boolean isSite(ElementProxy element, String link) {
+        return link.equals(element.getText().trim());
     }
 
     private static boolean isStackOverflow(String link) {
@@ -173,15 +176,15 @@ public class JavaUsefulProjects {
                 link.contains("gnu.org/copyleft/");
     }
 
-    private static boolean isProjectLink(Element element, String link) {
+    private static boolean isProjectLink(ElementProxy element, String link) {
         return !link.startsWith("#") &&
                 !link.contains("/Vedenin/") &&
                 !link.contains("useful-java-links") &&
                 !link.contains("/akullpp/");
     }
 
-    private static boolean isUserGuide(Element element) {
-        return "User guide".equals(element.text());
+    private static boolean isUserGuide(ElementProxy element) {
+        return "User guide".equals(element.getText());
     }
 
 

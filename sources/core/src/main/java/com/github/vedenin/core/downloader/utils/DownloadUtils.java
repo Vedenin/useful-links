@@ -1,5 +1,7 @@
 package com.github.vedenin.core.downloader.utils;
 
+import com.github.vedenin.thirdpartylib.DocumentProxy;
+import com.github.vedenin.thirdpartylib.ElementProxy;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -53,7 +55,7 @@ public final class DownloadUtils {
     private DownloadUtils() {
     }
 
-    public static Document getPage(String url) {
+    public static DocumentProxy getPage(String url) {
         return Downloader.instance().getPage(url);
     }
 
@@ -93,16 +95,16 @@ public final class DownloadUtils {
         return nonProjectHeaders.stream().anyMatch(category::contains);
     }
 
-    public static boolean isSite(Element element, String link) {
-        return link.equals(element.text().trim());
+    public static boolean isSite(ElementProxy element, String link) {
+        return link.equals(element.getText().trim());
     }
 
     public static boolean isStackOverflow(String link) {
         return link.contains("stackoverflow.com");
     }
 
-    public static boolean isUserGuide(Element element) {
-        return "User guide".equals(element.text());
+    public static boolean isUserGuide(ElementProxy element) {
+        return "User guide".equals(element.getText());
     }
 
 

@@ -13,11 +13,12 @@ import java.io.IOException;
 public class HTMLParserProxy {
     private static String CHARSET_NAME = Charsets.UTF_8.name();
 
-    public static Document parseFile(File file) throws IOException {
-        return Jsoup.parse(file, CHARSET_NAME);
+    public static DocumentProxy parseFile(File file) throws IOException {
+        return DocumentProxy.getProxy(Jsoup.parse(file, CHARSET_NAME));
     }
 
-    public static Document parseUrl(String url, String userAgent, int timeout) throws IOException {
-        return Jsoup.connect(url).userAgent(userAgent).timeout(timeout).get();
+    public static DocumentProxy parseUrl(String url, String userAgent, int timeout) throws IOException {
+        return DocumentProxy.getProxy(Jsoup.connect(url).userAgent(userAgent).timeout(timeout).get());
     }
+
 }

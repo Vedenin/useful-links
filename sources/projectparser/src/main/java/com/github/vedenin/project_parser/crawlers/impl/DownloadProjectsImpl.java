@@ -3,10 +3,9 @@ package com.github.vedenin.project_parser.crawlers.impl;
 import com.github.vedenin.project_parser.containers.DownloadContext;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.crawlers.DownloadProjects;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import com.github.vedenin.thirdpartylib.DocumentProxy;
+import com.github.vedenin.thirdpartylib.ElementProxy;
 import org.jsoup.parser.Tag;
-import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -40,7 +39,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
      */
     @Override
     public List<String> getSkippedSections(String url) {
-        Document doc = getPage(url);
+        DocumentProxy doc = getPage(url);
         return parserSkippedSections(doc.select(README_TEG), DownloadContext.create());
     }
 
@@ -49,49 +48,49 @@ public class DownloadProjectsImpl implements DownloadProjects {
      */
     @Override
     public Map<String, ProjectContainer> getProjects(String url) {
-        Document doc = getPage(url);
-        Elements title = doc.select(TITLE_TEG);
-        String baseUrl = title.first().ownText().split(":")[0];
-        Elements div = doc.select(README_TEG);
+        DocumentProxy doc = getPage(url);
+        List<ElementProxy> title = doc.select(TITLE_TEG);
+        String baseUrl = title.get(0).getOwnText().split(":")[0];
+        List<ElementProxy> div = doc.select(README_TEG);
         return parserProjects(div, DownloadContext.create(baseUrl));
     }
 
-    private List<String> parserSkippedSections(Elements elements, DownloadContext context) {
+    private List<String> parserSkippedSections(List<ElementProxy> elements, DownloadContext context) {
         List<String> result = new ArrayList<>(elements.size());
-        for (Element element : elements) {
-            Tag tag = element.tag();
+        for (ElementProxy element : elements) {
+            Tag tag = element.getTag();
             if (isHeader(tag)) {
-                if(getSkipHeaderFlag(context, element.text(), getHeaderIndex(tag))) {
+                if(getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag))) {
                     result.add(context.currentCategory);
                 }
             }
-            result.addAll(parserSkippedSections(element.children(), context));
+            result.addAll(parserSkippedSections(element.getChild(), context));
         }
         return result;
     }
 
-    private Map<String, ProjectContainer> parserProjects(Elements elements, DownloadContext context) {
+    private Map<String, ProjectContainer> parserProjects(List<ElementProxy> elements, DownloadContext context) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
-        for (Element element : elements) {
-            Tag tag = element.tag();
+        for (ElementProxy element : elements) {
+            Tag tag = element.getTag();
             if (isHeader(tag)) {
-                context.skipHeaderFlag = getSkipHeaderFlag(context, element.text(), getHeaderIndex(tag));
+                context.skipHeaderFlag = getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag));
             } else if(!context.skipHeaderFlag) {
                 proceedBody(element, context, result);
             }
-            result.putAll(parserProjects(element.children(), context));
+            result.putAll(parserProjects(element.getChild(), context));
         }
         return result;
     }
 
-    private static void proceedBody(Element element, DownloadContext context,  Map<String, ProjectContainer> result) {
-        Tag tag = element.tag();
+    private static void proceedBody(ElementProxy element, DownloadContext context,  Map<String, ProjectContainer> result) {
+        Tag tag = element.getTag();
         if(isEnum(tag)){
             context.isNewProject = true;
             context.description = getDescription(element);
         } else {
             if (isLink(tag)) {
-                String link = element.attr(HREF_ATTR);
+                String link = element.getAttr(HREF_ATTR);
                 if (isProjectLink(link, context.baseUrl)) {
                     if (isLicenseLink(link)) {
                         saveLicense(context.container, element, link);
@@ -111,8 +110,8 @@ public class DownloadProjectsImpl implements DownloadProjects {
         }
     }
 
-    private static String getDescription(Element element) {
-        return element.ownText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
+    private static String getDescription(ElementProxy element) {
+        return element.getOwnText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
     }
 
     private boolean getSkipHeaderFlag(DownloadContext context, String currentCategory, Integer headerIndex) {
@@ -127,10 +126,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
     }
 
-    private static void saveLicense(ProjectContainer container, Element element, String link) {
+    private static void saveLicense(ProjectContainer container, ElementProxy element, String link) {
         if (container != null) {
             container.licenseUrl = link;
-            container.license = element.text();
+            container.license = element.getText();
         }
     }
 
@@ -140,23 +139,23 @@ public class DownloadProjectsImpl implements DownloadProjects {
         }
     }
 
-    private static void saveStackOverflow(ProjectContainer container, Element element, String link) {
+    private static void saveStackOverflow(ProjectContainer container, ElementProxy element, String link) {
         if (container != null) {
             try {
-                container.stackOverflow = getInteger(element.text());
+                container.stackOverflow = getInteger(element.getText());
             } catch (Exception exp) {
                 container.stackOverflow = null;
-                System.out.println("saveStackOverflow " + link + ", " + element.text());
+                System.out.println("saveStackOverflow " + link + ", " + element.getText());
             }
             container.stackOverflowUrl = link;
         }
     }
 
-    private static ProjectContainer getProjectContainer(String currentCategory, String text, Element element, String link) {
+    private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementProxy element, String link) {
         ProjectContainer container;
         container = ProjectContainer.create();
         container.category = currentCategory;
-        container.name = element.text();
+        container.name = element.getText();
         saveUrlAndGithub(link, container);
         saveStarAndText(container, text);
         return container;

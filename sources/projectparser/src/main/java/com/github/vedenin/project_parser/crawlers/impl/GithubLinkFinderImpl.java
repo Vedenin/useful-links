@@ -1,12 +1,12 @@
 package com.github.vedenin.project_parser.crawlers.impl;
 
 import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import com.github.vedenin.thirdpartylib.DocumentProxy;
+import com.github.vedenin.thirdpartylib.ElementProxy;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
@@ -23,10 +23,10 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
      * @inheritDoc
      */
     @Override
-    public String getGithubLink(Document doc, String link) {
+    public String getGithubLink(DocumentProxy doc, String link) {
         if(!link.contains(GIT_HUB_URL)) {
             try {
-                Elements elements = doc.select("a[href*=github.com]");
+                List<ElementProxy> elements = doc.select("a[href*=github.com]");
                 String githubLink = getGithubLink(elements, link);
                 if(githubLink != null) {
                     System.out.println("github's:" + link + " | " + githubLink);
@@ -41,22 +41,22 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
         return null;
     }
 
-    private static String getGithubLink(Elements elements, String site) {
+    private static String getGithubLink(List<ElementProxy> elements, String site) {
         if(elements.isEmpty()) {
             return null;
         } else {
             Set<String> tokens = getToken(site);
             Set<String> set = new HashSet<>(elements.size());
             String candidate = null;
-            for(Element element: elements) {
-                String link = element.attr("href");
+            for(ElementProxy element: elements) {
+                String link = element.getAttr("href");
                 String url = link.substring(link.indexOf(GIT_HUB_URL) + GIT_HUB_URL.length());
                 int i1 = url.indexOf("/");
                 if(i1 > -1) {
                     int i2 = min(url.indexOf("/", i1+1), url.indexOf("#", i1+1));
                     String key = i2 < 0? url: url.substring(0, i2);
                     set.add(key);
-                    String text = element.text().toLowerCase();
+                    String text = element.getText().toLowerCase();
                     if(text.contains("fork") || text.contains("source code") || allMatch(key, tokens)) {
                         if(candidate != null && !key.equals(candidate)) {
                             candidate = candidate.length() < key.length()? candidate: key;
