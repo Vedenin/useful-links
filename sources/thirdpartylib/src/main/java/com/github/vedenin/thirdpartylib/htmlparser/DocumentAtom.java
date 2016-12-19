@@ -5,11 +5,11 @@ import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
 import com.github.vedenin.thirdpartylib.annotations.Contract;
 import com.github.vedenin.thirdpartylib.annotations.Reference;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import org.jsoup.nodes.Element;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
+import static java.util.stream.Collectors.*;
 
 /**
  * Created by vvedenin on 12/16/2016.
@@ -22,11 +22,8 @@ public class DocumentAtom {
 
     @Contract("Should returns elements according this CSS Query")
     public List<ElementAtom> select(String cssQuery) {
-        Elements elements = document.select(cssQuery);
-        List<ElementAtom> result = new ArrayList<>(elements.size());
-        for(Element element: elements) {
-            result.add(ElementAtom.getProxy(element));
-        }
+        List<ElementAtom> result = new ArrayList<>();
+        result.addAll(document.select(cssQuery).stream().map(ElementAtom::getProxy).collect(toList()));
         return result;
     }
 
