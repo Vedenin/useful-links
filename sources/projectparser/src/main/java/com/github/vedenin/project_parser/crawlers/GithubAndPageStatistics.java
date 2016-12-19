@@ -2,7 +2,7 @@ package com.github.vedenin.project_parser.crawlers;
 
 import com.github.vedenin.project_parser.containers.GithubInfoContainer;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.thirdpartylib.DocumentProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
 
 import java.util.Map;
 
@@ -23,5 +23,5 @@ public interface GithubAndPageStatistics {
      * @param url Github'project url
      * @return github's info
      */
-    GithubInfoContainer getGithubInfo(DocumentProxy doc, String url);
+    GithubInfoContainer getGithubInfo(DocumentAtom doc, String url);
 }

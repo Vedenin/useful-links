@@ -1,17 +1,17 @@
-package com.github.vedenin.thirdpartylib;
+package com.github.vedenin.thirdpartylib.io;
 
+import com.github.vedenin.thirdpartylib.annotations.Atom;
+import com.github.vedenin.thirdpartylib.annotations.AtomUtils;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +20,8 @@ import java.util.List;
  *
  * Created by vvedenin on 12/16/2016.
  */
-public class FileAndIOUtilsProxy {
+@AtomUtils
+public class FileAndIOUtilsAtom {
     private static final Charset FILE_CODE_PAGE = Charsets.UTF_8;
 
     public static Collection<File> listFiles(final File directory) {

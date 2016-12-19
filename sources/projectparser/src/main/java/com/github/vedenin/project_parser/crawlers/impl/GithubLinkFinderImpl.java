@@ -1,8 +1,8 @@
 package com.github.vedenin.project_parser.crawlers.impl;
 
 import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;
-import com.github.vedenin.thirdpartylib.DocumentProxy;
-import com.github.vedenin.thirdpartylib.ElementProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -23,10 +23,10 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
      * @inheritDoc
      */
     @Override
-    public String getGithubLink(DocumentProxy doc, String link) {
+    public String getGithubLink(DocumentAtom doc, String link) {
         if(!link.contains(GIT_HUB_URL)) {
             try {
-                List<ElementProxy> elements = doc.select("a[href*=github.com]");
+                List<ElementAtom> elements = doc.select("a[href*=github.com]");
                 String githubLink = getGithubLink(elements, link);
                 if(githubLink != null) {
                     System.out.println("github's:" + link + " | " + githubLink);
@@ -41,14 +41,14 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
         return null;
     }
 
-    private static String getGithubLink(List<ElementProxy> elements, String site) {
+    private static String getGithubLink(List<ElementAtom> elements, String site) {
         if(elements.isEmpty()) {
             return null;
         } else {
             Set<String> tokens = getToken(site);
             Set<String> set = new HashSet<>(elements.size());
             String candidate = null;
-            for(ElementProxy element: elements) {
+            for(ElementAtom element: elements) {
                 String link = element.getAttr("href");
                 String url = link.substring(link.indexOf(GIT_HUB_URL) + GIT_HUB_URL.length());
                 int i1 = url.indexOf("/");

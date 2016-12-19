@@ -1,9 +1,8 @@
 package com.github.vedenin.core.downloader;
 
 import com.github.vedenin.core.downloader.utils.DownloadConstants;
-import com.github.vedenin.thirdpartylib.DocumentProxy;
-import com.github.vedenin.thirdpartylib.HTMLParserProxy;
-import org.jsoup.nodes.Document;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.HTMLParserAtom;
 import com.github.vedenin.core.common.exceptions.DownloadException;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -52,15 +51,15 @@ public class Downloader {
         }
     }
 
-    public DocumentProxy getPage(String url) {
+    public DocumentAtom getPage(String url) {
         try {
             Thread.sleep(200);
             initHTTPSDownload();
             if (url.startsWith("file:")) {
                 File file = new File(url.replace("file:", ""));
-                return HTMLParserProxy.parseFile(file);
+                return HTMLParserAtom.parseFile(file);
             } else {
-                return HTMLParserProxy.parseUrl(url, DownloadConstants.USER_AGENT, 30000);
+                return HTMLParserAtom.parseUrl(url, DownloadConstants.USER_AGENT, 30000);
             }
         } catch (Exception e) {
             throw new DownloadException("Can't download url = " + url, e);

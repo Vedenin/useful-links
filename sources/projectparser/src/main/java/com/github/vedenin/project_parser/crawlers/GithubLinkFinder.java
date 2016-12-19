@@ -1,6 +1,6 @@
 package com.github.vedenin.project_parser.crawlers;
 
-import com.github.vedenin.thirdpartylib.DocumentProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
 
 /**
  * Find github link if project info without this link
@@ -14,7 +14,7 @@ public interface GithubLinkFinder {
      * @param link - url
      * @return github link's or null
      */
-    String getGithubLink(DocumentProxy doc, String link);
+    String getGithubLink(DocumentAtom doc, String link);
 
 
 }

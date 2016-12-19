@@ -3,9 +3,9 @@ package com.github.vedenin.project_parser.crawlers.impl;
 import com.github.vedenin.project_parser.containers.DownloadContext;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.crawlers.DownloadProjects;
-import com.github.vedenin.thirdpartylib.DocumentProxy;
-import com.github.vedenin.thirdpartylib.ElementProxy;
-import com.github.vedenin.thirdpartylib.TagProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.TagAtom;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -39,7 +39,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
      */
     @Override
     public List<String> getSkippedSections(String url) {
-        DocumentProxy doc = getPage(url);
+        DocumentAtom doc = getPage(url);
         return parserSkippedSections(doc.select(README_TEG), DownloadContext.create());
     }
 
@@ -48,17 +48,17 @@ public class DownloadProjectsImpl implements DownloadProjects {
      */
     @Override
     public Map<String, ProjectContainer> getProjects(String url) {
-        DocumentProxy doc = getPage(url);
-        List<ElementProxy> title = doc.select(TITLE_TEG);
+        DocumentAtom doc = getPage(url);
+        List<ElementAtom> title = doc.select(TITLE_TEG);
         String baseUrl = title.get(0).getOwnText().split(":")[0];
-        List<ElementProxy> div = doc.select(README_TEG);
+        List<ElementAtom> div = doc.select(README_TEG);
         return parserProjects(div, DownloadContext.create(baseUrl));
     }
 
-    private List<String> parserSkippedSections(List<ElementProxy> elements, DownloadContext context) {
+    private List<String> parserSkippedSections(List<ElementAtom> elements, DownloadContext context) {
         List<String> result = new ArrayList<>(elements.size());
-        for (ElementProxy element : elements) {
-            TagProxy tag = element.getTag();
+        for (ElementAtom element : elements) {
+            TagAtom tag = element.getTag();
             if (isHeader(tag)) {
                 if(getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag))) {
                     result.add(context.currentCategory);
@@ -69,10 +69,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return result;
     }
 
-    private Map<String, ProjectContainer> parserProjects(List<ElementProxy> elements, DownloadContext context) {
+    private Map<String, ProjectContainer> parserProjects(List<ElementAtom> elements, DownloadContext context) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
-        for (ElementProxy element : elements) {
-            TagProxy tag = element.getTag();
+        for (ElementAtom element : elements) {
+            TagAtom tag = element.getTag();
             if (isHeader(tag)) {
                 context.skipHeaderFlag = getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag));
             } else if(!context.skipHeaderFlag) {
@@ -83,8 +83,8 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return result;
     }
 
-    private static void proceedBody(ElementProxy element, DownloadContext context,  Map<String, ProjectContainer> result) {
-        TagProxy tag = element.getTag();
+    private static void proceedBody(ElementAtom element, DownloadContext context,  Map<String, ProjectContainer> result) {
+        TagAtom tag = element.getTag();
         if(isEnum(tag)){
             context.isNewProject = true;
             context.description = getDescription(element);
@@ -110,7 +110,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         }
     }
 
-    private static String getDescription(ElementProxy element) {
+    private static String getDescription(ElementAtom element) {
         return element.getOwnText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
     }
 
@@ -126,7 +126,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
     }
 
-    private static void saveLicense(ProjectContainer container, ElementProxy element, String link) {
+    private static void saveLicense(ProjectContainer container, ElementAtom element, String link) {
         if (container != null) {
             container.licenseUrl = link;
             container.license = element.getText();
@@ -139,7 +139,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         }
     }
 
-    private static void saveStackOverflow(ProjectContainer container, ElementProxy element, String link) {
+    private static void saveStackOverflow(ProjectContainer container, ElementAtom element, String link) {
         if (container != null) {
             try {
                 container.stackOverflow = getInteger(element.getText());
@@ -151,7 +151,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         }
     }
 
-    private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementProxy element, String link) {
+    private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementAtom element, String link) {
         ProjectContainer container;
         container = ProjectContainer.create();
         container.category = currentCategory;

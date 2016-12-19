@@ -1,5 +1,7 @@
-package com.github.vedenin.thirdpartylib;
+package com.github.vedenin.thirdpartylib.collections;
 
+import com.github.vedenin.thirdpartylib.annotations.Atom;
+import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -13,16 +15,9 @@ import java.util.Set;
  *
  * Created by vvedenin on 12/16/2016.
  */
-public class MultimapProxy<K, V> {
+@Atom
+public class MultimapAtom<K, V> {
     private final Multimap<K, V> map;
-
-    public MultimapProxy() {
-        this.map = HashMultimap.create();
-    }
-
-    public static MultimapProxy create() {
-        return new MultimapProxy();
-    }
 
     public Set<K> keySet() {
         return map.keySet();
@@ -34,5 +29,16 @@ public class MultimapProxy<K, V> {
 
     public void set(K key, V value) {
         map.put(key, value);
+    }
+
+    // Just boilerplate code for Atom
+    @BoilerPlate
+    private MultimapAtom() {
+        this.map = HashMultimap.create();
+    }
+
+    @BoilerPlate
+    public static MultimapAtom create() {
+        return new MultimapAtom();
     }
 }

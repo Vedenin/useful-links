@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
-import static com.github.vedenin.thirdpartylib.FileAndIOUtilsProxy.*;
+import static com.github.vedenin.thirdpartylib.io.FileAndIOUtilsAtom.*;
 
 
 /**

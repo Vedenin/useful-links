@@ -1,13 +1,11 @@
 package com.github.vedenin.project_parser.storeresult;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.CSVWriter;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.core.common.exceptions.StoreException;
-import org.apache.commons.lang3.reflect.FieldUtils;
+import com.github.vedenin.thirdpartylib.csv.CSVReaderAtom;
+import com.github.vedenin.thirdpartylib.csv.CSVWriterAtom;
+import com.github.vedenin.thirdpartylib.io.ReflectUtilsAtom;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -31,7 +29,7 @@ public class CSVStoreManager implements StoreManager {
 
     private <T> List<T>  readLists(String fileName, Class<T> cls) {
         List<T> result = new ArrayList<>();
-        try(CSVReader reader = new CSVReader(new FileReader(fileName), '\t') ) {
+        try(CSVReaderAtom reader = CSVReaderAtom.create(fileName, '\t') ) {
             Map<String, Field> fields = getAllFieldsMap(cls);
 
             List<String[]> lines = reader.readAll();
@@ -71,7 +69,7 @@ public class CSVStoreManager implements StoreManager {
     }
 
     private <T> Map<String, Field> getAllFieldsMap(Class<T> cls) {
-        List<Field> fieldsList = FieldUtils.getAllFieldsList(cls);
+        List<Field> fieldsList = ReflectUtilsAtom.getAllFieldsList(cls);
         Map<String, Field> fields = new HashMap<>(fieldsList.size());
         for(Field field: fieldsList) {
             fields.put(field.getName().toLowerCase(), field);
@@ -80,8 +78,8 @@ public class CSVStoreManager implements StoreManager {
     }
 
     private <T> void saveLists(String fileName, Collection<T> objects, Class<T> cls) {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(fileName), '\t')) {
-            List<Field> fieldsList = FieldUtils.getAllFieldsList(cls);
+        try (CSVWriterAtom writer = CSVWriterAtom.create(fileName, '\t')) {
+            List<Field> fieldsList = ReflectUtilsAtom.getAllFieldsList(cls);
             writeHeaders(writer, fieldsList);
             writeBody(objects, writer, fieldsList);
         } catch (IllegalAccessException | IOException e) {
@@ -89,7 +87,8 @@ public class CSVStoreManager implements StoreManager {
         }
     }
 
-    private static <T> void writeBody(Collection<T> objects, CSVWriter writer, List<Field> fieldsList) throws IllegalAccessException {
+    private static <T> void writeBody(Collection<T> objects, CSVWriterAtom writer, List<Field> fieldsList)
+            throws IllegalAccessException {
         for(T container: objects) {
             int i = 0;
             String[] row = new String[fieldsList.size()];
@@ -105,7 +104,7 @@ public class CSVStoreManager implements StoreManager {
         return value == null? "null": value.toString().replaceAll("\"", " ").replaceAll("'", " ").replaceAll("  ", " ").trim();
     }
 
-    private static void writeHeaders(CSVWriter writer, List<Field> fieldsList) {
+    private static void writeHeaders(CSVWriterAtom writer, List<Field> fieldsList) {
         String[] headers = new String[fieldsList.size()];
         int i = 0;
         for(Field field: fieldsList) {

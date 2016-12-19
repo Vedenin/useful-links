@@ -1,9 +1,9 @@
 package com.github.vedenin.project_parser.crawlers.old;
 
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.thirdpartylib.DocumentProxy;
-import com.github.vedenin.thirdpartylib.ElementProxy;
-import com.github.vedenin.thirdpartylib.TagProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.TagAtom;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -38,8 +38,8 @@ public class JavaUsefulProjects {
      */
     public Map<String, ProjectContainer> getProjects(String url) {
         System.out.println("Start downloading");
-        DocumentProxy doc = getPage(url);
-        List<ElementProxy> div = doc.select("#readme");
+        DocumentAtom doc = getPage(url);
+        List<ElementAtom> div = doc.select("#readme");
         Map<String, ProjectContainer> result = parserProjects(div, "", null, "");
         System.out.println("End downloading");
         System.out.println();
@@ -48,10 +48,10 @@ public class JavaUsefulProjects {
 
 
 
-    private static Map<String, ProjectContainer> parserProjects(List<ElementProxy> elements, String currentCategory, ProjectContainer container, String description) {
+    private static Map<String, ProjectContainer> parserProjects(List<ElementAtom> elements, String currentCategory, ProjectContainer container, String description) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
-        for (ElementProxy element : elements) {
-            TagProxy tag = element.getTag();
+        for (ElementAtom element : elements) {
+            TagAtom tag = element.getTag();
             if (isHeader(tag)) {
                 currentCategory = element.getText();
                 container = null;
@@ -86,7 +86,7 @@ public class JavaUsefulProjects {
         container.userGuide = link;
     }
 
-    private static String getDescription(ElementProxy element) {
+    private static String getDescription(ElementAtom element) {
         return element.getOwnText().replace("License:", "").replace("stackoverflow - more", "").replaceAll("  ", " ");
     }
 
@@ -104,7 +104,7 @@ public class JavaUsefulProjects {
         return result.startsWith("-") ? result.substring(1).trim() : result;
     }
 
-    private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementProxy element, String link) {
+    private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementAtom element, String link) {
         ProjectContainer container;
         container = ProjectContainer.create();
         container.category = currentCategory;
@@ -136,7 +136,7 @@ public class JavaUsefulProjects {
         container.allText = container.description;
     }
 
-    private static void saveLicense(ProjectContainer container, ElementProxy element, String link) {
+    private static void saveLicense(ProjectContainer container, ElementAtom element, String link) {
         if (container != null) {
             container.licenseUrl = link;
             container.license = element.getText();
@@ -151,13 +151,13 @@ public class JavaUsefulProjects {
         }
     }
 
-    private static void saveStackOverflow(ProjectContainer container, ElementProxy element) {
+    private static void saveStackOverflow(ProjectContainer container, ElementAtom element) {
         if (container != null) {
             container.stackOverflow = getInteger(element.getText());
         }
     }
 
-    private static boolean isSite(ElementProxy element, String link) {
+    private static boolean isSite(ElementAtom element, String link) {
         return link.equals(element.getText().trim());
     }
 
@@ -173,14 +173,14 @@ public class JavaUsefulProjects {
                 link.contains("gnu.org/copyleft/");
     }
 
-    private static boolean isProjectLink(ElementProxy element, String link) {
+    private static boolean isProjectLink(ElementAtom element, String link) {
         return !link.startsWith("#") &&
                 !link.contains("/Vedenin/") &&
                 !link.contains("useful-java-links") &&
                 !link.contains("/akullpp/");
     }
 
-    private static boolean isUserGuide(ElementProxy element) {
+    private static boolean isUserGuide(ElementAtom element) {
         return "User guide".equals(element.getText());
     }
 

@@ -1,9 +1,9 @@
 package com.github.vedenin.core.downloader.utils;
 
-import com.github.vedenin.thirdpartylib.DocumentProxy;
-import com.github.vedenin.thirdpartylib.ElementProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
+import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
 import com.github.vedenin.core.downloader.Downloader;
-import com.github.vedenin.thirdpartylib.TagProxy;
+import com.github.vedenin.thirdpartylib.htmlparser.TagAtom;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,15 +15,15 @@ import static java.util.stream.Collectors.toList;
  * Created by vvedenin on 5/10/2016.
  */
 public final class DownloadUtils {
-    private static final TagProxy H1 = TagProxy.valueOf("h1");
-    private static final TagProxy H2 = TagProxy.valueOf("h2");
-    private static final TagProxy H3 = TagProxy.valueOf("h3");
-    private static final TagProxy H4 = TagProxy.valueOf("h4");
-    private static final TagProxy H5 = TagProxy.valueOf("h5");
-    private static final TagProxy H6 = TagProxy.valueOf("h6");
-    private static final TagProxy LI = TagProxy.valueOf("li");
-    private static final Map<TagProxy, Integer> headersIndexMap = new HashMap<>(6);
-    private static final TagProxy A = TagProxy.valueOf("a");
+    private static final TagAtom H1 = TagAtom.valueOf("h1");
+    private static final TagAtom H2 = TagAtom.valueOf("h2");
+    private static final TagAtom H3 = TagAtom.valueOf("h3");
+    private static final TagAtom H4 = TagAtom.valueOf("h4");
+    private static final TagAtom H5 = TagAtom.valueOf("h5");
+    private static final TagAtom H6 = TagAtom.valueOf("h6");
+    private static final TagAtom LI = TagAtom.valueOf("li");
+    private static final Map<TagAtom, Integer> headersIndexMap = new HashMap<>(6);
+    private static final TagAtom A = TagAtom.valueOf("a");
 
     static {
         headersIndexMap.put(H1, 1);
@@ -34,26 +34,26 @@ public final class DownloadUtils {
         headersIndexMap.put(H6, 6);
     }
 
-    public static boolean isHeader(TagProxy TagProxy) {
-        return H1.equals(TagProxy) || H2.equals(TagProxy) || H3.equals(TagProxy) || H4.equals(TagProxy) || H5.equals(TagProxy) || H6.equals(TagProxy);
+    public static boolean isHeader(TagAtom TagAtom) {
+        return H1.equals(TagAtom) || H2.equals(TagAtom) || H3.equals(TagAtom) || H4.equals(TagAtom) || H5.equals(TagAtom) || H6.equals(TagAtom);
     }
 
-    public static Integer getHeaderIndex(TagProxy TagProxy) {
-        return headersIndexMap.get(TagProxy);
+    public static Integer getHeaderIndex(TagAtom TagAtom) {
+        return headersIndexMap.get(TagAtom);
     }
 
-    public static boolean isEnum(TagProxy TagProxy) {
-        return LI.equals(TagProxy);
+    public static boolean isEnum(TagAtom TagAtom) {
+        return LI.equals(TagAtom);
     }
 
-    public static boolean isLink(TagProxy TagProxy) {
-        return A.equals(TagProxy);
+    public static boolean isLink(TagAtom TagAtom) {
+        return A.equals(TagAtom);
     }
 
     private DownloadUtils() {
     }
 
-    public static DocumentProxy getPage(String url) {
+    public static DocumentAtom getPage(String url) {
         return Downloader.instance().getPage(url);
     }
 
@@ -93,7 +93,7 @@ public final class DownloadUtils {
         return nonProjectHeaders.stream().anyMatch(category::contains);
     }
 
-    public static boolean isSite(ElementProxy element, String link) {
+    public static boolean isSite(ElementAtom element, String link) {
         return link.equals(element.getText().trim());
     }
 
@@ -101,7 +101,7 @@ public final class DownloadUtils {
         return link.contains("stackoverflow.com");
     }
 
-    public static boolean isUserGuide(ElementProxy element) {
+    public static boolean isUserGuide(ElementAtom element) {
         return "User guide".equals(element.getText());
     }
 

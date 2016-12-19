@@ -1,7 +1,7 @@
 package com.github.vedenin.core.classificators;
 
 import com.github.vedenin.core.common.containers.CompareCategoryIndex;
-import com.github.vedenin.thirdpartylib.MultimapProxy;
+import com.github.vedenin.thirdpartylib.collections.MultimapAtom;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,8 +21,8 @@ public class WordsClassificator {
      * @param mapFinding - map with word and categories
      * @return category from first map and count common words from first and second map
      */
-    public Map<String, Integer> getNumberOfOccurrences(MultimapProxy<String, String> mapKnown,
-                                                       MultimapProxy<String, String> mapFinding) {
+    public Map<String, Integer> getNumberOfOccurrences(MultimapAtom<String, String> mapKnown,
+                                                       MultimapAtom<String, String> mapFinding) {
         Map<String, Integer> result = new TreeMap<>();
         for (String word : mapKnown.keySet()) {
             Collection<String> categoriesKnown = mapKnown.get(word);
@@ -43,7 +43,7 @@ public class WordsClassificator {
      * @return map with category and count of all words
      */
 
-    public Map<String, Integer> getCountWordByCategory(MultimapProxy<String, String> mapFinding) {
+    public Map<String, Integer> getCountWordByCategory(MultimapAtom<String, String> mapFinding) {
         Map<String, Integer> result = new TreeMap<>();
         for (String word : mapFinding.keySet()) {
             Collection<String> categoriesFinding = mapFinding.get(word);
@@ -63,8 +63,8 @@ public class WordsClassificator {
      * @param cntFindingCategory
      * @return
      */
-    public Map<CompareCategoryIndex, Double> getCommonIndex(MultimapProxy<String, String> mapKnown,
-                                                            MultimapProxy<String, String> mapFinding,
+    public Map<CompareCategoryIndex, Double> getCommonIndex(MultimapAtom<String, String> mapKnown,
+                                                            MultimapAtom<String, String> mapFinding,
                                                             Map<String, Integer> cntKnownCategory,
                                                             Map<String, Integer> cntFindingCategory) {
         Map<CompareCategoryIndex, Double> result = new TreeMap<>();
