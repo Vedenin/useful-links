@@ -5,7 +5,7 @@ import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.crawlers.DownloadProjects;
 import com.github.vedenin.thirdpartylib.DocumentProxy;
 import com.github.vedenin.thirdpartylib.ElementProxy;
-import org.jsoup.parser.Tag;
+import com.github.vedenin.thirdpartylib.TagProxy;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -58,7 +58,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
     private List<String> parserSkippedSections(List<ElementProxy> elements, DownloadContext context) {
         List<String> result = new ArrayList<>(elements.size());
         for (ElementProxy element : elements) {
-            Tag tag = element.getTag();
+            TagProxy tag = element.getTag();
             if (isHeader(tag)) {
                 if(getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag))) {
                     result.add(context.currentCategory);
@@ -72,7 +72,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
     private Map<String, ProjectContainer> parserProjects(List<ElementProxy> elements, DownloadContext context) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
         for (ElementProxy element : elements) {
-            Tag tag = element.getTag();
+            TagProxy tag = element.getTag();
             if (isHeader(tag)) {
                 context.skipHeaderFlag = getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag));
             } else if(!context.skipHeaderFlag) {
@@ -84,7 +84,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
     }
 
     private static void proceedBody(ElementProxy element, DownloadContext context,  Map<String, ProjectContainer> result) {
-        Tag tag = element.getTag();
+        TagProxy tag = element.getTag();
         if(isEnum(tag)){
             context.isNewProject = true;
             context.description = getDescription(element);

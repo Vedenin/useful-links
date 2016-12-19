@@ -1,10 +1,7 @@
 package com.github.vedenin.thirdpartylib;
 
 import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -26,8 +23,8 @@ public class ElementProxy {
         return element.text();
     }
 
-    public Tag getTag() {
-        return element.tag();
+    public TagProxy getTag() {
+        return TagProxy.getProxy(element.tag());
     }
 
     public String getAttr(String name) {

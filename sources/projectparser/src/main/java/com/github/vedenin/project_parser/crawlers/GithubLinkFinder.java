@@ -1,7 +1,6 @@
 package com.github.vedenin.project_parser.crawlers;
 
 import com.github.vedenin.thirdpartylib.DocumentProxy;
-import org.jsoup.nodes.Document;
 
 /**
  * Find github link if project info without this link

@@ -6,8 +6,6 @@ import com.github.vedenin.project_parser.crawlers.GithubAndPageStatistics;
 import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;
 import com.github.vedenin.thirdpartylib.DocumentProxy;
 import com.github.vedenin.thirdpartylib.ElementProxy;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.util.List;
 import java.util.Map;

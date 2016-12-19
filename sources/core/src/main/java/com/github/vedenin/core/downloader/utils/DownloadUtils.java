@@ -2,10 +2,8 @@ package com.github.vedenin.core.downloader.utils;
 
 import com.github.vedenin.thirdpartylib.DocumentProxy;
 import com.github.vedenin.thirdpartylib.ElementProxy;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
 import com.github.vedenin.core.downloader.Downloader;
+import com.github.vedenin.thirdpartylib.TagProxy;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,15 +15,15 @@ import static java.util.stream.Collectors.toList;
  * Created by vvedenin on 5/10/2016.
  */
 public final class DownloadUtils {
-    private static final Tag H1 = Tag.valueOf("h1");
-    private static final Tag H2 = Tag.valueOf("h2");
-    private static final Tag H3 = Tag.valueOf("h3");
-    private static final Tag H4 = Tag.valueOf("h4");
-    private static final Tag H5 = Tag.valueOf("h5");
-    private static final Tag H6 = Tag.valueOf("h6");
-    private static final Tag LI = Tag.valueOf("li");
-    private static final Map<Tag, Integer> headersIndexMap = new HashMap<>(6);
-    private static final Tag A = Tag.valueOf("a");
+    private static final TagProxy H1 = TagProxy.valueOf("h1");
+    private static final TagProxy H2 = TagProxy.valueOf("h2");
+    private static final TagProxy H3 = TagProxy.valueOf("h3");
+    private static final TagProxy H4 = TagProxy.valueOf("h4");
+    private static final TagProxy H5 = TagProxy.valueOf("h5");
+    private static final TagProxy H6 = TagProxy.valueOf("h6");
+    private static final TagProxy LI = TagProxy.valueOf("li");
+    private static final Map<TagProxy, Integer> headersIndexMap = new HashMap<>(6);
+    private static final TagProxy A = TagProxy.valueOf("a");
 
     static {
         headersIndexMap.put(H1, 1);
@@ -36,20 +34,20 @@ public final class DownloadUtils {
         headersIndexMap.put(H6, 6);
     }
 
-    public static boolean isHeader(Tag tag) {
-        return H1.equals(tag) || H2.equals(tag) || H3.equals(tag) || H4.equals(tag) || H5.equals(tag) || H6.equals(tag);
+    public static boolean isHeader(TagProxy TagProxy) {
+        return H1.equals(TagProxy) || H2.equals(TagProxy) || H3.equals(TagProxy) || H4.equals(TagProxy) || H5.equals(TagProxy) || H6.equals(TagProxy);
     }
 
-    public static Integer getHeaderIndex(Tag tag) {
-        return headersIndexMap.get(tag);
+    public static Integer getHeaderIndex(TagProxy TagProxy) {
+        return headersIndexMap.get(TagProxy);
     }
 
-    public static boolean isEnum(Tag tag) {
-        return LI.equals(tag);
+    public static boolean isEnum(TagProxy TagProxy) {
+        return LI.equals(TagProxy);
     }
 
-    public static boolean isLink(Tag tag) {
-        return A.equals(tag);
+    public static boolean isLink(TagProxy TagProxy) {
+        return A.equals(TagProxy);
     }
 
     private DownloadUtils() {

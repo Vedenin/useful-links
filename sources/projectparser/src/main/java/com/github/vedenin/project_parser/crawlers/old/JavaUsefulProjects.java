@@ -3,10 +3,7 @@ package com.github.vedenin.project_parser.crawlers.old;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.thirdpartylib.DocumentProxy;
 import com.github.vedenin.thirdpartylib.ElementProxy;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
-import org.jsoup.select.Elements;
+import com.github.vedenin.thirdpartylib.TagProxy;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -54,7 +51,7 @@ public class JavaUsefulProjects {
     private static Map<String, ProjectContainer> parserProjects(List<ElementProxy> elements, String currentCategory, ProjectContainer container, String description) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
         for (ElementProxy element : elements) {
-            Tag tag = element.getTag();
+            TagProxy tag = element.getTag();
             if (isHeader(tag)) {
                 currentCategory = element.getText();
                 container = null;
