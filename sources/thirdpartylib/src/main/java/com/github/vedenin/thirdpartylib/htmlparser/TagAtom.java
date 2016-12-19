@@ -5,6 +5,9 @@ import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
 import org.jsoup.parser.Tag;
 
 /**
+ * This Atom pattern (pattern that extends a Proxy pattern that have only minimal methods from original class)
+ * This using to light-reference to another third party open-source libraries
+ *
  * Created by vvedenin on 12/19/2016.
  */
 @Atom

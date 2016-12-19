@@ -9,9 +9,8 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * Proxy object for Multimap object
- *
- * This proxy must provide only method that need in project to light dependency for third party libraries
+ * This Atom pattern (pattern that extends a Proxy pattern that have only minimal methods from original class)
+ * This using to light-reference to another third party open-source libraries
  *
  * Created by vvedenin on 12/16/2016.
  */

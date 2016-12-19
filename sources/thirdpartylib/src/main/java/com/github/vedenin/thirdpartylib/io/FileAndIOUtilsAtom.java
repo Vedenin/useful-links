@@ -16,7 +16,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Proxy object for static FileUtils methods
+ * This Atom pattern (pattern that extends a Proxy pattern that have only minimal methods from original class)
+ * This using to light-reference to another third party open-source libraries
  *
  * Created by vvedenin on 12/16/2016.
  */

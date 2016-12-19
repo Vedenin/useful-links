@@ -7,6 +7,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
+ * This Atom pattern (pattern that extends a Proxy pattern that have only minimal methods from original class)
+ * This using to light-reference to another third party open-source libraries
+ *
  * Created by vvedenin on 12/19/2016.
  */
 @AtomUtils
