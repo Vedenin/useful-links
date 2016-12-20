@@ -21,4 +21,5 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 @Target({TYPE})
 @Retention(RUNTIME)
 public @interface AtomUtils {
+    Class[] value() default {};
 }

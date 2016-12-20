@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * Created by vvedenin on 12/16/2016.
  */
-@Atom
+@Atom(HashMultimap.class)
 public class MultimapAtom<K, V> {
     private final Multimap<K, V> map;
 

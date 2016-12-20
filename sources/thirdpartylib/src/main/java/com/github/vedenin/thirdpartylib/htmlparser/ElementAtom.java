@@ -2,7 +2,7 @@ package com.github.vedenin.thirdpartylib.htmlparser;
 
 import com.github.vedenin.thirdpartylib.annotations.Atom;
 import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
-import com.github.vedenin.thirdpartylib.annotations.Reference;
+import com.github.vedenin.thirdpartylib.annotations.Molecule;
 import org.jsoup.nodes.Element;
 import java.util.List;
 
@@ -14,8 +14,8 @@ import static java.util.stream.Collectors.*;
  *
  * Created by vvedenin on 12/16/2016.
  */
-@Atom
-@Reference({ElementAtom.class, TagAtom.class, DocumentAtom.class})
+@Atom(Element.class)
+@Molecule({ElementAtom.class, TagAtom.class, DocumentAtom.class})
 public class ElementAtom {
     private final Element element;
 

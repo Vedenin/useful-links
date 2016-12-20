@@ -2,7 +2,7 @@ package com.github.vedenin.thirdpartylib.htmlparser;
 
 import com.github.vedenin.thirdpartylib.annotations.Atom;
 import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
-import com.github.vedenin.thirdpartylib.annotations.Reference;
+import com.github.vedenin.thirdpartylib.annotations.Molecule;
 import org.jsoup.parser.Tag;
 
 /**
@@ -11,8 +11,8 @@ import org.jsoup.parser.Tag;
  *
  * Created by vvedenin on 12/19/2016.
  */
-@Atom
-@Reference({ElementAtom.class})
+@Atom(Tag.class)
+@Molecule({ElementAtom.class})
 public class TagAtom {
     private final Tag tag;
 

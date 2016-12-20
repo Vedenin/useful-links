@@ -3,7 +3,7 @@ package com.github.vedenin.thirdpartylib.htmlparser;
 import com.github.vedenin.thirdpartylib.annotations.Atom;
 import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
 import com.github.vedenin.thirdpartylib.annotations.Contract;
-import com.github.vedenin.thirdpartylib.annotations.Reference;
+import com.github.vedenin.thirdpartylib.annotations.Molecule;
 import org.jsoup.nodes.Document;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,9 @@ import static java.util.stream.Collectors.*;
  *
  * Created by vvedenin on 12/16/2016.
  */
-@Atom
+@Atom(Document.class)
+@Molecule({ElementAtom.class})
 @Contract("Provide information about HTML pages")
-@Reference({ElementAtom.class})
 public class DocumentAtom {
     private final Document document;
 

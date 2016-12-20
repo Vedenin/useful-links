@@ -21,7 +21,7 @@ import java.util.List;
  *
  * Created by vvedenin on 12/16/2016.
  */
-@AtomUtils
+@AtomUtils({FileUtils.class, Files.class, IOUtils.class})
 public class FileAndIOUtilsAtom {
     private static final Charset FILE_CODE_PAGE = Charsets.UTF_8;
 

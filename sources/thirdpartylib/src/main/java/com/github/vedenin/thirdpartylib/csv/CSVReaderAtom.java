@@ -17,7 +17,7 @@ import java.util.List;
  *
  * Created by vvedenin on 12/19/2016.
  */
-@Atom
+@Atom(CSVReader.class)
 @Contract("Should be used to read from CSV file")
 public class CSVReaderAtom implements Closeable {
     private final CSVReader csvReader;

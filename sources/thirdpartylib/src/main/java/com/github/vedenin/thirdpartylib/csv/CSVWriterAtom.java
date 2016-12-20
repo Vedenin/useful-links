@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * Created by vvedenin on 12/19/2016.
  */
-@Atom
+@Atom(CSVWriter.class)
 @Contract("Should be used to write to CSV file")
 public class CSVWriterAtom implements Closeable {
     private final CSVWriter csvWriter;

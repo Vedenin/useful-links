@@ -12,7 +12,7 @@ import java.util.List;
  *
  * Created by vvedenin on 12/19/2016.
  */
-@AtomUtils
+@AtomUtils(FieldUtils.class)
 public class ReflectUtilsAtom {
     public static List<Field> getAllFieldsList(final Class<?> cls) {
         return FieldUtils.getAllFieldsList(cls);

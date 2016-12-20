@@ -9,7 +9,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 /**
  * NOT NECESSARY ANNOTATION!
  *
- * Reference annotation for Atom class
+ * Molecule annotation for Atom class
  * This annotation can be used to describe that this Atom return other Atoms or methods this Atom using other Atom
  * as parameters
  *
@@ -17,6 +17,6 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  */
 @Target({ TYPE})
 @Retention(SOURCE)
-public @interface Reference {
+public @interface Molecule {
     Class[] value();
 }
