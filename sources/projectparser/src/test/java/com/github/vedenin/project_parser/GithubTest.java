@@ -21,7 +21,7 @@ import static com.github.vedenin.core.downloader.utils.DownloadUtils.getPage;
 /**
  * Test github's
  * <p>
- * Created by vvedenin on 7/12/2016.
+ * Created by Slava Vedenin on 7/12/2016.
  */
 public class GithubTest {
     @Test

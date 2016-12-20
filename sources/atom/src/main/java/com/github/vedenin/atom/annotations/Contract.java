@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * This annotation can be used to describe contract to this atom/proxy method
  * Using just for describe developer how want to use another libraries/class/method
  *
- * Created by vvedenin on 5/10/2016.
+ * Created by Slava Vedenin on 5/10/2016.
  */
 @Target({ TYPE, METHOD, CONSTRUCTOR})
 @Retention(SOURCE)

@@ -16,7 +16,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by vvedenin on 6/16/2016.
+ * Created by Slava Vedenin on 6/16/2016.
  */
 public class CSVStoreManagerTests {
     @Test

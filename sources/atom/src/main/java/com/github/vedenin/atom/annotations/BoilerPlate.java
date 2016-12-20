@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * This annotation can be used to describe BoilerPlate methods
  *
  * It's source annotation and can be using only for programmer (not for compiler)
- * Created by vvedenin on 5/10/2016.
+ * Created by Slava Vedenin on 5/10/2016.
  */
 @Target({ METHOD, CONSTRUCTOR})
 @Retention(SOURCE)

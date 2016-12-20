@@ -2,7 +2,7 @@ package com.github.vedenin.core.common.exceptions;
 
 /**
  * Exception when program can't download this url
- * Created by vvedenin on 6/6/2016.
+ * Created by Slava Vedenin on 6/6/2016.
  */
 public class DownloadException extends RuntimeException {
     public DownloadException() {

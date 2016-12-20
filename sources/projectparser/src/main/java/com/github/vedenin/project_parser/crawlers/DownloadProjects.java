@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Returns Programming Projects from awesome lists or useful links
  *
- * Created by vvedenin on 6/6/2016.
+ * Created by Slava Vedenin on 6/6/2016.
  */
 public interface DownloadProjects {
     /**

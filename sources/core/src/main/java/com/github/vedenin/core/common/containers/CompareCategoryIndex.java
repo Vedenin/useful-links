@@ -5,12 +5,12 @@ import com.github.vedenin.core.common.annotations.PropertiesContainer;
 /**
  * Container for comparisons categories
  *
- * Created by vvedenin on 7/1/2016.
+ * Created by Slava Vedenin on 7/1/2016.
  */
 @PropertiesContainer // class without getter and setter (see Properties in C#)
 public class CompareCategoryIndex implements Comparable {
-    public String knownCategory; // Category that mapping we already known
-    public String findingCategory; // Category that mapping we need to find
+    private String knownCategory; // Category that mapping we already known
+    private String findingCategory; // Category that mapping we need to find
 
     public static CompareCategoryIndex create(String knownCategory, String findingCategory) {
         CompareCategoryIndex result = new CompareCategoryIndex();

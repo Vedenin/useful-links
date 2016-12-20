@@ -15,7 +15,7 @@ import java.io.File;
 /**
  * Class to simple download resources
  *
- * Created by vvedenin on 6/6/2016.
+ * Created by Slava Vedenin on 6/6/2016.
  */
 public class Downloader {
     private boolean isSSLEnabled = false;

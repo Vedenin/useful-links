@@ -3,7 +3,7 @@ package com.github.vedenin.core.downloader.utils;
 /**
  * Global constants
  *
- * Created by vvedenin on 5/12/2016.
+ * Created by Slava Vedenin on 5/12/2016.
  */
 public final class DownloadConstants {
 

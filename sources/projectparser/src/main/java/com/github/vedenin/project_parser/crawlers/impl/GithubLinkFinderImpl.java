@@ -16,7 +16,7 @@ import static com.github.vedenin.core.downloader.utils.DownloadUtils.min;
 /**
  * Find github link if project info without this link
  *
- * Created by vvedenin on 5/12/2016.
+ * Created by Slava Vedenin on 5/12/2016.
  */
 public class GithubLinkFinderImpl implements GithubLinkFinder {
     /**

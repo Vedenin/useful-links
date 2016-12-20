@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * CSVStoreManager - save parsing result to CSV
  *
- * Created by vvedenin on 6/14/2016.
+ * Created by Slava Vedenin on 6/14/2016.
  */
 public class CSVStoreManager implements StoreManager {
     @Override

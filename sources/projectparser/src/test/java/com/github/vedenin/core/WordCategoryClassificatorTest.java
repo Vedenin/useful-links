@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.Map;
 
 /**
- * Created by vvedenin on 7/12/2016.
+ * Created by Slava Vedenin on 7/12/2016.
  */
 @Ignore
 public class WordCategoryClassificatorTest {

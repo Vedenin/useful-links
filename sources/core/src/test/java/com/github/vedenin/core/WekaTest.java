@@ -14,7 +14,7 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 
 /**
- * Created by vvedenin on 5/12/2016.
+ * Created by Slava Vedenin on 5/12/2016.
  */
 public class WekaTest {
     private static final String TEST_STRING = "@relation weather\n" +

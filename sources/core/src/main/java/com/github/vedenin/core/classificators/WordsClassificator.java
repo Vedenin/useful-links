@@ -10,7 +10,7 @@ import java.util.TreeMap;
 /**
  * Compare some set of categories according words in this category
  * <p>
- * Created by vvedenin on 7/1/2016.
+ * Created by Slava Vedenin on 7/1/2016.
  */
 public class WordsClassificator {
 

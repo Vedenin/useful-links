@@ -5,7 +5,7 @@ import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
 /**
  * Find github link if project info without this link
  * <p>
- * Created by vvedenin on 7/13/2016.
+ * Created by Slava Vedenin on 7/13/2016.
  */
 public interface GithubLinkFinder {
     /**

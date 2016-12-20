@@ -13,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * This annotation can be used to describe that this Atom return other Atoms or methods this Atom using other Atom
  * as parameters
  *
- * Created by vvedenin on 5/10/2016.
+ * Created by Slava Vedenin on 5/10/2016.
  */
 @Target({ TYPE})
 @Retention(SOURCE)

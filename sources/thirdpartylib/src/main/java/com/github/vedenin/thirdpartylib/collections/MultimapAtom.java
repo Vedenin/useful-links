@@ -9,10 +9,10 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * This Atom pattern (pattern that extends a Proxy pattern that have only minimal methods from original class)
+ * This Atom pattern (pattern that extends a Proxy/Facade pattern that have only minimal methods from original class)
  * This using to light-reference to another third party open-source libraries
  *
- * Created by vvedenin on 12/16/2016.
+ * Created by Slava Vedenin on 12/16/2016.
  */
 @Atom(HashMultimap.class)
 public class MultimapAtom<K, V> {

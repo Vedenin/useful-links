@@ -12,7 +12,7 @@ import java.util.Map;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by vvedenin on 5/10/2016.
+ * Created by Slava Vedenin on 5/10/2016.
  */
 public final class DownloadUtils {
     private static final TagAtom H1 = TagAtom.valueOf("h1");

@@ -5,7 +5,7 @@ import com.github.vedenin.core.common.annotations.PropertiesContainer;
 /**
  * Returns information about github's project info
  *
- * Created by vvedenin on 5/11/2016.
+ * Created by Slava Vedenin on 5/11/2016.
  */
 @PropertiesContainer // class without getter and setter (see Properties in C#)
 public class GithubInfoContainer {
