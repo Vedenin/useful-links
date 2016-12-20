@@ -1,6 +1,6 @@
 package com.github.vedenin.thirdpartylib.io;
 
-import com.github.vedenin.thirdpartylib.annotations.AtomUtils;
+import com.github.vedenin.atom.annotations.AtomUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.lang.reflect.Field;

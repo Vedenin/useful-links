@@ -1,4 +1,4 @@
-package com.github.vedenin.thirdpartylib.annotations;
+package com.github.vedenin.atom.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

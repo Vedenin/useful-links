@@ -80,5 +80,11 @@
             <version>1.10.19</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.github.vedenin</groupId>
+            <artifactId>atom</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

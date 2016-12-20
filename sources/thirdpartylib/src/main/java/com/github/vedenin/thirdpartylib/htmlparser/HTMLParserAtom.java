@@ -1,7 +1,7 @@
 package com.github.vedenin.thirdpartylib.htmlparser;
 
-import com.github.vedenin.thirdpartylib.annotations.AtomUtils;
-import com.github.vedenin.thirdpartylib.annotations.Molecule;
+import com.github.vedenin.atom.annotations.AtomUtils;
+import com.github.vedenin.atom.annotations.Molecule;
 import com.google.common.base.Charsets;
 import org.jsoup.Jsoup;
 

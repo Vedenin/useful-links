@@ -1,8 +1,8 @@
 package com.github.vedenin.thirdpartylib.htmlparser;
 
-import com.github.vedenin.thirdpartylib.annotations.Atom;
-import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
-import com.github.vedenin.thirdpartylib.annotations.Molecule;
+import com.github.vedenin.atom.annotations.Atom;
+import com.github.vedenin.atom.annotations.BoilerPlate;
+import com.github.vedenin.atom.annotations.Molecule;
 import org.jsoup.nodes.Element;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.github.vedenin.thirdpartylib.io;
 
-import com.github.vedenin.thirdpartylib.annotations.Atom;
-import com.github.vedenin.thirdpartylib.annotations.AtomUtils;
+import com.github.vedenin.atom.annotations.Atom;
+import com.github.vedenin.atom.annotations.AtomUtils;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;

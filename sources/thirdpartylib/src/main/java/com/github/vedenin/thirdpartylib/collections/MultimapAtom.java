@@ -1,7 +1,7 @@
 package com.github.vedenin.thirdpartylib.collections;
 
-import com.github.vedenin.thirdpartylib.annotations.Atom;
-import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
+import com.github.vedenin.atom.annotations.Atom;
+import com.github.vedenin.atom.annotations.BoilerPlate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 

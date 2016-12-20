@@ -1,9 +1,9 @@
 package com.github.vedenin.thirdpartylib.csv;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import com.github.vedenin.thirdpartylib.annotations.Atom;
-import com.github.vedenin.thirdpartylib.annotations.BoilerPlate;
-import com.github.vedenin.thirdpartylib.annotations.Contract;
+import com.github.vedenin.atom.annotations.Atom;
+import com.github.vedenin.atom.annotations.BoilerPlate;
+import com.github.vedenin.atom.annotations.Contract;
 
 import java.io.Closeable;
 import java.io.FileWriter;
