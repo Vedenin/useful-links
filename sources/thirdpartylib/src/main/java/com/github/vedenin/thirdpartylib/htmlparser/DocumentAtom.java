@@ -26,7 +26,7 @@ public class DocumentAtom {
     @Contract("Should returns elements according this CSS Query")
     public List<ElementAtom> select(String cssQuery) {
         List<ElementAtom> result = new ArrayList<>();
-        result.addAll(document.select(cssQuery).stream().map(ElementAtom::getProxy).collect(toList()));
+        result.addAll(document.select(cssQuery).stream().map(ElementAtom::getAtom).collect(toList()));
         return result;
     }
 
@@ -43,7 +43,7 @@ public class DocumentAtom {
     }
 
     @BoilerPlate
-    public static DocumentAtom getAtom(Document document) {
+    static DocumentAtom getAtom(Document document) {
         return new DocumentAtom(document);
     }
 

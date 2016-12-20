@@ -46,7 +46,7 @@ public class TagAtom {
     }
 
     @BoilerPlate
-    public static TagAtom getAtom(Tag tag) {
+    static TagAtom getAtom(Tag tag) {
         return new TagAtom(tag);
     }
 }

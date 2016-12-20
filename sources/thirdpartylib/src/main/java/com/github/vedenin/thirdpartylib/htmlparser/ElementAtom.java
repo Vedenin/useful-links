@@ -36,7 +36,7 @@ public class ElementAtom {
     }
 
     public List<ElementAtom> getChild() {
-        return element.children().stream().map(ElementAtom::getProxy).collect(toList());
+        return element.children().stream().map(ElementAtom::getAtom).collect(toList());
     }
 
     // Just boilerplate code for Atom
@@ -46,7 +46,7 @@ public class ElementAtom {
     }
 
     @BoilerPlate
-    public static ElementAtom getProxy(Element element) {
+    static ElementAtom getAtom(Element element) {
         return new ElementAtom(element);
     }
 

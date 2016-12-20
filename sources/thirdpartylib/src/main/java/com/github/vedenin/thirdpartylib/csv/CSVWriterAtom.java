@@ -38,13 +38,13 @@ public class CSVWriterAtom implements Closeable {
     }
 
     @BoilerPlate
-    public static CSVWriterAtom getProxy(CSVWriter csvReader) {
+    public static CSVWriterAtom getAtom(CSVWriter csvReader) {
         return new CSVWriterAtom(csvReader);
     }
 
     @BoilerPlate
     public static CSVWriterAtom create(String fileName, char separator) throws IOException {
-        return getProxy(new CSVWriter(new FileWriter(fileName), separator));
+        return getAtom(new CSVWriter(new FileWriter(fileName), separator));
     }
 
 }
