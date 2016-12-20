@@ -8,7 +8,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Annotation for Atom class that provide only static method (utils classes)
  *
- * This class is a Proxy pattern that have only minimal methods from original class
+ * This class is a Proxy/Facade pattern that have only minimal methods from original class
  * Using to light-reference one module to another (for example, for third party open-source libraries)
  *
  * Also Atom class may have Test and Contract annotation

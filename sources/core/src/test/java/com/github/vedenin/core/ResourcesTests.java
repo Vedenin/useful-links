@@ -2,6 +2,7 @@ package com.github.vedenin.core;
 
 import com.github.vedenin.core.resources.Resources;
 import org.junit.Test;
+
 import java.util.List;
 import java.util.Map;
 
