@@ -1,7 +1,8 @@
 package com.github.vedenin.core.classificators;
 
+import com.github.vedenin.atoms.collections.ListAtom;
+import com.github.vedenin.atoms.collections.MultimapAtom;
 import com.github.vedenin.core.common.containers.CompareCategoryIndex;
-import com.github.vedenin.thirdpartylib.collections.MultimapAtom;
 
 import java.util.Collection;
 import java.util.Map;
@@ -25,8 +26,8 @@ public class WordsClassificator {
                                                        MultimapAtom<String, String> mapFinding) {
         Map<String, Integer> result = new TreeMap<>();
         for (String word : mapKnown.keySet()) {
-            Collection<String> categoriesKnown = mapKnown.get(word);
-            Collection<String> categoriesFinding = mapFinding.get(word);
+            ListAtom<String> categoriesKnown = mapKnown.get(word);
+            ListAtom<String> categoriesFinding = mapFinding.get(word);
             for (String categoryFinding : categoriesFinding) {
                 for (String categoryKnown : categoriesKnown) {
                     result.put(categoryKnown, result.containsKey(categoryKnown) ? result.get(categoryKnown) + 1 : 1);
@@ -46,7 +47,7 @@ public class WordsClassificator {
     public Map<String, Integer> getCountWordByCategory(MultimapAtom<String, String> mapFinding) {
         Map<String, Integer> result = new TreeMap<>();
         for (String word : mapFinding.keySet()) {
-            Collection<String> categoriesFinding = mapFinding.get(word);
+            ListAtom<String> categoriesFinding = mapFinding.get(word);
             for (String categoryFinding : categoriesFinding) {
                 result.put(categoryFinding, result.containsKey(categoryFinding) ? result.get(categoryFinding) + 1 : 1);
             }
@@ -69,8 +70,8 @@ public class WordsClassificator {
                                                             Map<String, Integer> cntFindingCategory) {
         Map<CompareCategoryIndex, Double> result = new TreeMap<>();
         for (String word : mapFinding.keySet()) {
-            Collection<String> knownCategory = mapKnown.get(word);
-            Collection<String> findingCategory = mapFinding.get(word);
+            ListAtom<String> knownCategory = mapKnown.get(word);
+            ListAtom<String> findingCategory = mapFinding.get(word);
             for (String author : knownCategory) {
                 for (String anonymous : findingCategory) {
                     CompareCategoryIndex key = CompareCategoryIndex.create(author, anonymous);

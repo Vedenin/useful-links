@@ -1,9 +1,10 @@
 package com.github.vedenin.project_parser.crawlers.old;
 
+import com.github.vedenin.atoms.collections.ListAtom;
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
+import com.github.vedenin.atoms.htmlparser.ElementAtom;
+import com.github.vedenin.atoms.htmlparser.TagAtom;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.TagAtom;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -39,7 +40,7 @@ public class JavaUsefulProjects {
     public Map<String, ProjectContainer> getProjects(String url) {
         System.out.println("Start downloading");
         DocumentAtom doc = getPage(url);
-        List<ElementAtom> div = doc.select("#readme");
+        ListAtom<ElementAtom> div = doc.select("#readme");
         Map<String, ProjectContainer> result = parserProjects(div, "", null, "");
         System.out.println("End downloading");
         System.out.println();
@@ -48,7 +49,7 @@ public class JavaUsefulProjects {
 
 
 
-    private static Map<String, ProjectContainer> parserProjects(List<ElementAtom> elements, String currentCategory, ProjectContainer container, String description) {
+    private static Map<String, ProjectContainer> parserProjects(ListAtom<ElementAtom> elements, String currentCategory, ProjectContainer container, String description) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
         for (ElementAtom element : elements) {
             TagAtom tag = element.getTag();

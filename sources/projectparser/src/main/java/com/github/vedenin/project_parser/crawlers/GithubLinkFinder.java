@@ -1,6 +1,6 @@
 package com.github.vedenin.project_parser.crawlers;
 
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
 
 /**
  * Find github link if project info without this link

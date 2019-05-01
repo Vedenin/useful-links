@@ -1,15 +1,15 @@
 package com.github.vedenin.core.downloader;
 
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
+import com.github.vedenin.atoms.htmlparser.HTMLParserAtom;
+import com.github.vedenin.atoms.io.FileAtom;
 import com.github.vedenin.core.downloader.utils.DownloadConstants;
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.HTMLParserAtom;
 import com.github.vedenin.core.common.exceptions.DownloadException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.io.File;
 
 
 /**
@@ -56,7 +56,7 @@ public class Downloader {
             Thread.sleep(200);
             initHTTPSDownload();
             if (url.startsWith("file:")) {
-                File file = new File(url.replace("file:", ""));
+                FileAtom file = FileAtom.create(url.replace("file:", ""));
                 return HTMLParserAtom.parseFile(file);
             } else {
                 return HTMLParserAtom.parseUrl(url, DownloadConstants.USER_AGENT, 30000);

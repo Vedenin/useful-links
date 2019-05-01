@@ -1,13 +1,12 @@
 package com.github.vedenin.project_parser.crawlers.impl;
 
+import com.github.vedenin.atoms.collections.ListAtom;
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
+import com.github.vedenin.atoms.htmlparser.ElementAtom;
 import com.github.vedenin.project_parser.containers.GithubInfoContainer;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.crawlers.GithubAndPageStatistics;
 import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
-
-import java.util.List;
 import java.util.Map;
 
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
@@ -70,7 +69,7 @@ public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
         result.text = doc.getText();
         try {
 
-            List<ElementAtom> elements = doc.select("a[href*=/watchers]");
+            ListAtom<ElementAtom> elements = doc.select("a[href*=/watchers]");
             result.watchs = getInteger(elements.get(0).getText());
 
             elements = doc.select("a[href*=/stargazers]");

@@ -1,8 +1,8 @@
 package com.github.vedenin.project_parser.crawlers;
 
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
 import com.github.vedenin.project_parser.containers.GithubInfoContainer;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
 
 import java.util.Map;
 

@@ -1,8 +1,9 @@
 package com.github.vedenin.project_parser.crawlers.impl;
 
-import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
+import com.github.vedenin.atoms.collections.ListAtom;
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
+import com.github.vedenin.atoms.htmlparser.ElementAtom;
+import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -26,7 +27,7 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
     public String getGithubLink(DocumentAtom doc, String link) {
         if(!link.contains(GIT_HUB_URL)) {
             try {
-                List<ElementAtom> elements = doc.select("a[href*=github.com]");
+                ListAtom<ElementAtom> elements = doc.select("a[href*=github.com]");
                 String githubLink = getGithubLink(elements, link);
                 if(githubLink != null) {
                     System.out.println("github's:" + link + " | " + githubLink);
@@ -41,7 +42,7 @@ public class GithubLinkFinderImpl implements GithubLinkFinder {
         return null;
     }
 
-    private static String getGithubLink(List<ElementAtom> elements, String site) {
+    private static String getGithubLink(ListAtom<ElementAtom> elements, String site) {
         if(elements.isEmpty()) {
             return null;
         } else {

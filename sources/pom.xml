@@ -37,6 +37,5 @@
         <module>core</module>
         <module>projectparser</module>
         <module>thirdpartylib</module>
-        <module>atom</module>
     </modules>
 </project>

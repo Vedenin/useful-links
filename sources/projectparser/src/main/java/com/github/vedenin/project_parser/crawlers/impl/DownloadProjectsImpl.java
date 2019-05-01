@@ -1,11 +1,12 @@
 package com.github.vedenin.project_parser.crawlers.impl;
 
+import com.github.vedenin.atoms.collections.ListAtom;
+import com.github.vedenin.atoms.htmlparser.DocumentAtom;
+import com.github.vedenin.atoms.htmlparser.ElementAtom;
+import com.github.vedenin.atoms.htmlparser.TagAtom;
 import com.github.vedenin.project_parser.containers.DownloadContext;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.crawlers.DownloadProjects;
-import com.github.vedenin.thirdpartylib.htmlparser.DocumentAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.ElementAtom;
-import com.github.vedenin.thirdpartylib.htmlparser.TagAtom;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -49,13 +50,13 @@ public class DownloadProjectsImpl implements DownloadProjects {
     @Override
     public Map<String, ProjectContainer> getProjects(String url) {
         DocumentAtom doc = getPage(url);
-        List<ElementAtom> title = doc.select(TITLE_TEG);
+        ListAtom<ElementAtom> title = doc.select(TITLE_TEG);
         String baseUrl = title.get(0).getOwnText().split(":")[0];
-        List<ElementAtom> div = doc.select(README_TEG);
+        ListAtom<ElementAtom> div = doc.select(README_TEG);
         return parserProjects(div, DownloadContext.create(baseUrl));
     }
 
-    private List<String> parserSkippedSections(List<ElementAtom> elements, DownloadContext context) {
+    private List<String> parserSkippedSections(ListAtom<ElementAtom> elements, DownloadContext context) {
         List<String> result = new ArrayList<>(elements.size());
         for (ElementAtom element : elements) {
             TagAtom tag = element.getTag();
@@ -69,7 +70,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
         return result;
     }
 
-    private Map<String, ProjectContainer> parserProjects(List<ElementAtom> elements, DownloadContext context) {
+    private Map<String, ProjectContainer> parserProjects(ListAtom<ElementAtom> elements, DownloadContext context) {
         Map<String, ProjectContainer> result = new LinkedHashMap<>(elements.size());
         for (ElementAtom element : elements) {
             TagAtom tag = element.getTag();
