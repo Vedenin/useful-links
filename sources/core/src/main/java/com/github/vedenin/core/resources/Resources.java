@@ -6,7 +6,6 @@ import com.github.vedenin.atoms.io.FileAtom;
 import com.github.vedenin.core.common.exceptions.ResourceException;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.*;

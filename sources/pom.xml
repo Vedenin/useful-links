@@ -36,6 +36,5 @@
     <modules>
         <module>core</module>
         <module>projectparser</module>
-        <module>thirdpartylib</module>
     </modules>
 </project>

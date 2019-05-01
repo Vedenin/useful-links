@@ -2,9 +2,9 @@ package com.github.vedenin.project_parser.storeresult;
 
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.core.common.exceptions.StoreException;
-import com.github.vedenin.thirdpartylib.csv.CSVReaderAtom;
-import com.github.vedenin.thirdpartylib.csv.CSVWriterAtom;
-import com.github.vedenin.thirdpartylib.io.ReflectUtilsAtom;
+import com.github.vedenin.atoms.csv.CSVReaderAtom;
+import com.github.vedenin.atoms.csv.CSVWriterAtom;
+import com.github.vedenin.atoms.io.ReflectUtilsAtom;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;

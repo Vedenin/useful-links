@@ -1,4 +1,4 @@
-package com.github.vedenin.thirdpartylib.csv;
+package com.github.vedenin.atoms.csv;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.github.vedenin.atom.annotations.Atom;

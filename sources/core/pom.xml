@@ -34,12 +34,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.vedenin</groupId>
-            <artifactId>thirdpartylib</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- Testing -->
 
         <dependency>
@@ -55,5 +49,94 @@
             <scope>test</scope>
             <version>1.10.19</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+
+        <!-- Utils (Apache common, guava) -->
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <!-- CSV parser -->
+
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <!-- Machine Learning -->
+
+        <!-- https://github.com/haifengl/smile -->
+        <dependency>
+            <groupId>com.github.haifengl</groupId>
+            <artifactId>smile-core</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <!-- http://mvnrepository.com/artifact/nz.ac.waikato.cms.weka/weka-stable -->
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>3.6.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.vedenin</groupId>
+            <artifactId>atom</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.vedenin.atoms</groupId>
+            <artifactId>annotations</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.vedenin.atoms</groupId>
+            <artifactId>collections</artifactId>
+            <version>1.0-guava</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.vedenin.atoms</groupId>
+            <artifactId>atoms-htmlparser</artifactId>
+            <version>0.1-jsoup-draft</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.vedenin.atoms</groupId>
+            <artifactId>atoms-io</artifactId>
+            <version>0.1-default-draft</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.github.vedenin.atoms</groupId>
+            <artifactId>atoms-strings</artifactId>
+            <version>0.1-default-draft</version>
+        </dependency>
+
     </dependencies>
 </project>
