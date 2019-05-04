@@ -9,25 +9,25 @@ import lombok.Data;
  */
 @Data(staticConstructor = "create")
 public class ProjectContainer {
-    public String category;
-    public String name;
-    public String url;
-    public String description;
-    public Integer star;
-    public Integer stackOverflow;
-    public String stackOverflowUrl;
-    public String license;
-    public String licenseUrl;
-    public String site;
-    public String userGuide;
-    public Integer newStars;
-    public Integer newWatchs;
-    public Integer newForks;
-    public String pageText;
-    public Integer newStackOverflow;
-    public String github;
-    public String allText;
-    public Boolean isExist = true;
+    private String category;
+    private String name;
+    private String url;
+    private String description;
+    private Integer star;
+    private Integer stackOverflow;
+    private String stackOverflowUrl;
+    private String license;
+    private String licenseUrl;
+    private String site;
+    private String userGuide;
+    private Integer newStars;
+    private Integer newWatchs;
+    private Integer newForks;
+    private String pageText;
+    private Integer newStackOverflow;
+    private String github;
+    private String allText;
+    private Boolean isExist = true;
 
     public boolean isEmpty() {
         return url.isEmpty();
