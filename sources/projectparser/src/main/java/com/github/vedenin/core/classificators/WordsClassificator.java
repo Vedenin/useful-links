@@ -4,7 +4,6 @@ import com.github.vedenin.atoms.collections.ListAtom;
 import com.github.vedenin.atoms.collections.MultimapAtom;
 import com.github.vedenin.core.common.containers.CompareCategoryIndex;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 

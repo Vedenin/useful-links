@@ -13,9 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.vedenin.core.downloader.utils.DownloadUtils.*;
 import static com.github.vedenin.project_parser.Constants.GITHUB_STAR;
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.*;
 
 /**
  * @inheritDoc
@@ -62,7 +62,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
             TagAtom tag = element.getTag();
             if (isHeader(tag)) {
                 if(getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag))) {
-                    result.add(context.currentCategory);
+                    result.add(context.getCurrentCategory());
                 }
             }
             result.addAll(parserSkippedSections(element.getChild(), context));
@@ -75,8 +75,8 @@ public class DownloadProjectsImpl implements DownloadProjects {
         for (ElementAtom element : elements) {
             TagAtom tag = element.getTag();
             if (isHeader(tag)) {
-                context.skipHeaderFlag = getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag));
-            } else if(!context.skipHeaderFlag) {
+                context.setSkipHeaderFlag(getSkipHeaderFlag(context, element.getText(), getHeaderIndex(tag)));
+            } else if(!context.isSkipHeaderFlag()) {
                 proceedBody(element, context, result);
             }
             result.putAll(parserProjects(element.getChild(), context));
@@ -87,24 +87,24 @@ public class DownloadProjectsImpl implements DownloadProjects {
     private static void proceedBody(ElementAtom element, DownloadContext context,  Map<String, ProjectContainer> result) {
         TagAtom tag = element.getTag();
         if(isEnum(tag)){
-            context.isNewProject = true;
-            context.description = getDescription(element);
+            context.setSkipHeaderFlag(true);
+            context.setDescription(getDescription(element));
         } else {
             if (isLink(tag)) {
                 String link = element.getAttr(HREF_ATTR);
-                if (isProjectLink(link, context.baseUrl)) {
+                if (isProjectLink(link, context.getBaseUrl())) {
                     if (isLicenseLink(link)) {
-                        saveLicense(context.container, element, link);
-                        System.out.println(context.baseUrl + " [license] " + link);
+                        saveLicense(context.getContainer(), element, link);
+                        System.out.println(context.getBaseUrl() + " [license] " + link);
                     } else if (isSite(element, link)) {
-                        saveSite(context.container, link);
+                        saveSite(context.getContainer(), link);
                     } else if (isStackOverflow(link)) {
-                        saveStackOverflow(context.container, element, link);
+                        saveStackOverflow(context.getContainer(), element, link);
                     } else if (isUserGuide(element)) {
-                        saveUserGuide(context.container, link);
+                        saveUserGuide(context.getContainer(), link);
                     } else {
-                        context.container = getProjectContainer(context.currentCategory, context.description, element, link);
-                        result.put(context.container.url, context.container);
+                        context.container = getProjectContainer(context.getCurrentCategory(), context.getDescription(), element, link);
+                        result.put(context.getContainer().getUrl(), context.getContainer());
                     }
                 }
             }
@@ -116,15 +116,15 @@ public class DownloadProjectsImpl implements DownloadProjects {
     }
 
     private boolean getSkipHeaderFlag(DownloadContext context, String currentCategory, Integer headerIndex) {
-        context.currentCategory = currentCategory;
+        context.setCurrentCategory(currentCategory);
         if(context.skipHeader == null) {
-            if(isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectMainHeaders)) {
+            if(isNonProjectHeader(context.getCurrentCategory().toLowerCase(), nonProjectMainHeaders)) {
                 context.skipHeader = headerIndex;
             }
         } else if(headerIndex < context.skipHeader) {
             context.skipHeader = null;
         }
-        return isNonProjectHeader(context.currentCategory.toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
+        return isNonProjectHeader(context.getCurrentCategory().toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
     }
 
     private static void saveLicense(ProjectContainer container, ElementAtom element, String link) {

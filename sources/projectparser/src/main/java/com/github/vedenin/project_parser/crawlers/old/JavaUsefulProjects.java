@@ -8,11 +8,10 @@ import com.github.vedenin.project_parser.containers.ProjectContainer;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
 import static com.github.vedenin.core.downloader.utils.DownloadUtils.*;
+import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
 
 /**
  * Download all projects from useful-java-links

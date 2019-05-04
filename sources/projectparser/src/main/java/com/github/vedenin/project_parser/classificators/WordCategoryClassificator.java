@@ -52,9 +52,9 @@ public class WordCategoryClassificator {
                 Integer occurrences = value.get(category);
                 if(occurrences > 1) {
                     WordCategoryContainer container = WordCategoryContainer.create();
-                    container.word = word;
-                    container.category = category;
-                    container.number = occurrences;
+                    container.setWord(word);
+                    container.setCategory(category);
+                    container.setNumber(occurrences);
                     result.put(word, container);
                 }
             }

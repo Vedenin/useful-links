@@ -1,29 +1,26 @@
 package com.github.vedenin.project_parser.containers;
 
 import com.github.vedenin.core.common.annotations.PropertiesContainer;
+import lombok.Data;
 
 /**
  * Context to DownloadProjectsImpl class
  *
  * Created by vedenin on 12.06.16.
  */
-@PropertiesContainer
+@Data(staticConstructor = "create")
 public class DownloadContext {
     public String currentCategory = "";
     public ProjectContainer container = null;
     public Integer skipHeader = null;
     public boolean skipHeaderFlag = false;
     public boolean isNewProject = false;
-    public String description = "";
-    public String baseUrl = null;
-
-    public static DownloadContext create() {
-        return new DownloadContext();
-    }
+    private String description = "";
+    private String baseUrl = null;
 
     public static DownloadContext create(String baseUrl) {
         DownloadContext context = new DownloadContext();
-        context.baseUrl = baseUrl;
+        context.setBaseUrl(baseUrl);
         return context;
     }
 }

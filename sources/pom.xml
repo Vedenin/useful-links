@@ -34,7 +34,6 @@
     </build>
 
     <modules>
-        <module>core</module>
         <module>projectparser</module>
     </modules>
 </project>

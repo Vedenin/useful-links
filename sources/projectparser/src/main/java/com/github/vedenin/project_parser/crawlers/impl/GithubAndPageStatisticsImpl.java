@@ -50,10 +50,10 @@ public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
                     }
                 }
                 GithubInfoContainer info = getGithubInfo(doc, url);
-                p.newStars = info.stars;
-                p.newForks = info.forks;
-                p.newWatchs = info.watchs;
-                p.pageText = info.text == null ? "" : info.text.replaceAll("\n", " ").replaceAll("\r", "").trim();
+                p.newStars = info.getStars();
+                p.newForks = info.getForks();
+                p.newWatchs = info.getWatchs();
+                p.pageText = info.getUrl() == null ? "" : info.text.replaceAll("\n", " ").replaceAll("\r", "").trim();
             }
         }
         return map;

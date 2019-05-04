@@ -1,28 +1,15 @@
 package com.github.vedenin.project_parser.containers;
 
-import com.github.vedenin.core.common.annotations.PropertiesContainer;
+import lombok.Data;
 
 /**
  *  Word - Category mapping
  *
  * Created by Slava Vedenin on 5/14/2016.
  */
-@PropertiesContainer // class without getter and setter (see Properties in C#)
+@Data(staticConstructor = "create")
 public class WordCategoryContainer {
-    public String category;
-    public Integer number;
-    public String word;
-
-    public static WordCategoryContainer create() {
-        return new WordCategoryContainer();
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "category='" + category + '\'' +
-                ", number=" + number +
-                ", word='" + word + '\'' +
-                '}';
-    }
+    private String category;
+    private Integer number;
+    private String word;
 }

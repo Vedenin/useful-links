@@ -7,7 +7,6 @@ import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;

@@ -12,7 +12,6 @@ import java.util.Map;
 /**
  * Created by Slava Vedenin on 7/12/2016.
  */
-@Ignore
 public class WordCategoryClassificatorTest {
     @Test
     @Ignore

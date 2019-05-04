@@ -1,6 +1,7 @@
 package com.github.vedenin.project_parser.containers;
 
 import com.github.vedenin.core.common.annotations.PropertiesContainer;
+import lombok.Data;
 
 /**
  * Container that storeresult information about github's project
@@ -8,6 +9,7 @@ import com.github.vedenin.core.common.annotations.PropertiesContainer;
  * Created by Slava Vedenin on 5/10/2016.
  */
 @PropertiesContainer // class without getter and setter (see Properties in C#)
+@Data(staticConstructor = "create")
 public class ProjectContainer {
     public String category;
     public String name;
@@ -29,36 +31,7 @@ public class ProjectContainer {
     public String allText;
     public Boolean isExist = true;
 
-    @Override
-    public String toString() {
-        return "{" +
-                "category = '" + category + "'" +
-                toString(name, "name") +
-                toString(url, "url") +
-                toString(star, "star") +
-                toString(stackOverflow, "stackOverflow") +
-                toString(license, "license") +
-                toString(site, "site") +
-                toString(licenseUrl, "licenseUrl") +
-                toString(userGuide, "userGuide") +
-                toString(description, "description") +
-                toString(newStars, "newStars") +
-                toString(newStackOverflow, "newStackOverflow") +
-                toString(github, "github") +
-                toString(allText, "allText") +
-                toString(stackOverflowUrl, "stackOverflowUrl") +
-                '}';
-    }
-
     public boolean isEmpty() {
         return url.isEmpty();
-    }
-
-    private static String toString(Object value, String name) {
-        return value != null?", " + name + "='" + value + '\'' : "";
-    }
-
-    public static ProjectContainer create() {
-        return new ProjectContainer();
     }
 }
