@@ -9,11 +9,11 @@ import lombok.Data;
  */
 @Data(staticConstructor = "create")
 public class DownloadContext {
-    public String currentCategory = "";
-    public ProjectContainer container = null;
-    public Integer skipHeader = null;
-    public boolean skipHeaderFlag = false;
-    public boolean isNewProject = false;
+    private String currentCategory = "";
+    private ProjectContainer container = null;
+    private Integer skipHeader = null;
+    private boolean skipHeaderFlag = false;
+    private boolean isNewProject = false;
     private String description = "";
     private String baseUrl = null;
 
