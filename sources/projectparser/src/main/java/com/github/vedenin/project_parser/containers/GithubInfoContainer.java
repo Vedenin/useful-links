@@ -1,6 +1,5 @@
 package com.github.vedenin.project_parser.containers;
 
-import com.github.vedenin.core.common.annotations.PropertiesContainer;
 import lombok.Data;
 
 /**
@@ -10,9 +9,9 @@ import lombok.Data;
  */
 @Data(staticConstructor = "create")
 public class GithubInfoContainer {
-    public String url;
-    public Integer stars;
-    public Integer watchs;
-    public Integer forks;
-    public String text;
+    private String url;
+    private Integer stars;
+    private Integer watchs;
+    private Integer forks;
+    private String text;
 }

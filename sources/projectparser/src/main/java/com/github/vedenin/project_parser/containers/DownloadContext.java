@@ -1,6 +1,5 @@
 package com.github.vedenin.project_parser.containers;
 
-import com.github.vedenin.core.common.annotations.PropertiesContainer;
 import lombok.Data;
 
 /**

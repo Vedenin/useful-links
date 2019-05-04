@@ -1,6 +1,5 @@
 package com.github.vedenin.project_parser.containers;
 
-import com.github.vedenin.core.common.annotations.PropertiesContainer;
 import lombok.Data;
 
 /**
@@ -8,7 +7,6 @@ import lombok.Data;
  *
  * Created by Slava Vedenin on 5/10/2016.
  */
-@PropertiesContainer // class without getter and setter (see Properties in C#)
 @Data(staticConstructor = "create")
 public class ProjectContainer {
     public String category;
