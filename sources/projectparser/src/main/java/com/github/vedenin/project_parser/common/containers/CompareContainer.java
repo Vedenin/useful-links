@@ -1,4 +1,4 @@
-package com.github.vedenin.core.common.containers;
+package com.github.vedenin.project_parser.common.containers;
 
 /**
  * Container that show information about comparison (like morphology form and so on)f

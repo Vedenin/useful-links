@@ -1,4 +1,4 @@
-package com.github.vedenin.core;
+package com.github.vedenin.project_parser;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;

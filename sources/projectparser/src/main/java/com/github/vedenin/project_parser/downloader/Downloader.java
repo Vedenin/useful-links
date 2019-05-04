@@ -1,10 +1,10 @@
-package com.github.vedenin.core.downloader;
+package com.github.vedenin.project_parser.downloader;
 
 import com.github.vedenin.atoms.htmlparser.DocumentAtom;
 import com.github.vedenin.atoms.htmlparser.HTMLParserAtom;
 import com.github.vedenin.atoms.io.FileAtom;
-import com.github.vedenin.core.downloader.utils.DownloadConstants;
-import com.github.vedenin.core.common.exceptions.DownloadException;
+import com.github.vedenin.project_parser.downloader.utils.DownloadConstants;
+import com.github.vedenin.project_parser.common.exceptions.DownloadException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;

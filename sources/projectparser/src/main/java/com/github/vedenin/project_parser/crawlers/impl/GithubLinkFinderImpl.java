@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL_FULL;
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.min;
+import static com.github.vedenin.project_parser.downloader.utils.DownloadUtils.min;
 
 /**
  * Find github link if project info without this link

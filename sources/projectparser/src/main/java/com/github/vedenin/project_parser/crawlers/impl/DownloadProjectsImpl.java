@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.*;
+import static com.github.vedenin.project_parser.downloader.utils.DownloadUtils.*;
 import static com.github.vedenin.project_parser.Constants.GITHUB_STAR;
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
 
@@ -103,7 +103,7 @@ public class DownloadProjectsImpl implements DownloadProjects {
                     } else if (isUserGuide(element)) {
                         saveUserGuide(context.getContainer(), link);
                     } else {
-                        context.container = getProjectContainer(context.getCurrentCategory(), context.getDescription(), element, link);
+                        context.setContainer(getProjectContainer(context.getCurrentCategory(), context.getDescription(), element, link));
                         result.put(context.getContainer().getUrl(), context.getContainer());
                     }
                 }
@@ -117,46 +117,47 @@ public class DownloadProjectsImpl implements DownloadProjects {
 
     private boolean getSkipHeaderFlag(DownloadContext context, String currentCategory, Integer headerIndex) {
         context.setCurrentCategory(currentCategory);
-        if(context.skipHeader == null) {
+        if(context.getSkipHeader() == null) {
             if(isNonProjectHeader(context.getCurrentCategory().toLowerCase(), nonProjectMainHeaders)) {
-                context.skipHeader = headerIndex;
+                context.setSkipHeader(headerIndex);
             }
-        } else if(headerIndex < context.skipHeader) {
-            context.skipHeader = null;
+        } else if(headerIndex < context.getSkipHeader()) {
+            context.setSkipHeader(null);
         }
-        return isNonProjectHeader(context.getCurrentCategory().toLowerCase(), nonProjectHeaders) || context.skipHeader != null;
+        return isNonProjectHeader(context.getCurrentCategory().toLowerCase(), nonProjectHeaders)
+                || context.getSkipHeader() != null;
     }
 
     private static void saveLicense(ProjectContainer container, ElementAtom element, String link) {
         if (container != null) {
-            container.licenseUrl = link;
-            container.license = element.getText();
+            container.setLicenseUrl(link);
+            container.setSite(element.getText());
         }
     }
 
     private static void saveSite(ProjectContainer container, String link) {
         if (container != null) {
-            container.site = link;
+            container.setSite(link);
         }
     }
 
     private static void saveStackOverflow(ProjectContainer container, ElementAtom element, String link) {
         if (container != null) {
             try {
-                container.stackOverflow = getInteger(element.getText());
+                container.setStackOverflow(getInteger(element.getText()));
             } catch (Exception exp) {
-                container.stackOverflow = null;
+                container.setStackOverflow(null);
                 System.out.println("saveStackOverflow " + link + ", " + element.getText());
             }
-            container.stackOverflowUrl = link;
+            container.setStackOverflowUrl(link);
         }
     }
 
     private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementAtom element, String link) {
         ProjectContainer container;
         container = ProjectContainer.create();
-        container.category = currentCategory;
-        container.name = element.getText();
+        container.setCategory(currentCategory);
+        container.setName(element.getText());
         saveUrlAndGithub(link, container);
         saveStarAndText(container, text);
         return container;
@@ -164,10 +165,10 @@ public class DownloadProjectsImpl implements DownloadProjects {
 
     private static void saveUrlAndGithub(String link, ProjectContainer container) {
         if(link.contains(GIT_HUB_URL)) {
-            container.github = link;
-            container.url = link;
+            container.setGithub(link);
+            container.setUrl(link);
         } else {
-            container.url = link;
+            container.setUrl(link);
         }
     }
 
@@ -176,12 +177,12 @@ public class DownloadProjectsImpl implements DownloadProjects {
         if(i1 > -1) {
             int i2 = min(text.indexOf(".", i1), text.indexOf(",", i1));
             String starText = text.substring(i1, i2);
-            container.star = getInteger(text.substring(i1 + GITHUB_STAR.length(), i2));
-            container.description = getDescription(text, starText);
+            container.setStar(getInteger(text.substring(i1 + GITHUB_STAR.length(), i2)));
+            container.setDescription(getDescription(text, starText));
         } else {
-            container.description = getDescription(text, "");
+            container.setDescription(getDescription(text, ""));
         }
-        container.allText = container.description;
+        container.setAllText(container.getDescription());
     }
 
     private static String getDescription(String text, String replacedText) {
@@ -198,6 +199,6 @@ public class DownloadProjectsImpl implements DownloadProjects {
     }
 
     private static void saveUserGuide(ProjectContainer container, String link) {
-        container.userGuide = link;
+        container.setUserGuide(link);
     }
 }

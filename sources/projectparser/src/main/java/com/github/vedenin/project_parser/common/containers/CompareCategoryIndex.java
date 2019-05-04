@@ -1,13 +1,13 @@
-package com.github.vedenin.core.common.containers;
+package com.github.vedenin.project_parser.common.containers;
 
-import com.github.vedenin.core.common.annotations.PropertiesContainer;
+import lombok.Data;
 
 /**
  * Container for comparisons categories
  *
  * Created by Slava Vedenin on 7/1/2016.
  */
-@PropertiesContainer // class without getter and setter (see Properties in C#)
+@Data(staticConstructor = "create")
 public class CompareCategoryIndex implements Comparable {
     private String knownCategory; // Category that mapping we already known
     private String findingCategory; // Category that mapping we need to find
@@ -16,30 +16,6 @@ public class CompareCategoryIndex implements Comparable {
         CompareCategoryIndex result = new CompareCategoryIndex();
         result.findingCategory = findingCategory;
         result.knownCategory = knownCategory;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return findingCategory + " : " + knownCategory;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CompareCategoryIndex that = (CompareCategoryIndex) o;
-
-        if (!knownCategory.equals(that.knownCategory)) return false;
-        return findingCategory.equals(that.findingCategory);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = knownCategory.hashCode();
-        result = 31 * result + findingCategory.hashCode();
         return result;
     }
 

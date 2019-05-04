@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.*;
+import static com.github.vedenin.project_parser.downloader.utils.DownloadUtils.*;
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
 
 /**
@@ -73,7 +73,7 @@ public class JavaUsefulProjects {
                         saveUserGuide(container, link);
                     } else {
                         container = getProjectContainer(currentCategory, description, element, link);
-                        result.put(container.url, container);
+                        result.put(container.getUrl(), container);
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class JavaUsefulProjects {
     }
 
     private static void saveUserGuide(ProjectContainer container, String link) {
-        container.userGuide = link;
+        container.setUserGuide(link);
     }
 
     private static String getDescription(ElementAtom element) {
@@ -107,8 +107,8 @@ public class JavaUsefulProjects {
     private static ProjectContainer getProjectContainer(String currentCategory, String text, ElementAtom element, String link) {
         ProjectContainer container;
         container = ProjectContainer.create();
-        container.category = currentCategory;
-        container.name = element.getText();
+        container.setCategory(currentCategory);
+        container.setName(element.getText());
         saveUrlAndGithub(link, container);
         saveStarAndText(container, text);
         return container;
@@ -116,10 +116,10 @@ public class JavaUsefulProjects {
 
     private static void saveUrlAndGithub(String link, ProjectContainer container) {
         if(link.contains(GIT_HUB_URL)) {
-            container.github = link;
-            container.url = link;
+            container.setGithub(link);
+            container.setUrl(link);
         } else {
-            container.url = link;
+            container.setUrl(link);
         }
     }
 
@@ -128,18 +128,18 @@ public class JavaUsefulProjects {
         if(i1 > -1) {
             int i2 = min(text.indexOf(".", i1), text.indexOf(",", i1));
             String starText = text.substring(i1, i2);
-            container.star = getInteger(text.substring(i1 + GITHUB_STAR.length(), i2));
-            container.description = getDescription(text, starText);
+            container.setStar(getInteger(text.substring(i1 + GITHUB_STAR.length(), i2)));
+            container.setDescription(getDescription(text, starText));
         } else {
-            container.description = getDescription(text, "");
+            container.setDescription(getDescription(text, ""));
         }
-        container.allText = container.description;
+        container.setAllText(container.getDescription());
     }
 
     private static void saveLicense(ProjectContainer container, ElementAtom element, String link) {
         if (container != null) {
-            container.licenseUrl = link;
-            container.license = element.getText();
+            container.setLicenseUrl(link);
+            container.setLicense(element.getText());
         }
     }
 
@@ -147,13 +147,13 @@ public class JavaUsefulProjects {
 
     private static void saveSite(ProjectContainer container, String link) {
         if (container != null) {
-            container.site = link;
+            container.setSite(link);
         }
     }
 
     private static void saveStackOverflow(ProjectContainer container, ElementAtom element) {
         if (container != null) {
-            container.stackOverflow = getInteger(element.getText());
+            container.setStackOverflow(getInteger(element.getText()));
         }
     }
 

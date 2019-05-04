@@ -28,8 +28,4 @@ public class ProjectContainer {
     private String github;
     private String allText;
     private Boolean isExist = true;
-
-    public boolean isEmpty() {
-        return url.isEmpty();
-    }
 }

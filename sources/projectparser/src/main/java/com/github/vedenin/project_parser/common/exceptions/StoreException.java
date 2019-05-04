@@ -1,4 +1,4 @@
-package com.github.vedenin.core.common.exceptions;
+package com.github.vedenin.project_parser.common.exceptions;
 
 /**
  * RuntimeException if resources can't be open

@@ -1,8 +1,8 @@
-package com.github.vedenin.core.classificators;
+package com.github.vedenin.project_parser.classificators;
 
 import com.github.vedenin.atoms.collections.ListAtom;
 import com.github.vedenin.atoms.collections.MultimapAtom;
-import com.github.vedenin.core.common.containers.CompareCategoryIndex;
+import com.github.vedenin.project_parser.common.containers.CompareCategoryIndex;
 
 import java.util.Map;
 import java.util.TreeMap;

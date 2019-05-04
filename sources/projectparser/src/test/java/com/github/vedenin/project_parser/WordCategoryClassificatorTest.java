@@ -1,4 +1,4 @@
-package com.github.vedenin.core;
+package com.github.vedenin.project_parser;
 
 import com.github.vedenin.project_parser.classificators.WordCategoryClassificator;
 import com.github.vedenin.project_parser.containers.ProjectContainer;

@@ -10,8 +10,8 @@ import com.github.vedenin.project_parser.crawlers.GithubLinkFinder;
 import java.util.Map;
 
 import static com.github.vedenin.project_parser.Constants.GIT_HUB_URL;
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.getInteger;
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.getPage;
+import static com.github.vedenin.project_parser.downloader.utils.DownloadUtils.getInteger;
+import static com.github.vedenin.project_parser.downloader.utils.DownloadUtils.getPage;
 
 /**
  * Returns information about github's projects
@@ -25,35 +25,35 @@ public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
     @Override
     public Map<String, ProjectContainer> getProjectWithGithubInfo(Map<String, ProjectContainer> map) {
         for (ProjectContainer p : map.values()) {
-            String url = p.github != null && !p.github.isEmpty() ? p.github : p.url;
+            String url = p.getGithub() != null && !p.getGithub().isEmpty() ? p.getGithub() : p.getUrl();
             DocumentAtom doc = null;
             try {
                 doc = getPage(url);
-                p.isExist = true;
+                p.setIsExist(true);
             } catch (Exception exp) {
-                p.isExist = false;
+                p.setIsExist(false);
             }
-            if (p.isExist) {
-                if (p.github == null || p.github.isEmpty()) {
-                    if (p.url.contains(GIT_HUB_URL)) {
-                        p.github = p.url;
+            if (p.getIsExist()) {
+                if (p.getGithub() == null || p.getGithub().isEmpty()) {
+                    if (p.getUrl().contains(GIT_HUB_URL)) {
+                        p.setGithub(p.getUrl());
                     } else {
-                        p.github = githubLinkFinder.getGithubLink(doc, url);
-                        if (p.github != null) {
+                        p.setGithub(githubLinkFinder.getGithubLink(doc, url));
+                        if (p.getGithub() != null) {
                             try {
-                                doc = getPage(p.github);
-                                url = p.github;
+                                doc = getPage(p.getGithub());
+                                url = p.getGithub();
                             } catch (Exception exp) {
-                                System.out.println("Can't open github url's = " + p.github);
+                                System.out.println("Can't open github url's = " + p.getGithub());
                             }
                         }
                     }
                 }
                 GithubInfoContainer info = getGithubInfo(doc, url);
-                p.newStars = info.getStars();
-                p.newForks = info.getForks();
-                p.newWatchs = info.getWatchs();
-                p.pageText = info.getUrl() == null ? "" : info.text.replaceAll("\n", " ").replaceAll("\r", "").trim();
+                p.setNewStars(info.getStars());
+                p.setNewForks(info.getForks());
+                p.setNewWatchs(info.getWatchs());
+                p.setPageText(info.getUrl() == null ? "" : info.getText().replaceAll("\n", " ").replaceAll("\r", "").trim());
             }
         }
         return map;
@@ -66,17 +66,17 @@ public class GithubAndPageStatisticsImpl implements GithubAndPageStatistics {
     @Override
     public GithubInfoContainer getGithubInfo(DocumentAtom doc, String url) {
         GithubInfoContainer result = GithubInfoContainer.create();
-        result.text = doc.getText();
+        result.setText(doc.getText());
         try {
 
             ListAtom<ElementAtom> elements = doc.select("a[href*=/watchers]");
-            result.watchs = getInteger(elements.get(0).getText());
+            result.setWatchs(getInteger(elements.get(0).getText()));
 
             elements = doc.select("a[href*=/stargazers]");
-            result.stars = getInteger(elements.get(0).getText());
+            result.setStars(getInteger(elements.get(0).getText()));
 
             elements = doc.select("a[href*=/network]");
-            result.forks = getInteger(elements.get(0).getText());
+            result.setForks(getInteger(elements.get(0).getText()));
         } catch (Exception exp) {
             System.out.println("Can't get github info from url " + url);
         }

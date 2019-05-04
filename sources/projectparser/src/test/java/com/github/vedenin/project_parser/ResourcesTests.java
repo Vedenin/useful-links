@@ -1,6 +1,6 @@
-package com.github.vedenin.core;
+package com.github.vedenin.project_parser;
 
-import com.github.vedenin.core.resources.Resources;
+import com.github.vedenin.project_parser.resources.Resources;
 import org.junit.Test;
 
 import java.util.List;

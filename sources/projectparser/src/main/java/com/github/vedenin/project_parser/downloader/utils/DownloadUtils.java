@@ -1,9 +1,9 @@
-package com.github.vedenin.core.downloader.utils;
+package com.github.vedenin.project_parser.downloader.utils;
 
 import com.github.vedenin.atoms.htmlparser.DocumentAtom;
 import com.github.vedenin.atoms.htmlparser.ElementAtom;
 import com.github.vedenin.atoms.htmlparser.TagAtom;
-import com.github.vedenin.core.downloader.Downloader;
+import com.github.vedenin.project_parser.downloader.Downloader;
 
 import java.util.HashMap;
 import java.util.List;

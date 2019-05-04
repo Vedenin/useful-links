@@ -1,6 +1,6 @@
 package com.github.vedenin.project_parser;
 
-import com.github.vedenin.core.resources.Resources;
+import com.github.vedenin.project_parser.resources.Resources;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.crawlers.DownloadProjects;
 import com.github.vedenin.project_parser.crawlers.impl.DownloadProjectsImpl;

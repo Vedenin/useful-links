@@ -1,6 +1,6 @@
 package com.github.vedenin.project_parser;
 
-import com.github.vedenin.core.resources.Resources;
+import com.github.vedenin.project_parser.resources.Resources;
 import com.github.vedenin.project_parser.containers.GithubInfoContainer;
 import com.github.vedenin.project_parser.containers.ProjectContainer;
 import com.github.vedenin.project_parser.storeresult.CSVStoreManager;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.vedenin.core.downloader.utils.DownloadUtils.getPage;
+import static com.github.vedenin.project_parser.downloader.utils.DownloadUtils.getPage;
 
 /**
  * Test github's

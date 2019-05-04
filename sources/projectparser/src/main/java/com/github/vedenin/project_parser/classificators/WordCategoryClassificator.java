@@ -21,10 +21,10 @@ public class WordCategoryClassificator {
     private Map<String, Map<String, Integer>> getWordCategoryMap(Map<String, ProjectContainer> projects) {
         Map<String, Map<String, Integer>> tmpResult = new HashMap<>();
         for(ProjectContainer project: projects.values()){
-            String text = project.allText;
+            String text = project.getAllText();
             String textWithoutNonChar = text.replaceAll("[^a-zA-Z0-9]"," ");
             String[] words = textWithoutNonChar.split(" ");
-            String category = project.category;
+            String category = project.getCategory();
             for(String word: words) {
                 if(!word.isEmpty()) {
                     Map<String, Integer> map = tmpResult.get(word);

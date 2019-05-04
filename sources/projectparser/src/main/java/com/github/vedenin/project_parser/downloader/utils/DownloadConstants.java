@@ -1,4 +1,4 @@
-package com.github.vedenin.core.downloader.utils;
+package com.github.vedenin.project_parser.downloader.utils;
 
 /**
  * Global constants
