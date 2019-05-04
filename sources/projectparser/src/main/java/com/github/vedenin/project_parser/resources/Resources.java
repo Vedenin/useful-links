@@ -3,7 +3,7 @@ package com.github.vedenin.project_parser.resources;
 
 import com.github.vedenin.atoms.io.FileAndIOUtilsAtom;
 import com.github.vedenin.atoms.io.FileAtom;
-import com.github.vedenin.project_parser.common.exceptions.ResourceException;
+import com.github.vedenin.project_parser.exceptions.ResourceException;
 
 import java.io.File;
 import java.io.InputStream;

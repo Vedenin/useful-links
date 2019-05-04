@@ -1,4 +1,4 @@
-package com.github.vedenin.project_parser.common.exceptions;
+package com.github.vedenin.project_parser.exceptions;
 
 /**
  * Exception when program can't download this url

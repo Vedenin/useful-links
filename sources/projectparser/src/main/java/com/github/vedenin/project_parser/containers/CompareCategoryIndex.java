@@ -1,4 +1,4 @@
-package com.github.vedenin.project_parser.common.containers;
+package com.github.vedenin.project_parser.containers;
 
 import lombok.Data;
 

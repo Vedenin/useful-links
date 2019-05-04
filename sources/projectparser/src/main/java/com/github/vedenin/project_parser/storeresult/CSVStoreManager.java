@@ -1,7 +1,7 @@
 package com.github.vedenin.project_parser.storeresult;
 
 import com.github.vedenin.project_parser.containers.ProjectContainer;
-import com.github.vedenin.project_parser.common.exceptions.StoreException;
+import com.github.vedenin.project_parser.exceptions.StoreException;
 import com.github.vedenin.atoms.csv.CSVReaderAtom;
 import com.github.vedenin.atoms.csv.CSVWriterAtom;
 import com.github.vedenin.atoms.io.ReflectUtilsAtom;
